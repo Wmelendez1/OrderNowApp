@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1045458252960",
+    "project_id": "ordernow-bcdf4",
+    "storage_bucket": "ordernow-bcdf4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045458252960:android:ef91ddd25d6394ef3f85c5",
+        "android_client_info": {
+          "package_name": "com.example.ordernow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN83ePWwtBmmjtt3Z7Zc41McQ8jnmA5JE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
