@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.example.ordernow'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.ordernow"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -27,6 +27,21 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    buildFeatures{
+        viewBinding true
+    }
+
+    buildscript {
+        repositories {
+            google()
+            // other repositories if needed
+        }
+        dependencies {
+            classpath 'com.android.tools.build:gradle:4.2.0' // Update to the latest version
+        }
+    }
+
 }
 
 dependencies {
@@ -36,6 +51,13 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-database:20.1.0'
     implementation 'com.google.firebase:firebase-firestore:24.4.1'
+
+    implementation 'com.google.firebase:firebase-auth:20.0.4'
+    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation 'androidx.activity:activity-ktx:1.4.0'
+
+
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
