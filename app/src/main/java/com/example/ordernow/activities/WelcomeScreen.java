@@ -16,7 +16,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
         //set buttons here
         Button signUpButton = findViewById(R.id.signupButton);
-
+        Button loginBtn = findViewById(R.id.loginButton);
         //on click listeners here
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,6 +26,17 @@ public class WelcomeScreen extends AppCompatActivity {
                 startActivity(intent); //starts activity
             }
         });
+
+        loginBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                // intent to homepage
+                Intent toLogin = new Intent(WelcomeScreen.this, Login.class); // add intent later
+                startActivity(toLogin);
+
+            }
+        });
+
     }
 }
 

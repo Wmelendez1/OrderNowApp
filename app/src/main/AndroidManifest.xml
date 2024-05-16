@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderNow">
         <activity
+            android:name=".activities.Login"
+            android:exported="false" />
+        <activity
             android:name=".activities.SignUp"
             android:exported="false" />
         <activity
