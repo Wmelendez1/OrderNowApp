@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,115 +7,232 @@
     android:layout_height="match_parent"
     tools:context=".activities.ProfileLayout">
 
-    <!--Toolbar-->
-    <RelativeLayout
-        android:id="@+id/toolbarRl"
+    <!-- Toolbar -->
+
+    <!-- Back Button -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@drawable/shape_toolbar02">
+        android:layout_height="wrap_content"
+        android:background="@color/themecolor"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <!--Back Button-->
-        <ImageButton
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_back_white"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="26dp"
-            android:background="@android:color/transparent"/>
+    <ImageButton
+        android:id="@+id/backBtnProfile"
+        android:layout_width="79dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="24dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="back"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="1.0"
+        tools:src="@drawable/ic_back_white" />
 
-        <!--Title-->
-        <TextView
-            android:id="@+id/titleTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+    <!-- Profile Text -->
+    <TextView
+        android:id="@+id/profileTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="180dp"
+        android:text="Profile"
+        android:textAlignment="viewStart"
+        android:textColor="@color/white"
+        android:textColorLink="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.684" />
 
-            android:text="Your Profile"
-            android:layout_marginTop="18dp"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/white"/>
-        <!--Subtitle/Category of Book-->
+    <!-- Profile Picture -->
+    <!-- Edit Profile Button -->
 
+    <!-- Username -->
 
-    </RelativeLayout>
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profilePicIV"
+        android:layout_width="147dp"
+        android:layout_height="144dp"
+        android:src="@drawable/onlogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageView"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="95dp" />
 
-    <ImageView
-        android:id="@+id/bookRv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbarRl"
-        android:layout_marginTop="3dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/profile_layout" />
+    <!-- About Me Description -->
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\@Username"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePicIV" />
 
-    <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="148dp"
-        android:layout_marginBottom="5dp"
-        android:layout_below="@id/toolbarRl"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="8dp"
-        app:contentPadding="5dp">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username">
 
-        <RelativeLayout
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/aboutmeET"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="184dp"
+            android:clickable="true"
+            android:editable="true"
+            android:enabled="false"
+            android:hint="About me description"
+            tools:layout_editor_absoluteX="28dp"
+            tools:layout_editor_absoluteY="250dp" />
 
-            <RelativeLayout
-                android:id="@+id/pdfRl"
-                android:layout_width="100dp"
-                android:layout_height="140dp"
-                android:layout_marginEnd="5dp"
-                android:background="@color/gray01">
+    </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- PDF View -->
-                <com.github.barteksc.pdfviewer.PDFView
-                    android:id="@+id/pdfView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+    <LinearLayout
+        android:id="@+id/favorite_cuisines_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/favorite_cuisines_label"
+        tools:layout_editor_absoluteX="0dp">
 
-                <!-- Progress Bar -->
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone" />
+        <!-- Example of a favorite cuisine item -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cuisine 1"
+            android:textSize="16sp" />
 
-            </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cuisine 2"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/firstNameTv"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="First Name"
-                android:maxLines="1"
-                android:textColor="@color/black"
-                android:layout_toEndOf="@id/pdfRl"/>
+        <!-- Add more TextViews or dynamically add items here -->
 
-            <TextView
-                android:id="@+id/lastNameTv"
-                style="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/firstNameTv"
-                android:layout_toEndOf="@id/pdfRl"
-                android:layout_marginStart="5dp"
-                android:text="Last Name"
-                android:maxLines="4"
-                android:ellipsize="end"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+    </LinearLayout>
 
+    <TextView
+        android:id="@+id/favorite_cuisines_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Favorite Foods"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
+    <ImageButton
+        android:id="@+id/editProfileBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.47"
+        app:srcCompat="@android:drawable/ic_menu_edit"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+        tools:srcCompat="@android:drawable/ic_menu_edit" />
 
-        </RelativeLayout>
+    <EditText
+        android:id="@+id/firstnameET"
+        android:layout_width="154dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:contentDescription="First Name"
+        android:editable="true"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Firstname"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
-    </androidx.cardview.widget.CardView>
+    <EditText
+        android:id="@+id/lastNameET"
+        android:layout_width="154dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:clickable="true"
+        android:contentDescription="Last Name"
+        android:editable="true"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Lastname"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="8dp"
+        android:text="About me:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</RelativeLayout>
+    <ImageButton
+        android:id="@+id/saveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#00FFFFFF"
+        android:clickable="false"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_save" />
+
+    <ImageButton
+        android:id="@+id/editProfilePicBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="132dp"
+        android:background="#00FFFFFF"
+        android:clickable="false"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/profilePicIV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profilePicIV"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@android:drawable/ic_menu_camera"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <!-- Favorite Food Cuisines Section -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
