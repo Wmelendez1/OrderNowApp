@@ -34,6 +34,7 @@ public class HomePage extends AppCompatActivity {
     private ImageView whitePin;
     private PlacesClient placesClient;
     private AutocompleteSessionToken sessionToken;
+    static ArrayList<FoodNearYouDomain> foodnearyou;
 
 
     @Override
@@ -85,13 +86,13 @@ public class HomePage extends AppCompatActivity {
     }
 
     //setup recycle view to display food near you horizontally
-    private void recyclerViewFoodNearYou() {
+    public void recyclerViewFoodNearYou() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewFoodNearYou = findViewById(R.id.foodnearyourecview);
         recyclerViewFoodNearYou.setLayoutManager(linearLayoutManager);
 
         //add stores
-        ArrayList<FoodNearYouDomain> foodnearyou = new ArrayList<>();
+        foodnearyou = new ArrayList<>();
         foodnearyou.add(new FoodNearYouDomain("mcdonaldss", "McDonald's", 4.3, "1.5 mi", "$1.99", "30-45 min"));
 
 
