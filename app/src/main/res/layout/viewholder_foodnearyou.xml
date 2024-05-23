@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/foodnearyouLayout"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="@drawable/cat_background">
+
+    <ImageView
+        android:id="@+id/foodnearyoulogo"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/mcdonaldss" />
+
+    <TextView
+        android:id="@+id/foodnearyouName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="@font/cooperhewitt_bold"
+        android:text="name"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/foodnearyouTime"
+        app:layout_constraintEnd_toEndOf="@+id/foodnearyoulogo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/foodnearyoulogo"
+        app:layout_constraintTop_toBottomOf="@+id/foodnearyoulogo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/foodnearyouTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="@font/cooperhewitt_medium"
+        android:text="time"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/foodnearyouNumReview"
+        app:layout_constraintEnd_toEndOf="@id/foodnearyouName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/foodnearyouName" />
+
+    <TextView
+        android:id="@+id/dot1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="•"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/foodnearyouNumReview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/foodnearyouTime"
+        app:layout_constraintTop_toBottomOf="@id/foodnearyouName" />
+
+    <TextView
+        android:id="@+id/foodnearyouDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="@font/cooperhewitt_medium"
+        android:text="distance"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/foodnearyouNumReview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/dot1"
+        app:layout_constraintTop_toBottomOf="@id/foodnearyouName"
+        app:layout_constraintVertical_bias="0.0"
+        tools:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/dot2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="•"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/foodnearyouNumReview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/foodnearyouDistance"
+        app:layout_constraintTop_toBottomOf="@id/foodnearyouName" />
+
+    <TextView
+        android:id="@+id/foodnearyoudeliveryFee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="@font/cooperhewitt_medium"
+        android:text="deliveryFee"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/foodnearyouNumReview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/dot2"
+        app:layout_constraintTop_toBottomOf="@id/foodnearyouName"
+        app:layout_constraintVertical_bias="0.0"
+        tools:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/foodnearyouNumReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/cooperhewitt_bold"
+        android:text="numberReviews"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/foodnearyouTime"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/foodnearyouTime"
+        app:layout_constraintTop_toBottomOf="@id/foodnearyouTime" />
+</androidx.constraintlayout.widget.ConstraintLayout>

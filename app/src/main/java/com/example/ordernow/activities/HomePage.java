@@ -13,15 +13,23 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.ordernow.Adapter.CatergoryAdapter;
+import com.example.ordernow.Adapter.FoodNearYouAdapter;
+import com.example.ordernow.Domain.CategoryDomain;
+import com.example.ordernow.Domain.FoodNearYouDomain;
 import com.example.ordernow.R;
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.net.PlacesClient;
+
+import java.sql.Array;
+import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
 
     private View orderTrackerLayout;
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewCategories;
+    private RecyclerView recyclerViewFoodNearYou;
     private AutoCompleteTextView enterAddress;
     private ImageView whitePin;
     private PlacesClient placesClient;
@@ -55,6 +63,7 @@ public class HomePage extends AppCompatActivity {
         }
 
         recycleViewCategory();
+        recyclerViewFoodNearYou();
     }
 
     //setup recycle view to display categories horizontally
@@ -62,6 +71,32 @@ public class HomePage extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewCategories = findViewById(R.id.categoryrecview);
         recyclerViewCategories.setLayoutManager(linearLayoutManager);
+
+        //add categories
+        ArrayList<CategoryDomain> category = new ArrayList<>();
+        category.add(new CategoryDomain("Pizza", "pizza"));
+        category.add(new CategoryDomain("Burger", "burger"));
+        category.add(new CategoryDomain("Breakfast", "pancake"));
+        category.add(new CategoryDomain("Chinese", "chinesefood"));
+        category.add(new CategoryDomain("Fast Food", "fastfood"));
+
+        adapter = new CatergoryAdapter(category);
+        recyclerViewCategories.setAdapter(adapter);
+    }
+
+    //setup recycle view to display food near you horizontally
+    private void recyclerViewFoodNearYou() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewFoodNearYou = findViewById(R.id.foodnearyourecview);
+        recyclerViewFoodNearYou.setLayoutManager(linearLayoutManager);
+
+        //add stores
+        ArrayList<FoodNearYouDomain> foodnearyou = new ArrayList<>();
+        foodnearyou.add(new FoodNearYouDomain("mcdonaldss", "McDonald's", 4.3, "1.5 mi", "$1.99", "30-45 min"));
+
+
+        adapter = new FoodNearYouAdapter(foodnearyou);
+        recyclerViewFoodNearYou.setAdapter(adapter);
     }
 
     //method to check if there's an ongoing order
