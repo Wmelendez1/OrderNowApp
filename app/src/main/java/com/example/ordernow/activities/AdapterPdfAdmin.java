@@ -1,5 +1,4 @@
-package Adapters;
-
+package com.example.ordernow.activities;
 
 import static com.example.ordernow.activities.Constants.MAX_BYTES_PDF;
 
@@ -8,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
@@ -18,24 +18,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ordernow.R;
-import com.example.ordernow.activities.ModelPdf;
-import com.example.ordernow.activities.FilterPdfAdmin;
-import com.example.ordernow.activities.MyApplication;
 import com.example.ordernow.databinding.ActivityProfileLayoutBinding;
+import com.example.ordernow.activities.FilterPdfAdmin;
 import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.listener.OnErrorListener;
-import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
-import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
@@ -48,6 +34,7 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
     public FilterPdfAdmin filter;
 
     private static final String TAG = "PDF_ADAPTER_TAG";
+    private static final long MAX_BYTES_PDF = 50000000; // 50 MB
 
     public AdapterPdfAdmin(Context context, ArrayList<ModelPdf> pdfArrayList) {
         this.context = context;
@@ -66,6 +53,7 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
     @NonNull
     @Override
     public HolderPdfAdmin onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_profile_layout, parent, false);
         binding = ActivityProfileLayoutBinding.inflate(LayoutInflater.from(context), parent, false);
         return new HolderPdfAdmin(binding.getRoot());
     }
@@ -74,18 +62,18 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
     public void onBindViewHolder(@NonNull HolderPdfAdmin holder, int position) {
         // Get data
         ModelPdf model = pdfArrayList.get(position);
-        String title = model.getTitle();
-        String description = model.getDescription();
+        String firstName = model.getFirstName();
+        String lastName = model.getLastName();
         long timestamp = model.getTimestamp();
-        String formattedDate = MyApplication.formatTimestamp(timestamp);
+        String Age = model.getAge();
 
         // Set data to views
-        holder.firstNameTv.setText(title);
-        holder.lastNameTv.setText(description);
-        holder.dateTv.setText(formattedDate);
+        holder.firstNameTv.setText(firstName);
+        holder.lastNameTv.setText(lastName);
+        holder.AgeTv.setText(Age);
+
 
         // Load further details like category, pdf from URL, pdf size in separate functions
-        loadCategory(model, holder);
         loadPdfFromUrl(model, holder);
         loadPdfSize(model, holder);
     }
@@ -93,11 +81,16 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
     private void loadPdfSize(ModelPdf model, HolderPdfAdmin holder) {
         // Using URL, retrieve file metadata from Firebase Storage
         String pdfUrl = model.getUrl();
+        if (pdfUrl == null || pdfUrl.isEmpty()) {
+            Log.e(TAG, "PDF URL is null or empty");
+            return;
+        }
+
         StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(pdfUrl);
         ref.getMetadata().addOnSuccessListener(storageMetadata -> {
             // Get size in bytes
             double bytes = storageMetadata.getSizeBytes();
-            Log.d(TAG, "onSuccess: " + model.getTitle() + " " + bytes);
+            Log.d(TAG, "onSuccess: " + model.getFirstName() + " " + bytes);
 
             // Convert bytes to KB / MB
             double kb = bytes / 1024;
@@ -112,7 +105,8 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
                 sizeText = String.format("%.2f bytes", bytes);
             }
 
-            holder.sizeTv.setText(sizeText);
+            // Assuming you have a sizeTextView to display the size
+            holder.sizeTextView.setText(sizeText);
         }).addOnFailureListener(e -> {
             // Failed to get metadata
             Log.d(TAG, "onFailure: " + e.getMessage());
@@ -122,9 +116,16 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
     private void loadPdfFromUrl(ModelPdf model, HolderPdfAdmin holder) {
         // Load PDF from URL and display in PDFView
         String pdfUrl = model.getUrl();
+        Log.d(TAG, "PDF URL: " + pdfUrl); // Log the URL
+
+        if (pdfUrl == null || pdfUrl.isEmpty()) {
+            Log.e(TAG, "PDF URL is null or empty");
+            return;
+        }
+
         StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(pdfUrl);
         ref.getBytes(MAX_BYTES_PDF).addOnSuccessListener(bytes -> {
-            Log.d(TAG, "onSuccess: " + model.getTitle() + " successfully loaded");
+            Log.d(TAG, "onSuccess: " + model.getFirstName() + " successfully loaded");
 
             // Set PDF bytes to PDFView
             holder.pdfView.fromBytes(bytes)
@@ -151,27 +152,6 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         });
     }
 
-    private void loadCategory(ModelPdf model, HolderPdfAdmin holder) {
-        // Get category using categoryId from Firebase Database
-        String categoryId = model.getCategoryId();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categories");
-        ref.child(categoryId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // Get category
-                String category = String.valueOf(snapshot.child("category").getValue());
-
-                // Set category to categoryTv
-                holder.categoryTv.setText(category);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Handle onCancelled
-            }
-        });
-    }
-
     @Override
     public int getItemCount() {
         return pdfArrayList.size();
@@ -180,8 +160,9 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
     static class HolderPdfAdmin extends RecyclerView.ViewHolder {
         PDFView pdfView;
         ProgressBar progressBar;
-        TextView firstNameTv, lastNameTv, categoryTv, sizeTv, dateTv;
+        EditText firstNameTv, lastNameTv, AgeTv; // Change TextView to EditText
         ImageButton moreBtn;
+        TextView sizeTextView;
 
         public HolderPdfAdmin(@NonNull View itemView) {
             super(itemView);
@@ -189,6 +170,7 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
             progressBar = itemView.findViewById(R.id.progressBar);
             firstNameTv = itemView.findViewById(R.id.firstNameTv);
             lastNameTv = itemView.findViewById(R.id.lastNameTv);
+            AgeTv = itemView.findViewById(R.id.AgeTv);
 
         }
     }

@@ -2,11 +2,7 @@ package com.example.ordernow.activities;
 
 import android.widget.Filter;
 
-
-
 import java.util.ArrayList;
-
-import Adapters.AdapterPdfAdmin;
 
 public class FilterPdfAdmin extends Filter {
 
@@ -32,7 +28,7 @@ public class FilterPdfAdmin extends Filter {
             ArrayList<ModelPdf> filterModels = new ArrayList<>();
             for (int i=0; i<filterList.size(); i++){
                 //validate
-                if (filterList.get(i).getTitle().toUpperCase().contains(constraint)){
+                if (filterList.get(i).getFirstName().toUpperCase().contains(constraint)){
                     //add to filtered list
                     filterModels.add(filterList.get(i));
                 }

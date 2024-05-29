@@ -1,26 +1,32 @@
 package com.example.ordernow.activities;
 
 public class ModelPdf {
-    //variables
-    String uid, id, title, description, url, categoryId;
-    long timestamp;
+    // Variables
+    private String uid;
+    private String id;
+    private String firstName;
+    private String lastName;
+    private String url;
 
-    //empty constructor, required for firebase
-    public ModelPdf() {
-    }
 
-    //constructor for all params
-    public ModelPdf(String uid, String id, String title, String description, String url, String categoryId, long timestamp) {
+    private String Age;
+    private long timestamp;
+
+    // Empty constructor, required for Firebase
+    public ModelPdf() {}
+
+    // Constructor for all parameters
+    public ModelPdf(String uid, String id, String firstName, String lastName, String url, long timestamp, String Age) {
         this.uid = uid;
         this.id = id;
-        this.title = title;
-        this.description = description;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.url = url;
-        this.categoryId = categoryId;
         this.timestamp = timestamp;
+        this.Age = Age;
     }
 
-    /*-----Getter/Setter-----*/
+    // Getter and setter methods
     public String getUid() {
         return uid;
     }
@@ -37,20 +43,20 @@ public class ModelPdf {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUrl() {
@@ -61,14 +67,6 @@ public class ModelPdf {
         this.url = url;
     }
 
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public long getTimestamp() {
         return timestamp;
     }
@@ -76,4 +74,13 @@ public class ModelPdf {
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
+
+    public String getAge() {
+        return Age;
+    }
+
+    public void setAge(String age) {
+        Age = age;
+    }
+
 }
