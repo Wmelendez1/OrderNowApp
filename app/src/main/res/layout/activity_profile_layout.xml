@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".activities.ProfileLayout">
 
-    <!-- Toolbar -->
 
     <!-- Back Button -->
     <androidx.appcompat.widget.Toolbar
@@ -62,8 +61,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profilePicIV"
-        android:layout_width="147dp"
-        android:layout_height="144dp"
+        android:layout_width="152dp"
+        android:layout_height="151dp"
         android:src="@drawable/onlogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -190,7 +189,8 @@
         android:hint="Lastname"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/username"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView"
