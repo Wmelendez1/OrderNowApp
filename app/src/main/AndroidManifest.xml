@@ -19,6 +19,9 @@
             android:name=".activities.SignUp"
             android:exported="false" />
         <activity
+            android:name=".activities.CategoriesSearch"
+            android:exported="false" />
+        <activity
             android:name=".activities.CategoriesPage"
             android:exported="true" />
         <activity

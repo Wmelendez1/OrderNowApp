@@ -1,7 +1,10 @@
 package com.example.ordernow.activities;
 
+import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AutoCompleteTextView;
@@ -33,10 +36,6 @@ public class CategoriesPage extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewCategories;
     private RecyclerView recyclerViewFoodNearYou;
-    private AutoCompleteTextView enterAddress;
-    private ImageView whitePin;
-    private PlacesClient placesClient;
-    private AutocompleteSessionToken sessionToken;
     private EditText searchBar;
 
 
@@ -46,20 +45,16 @@ public class CategoriesPage extends AppCompatActivity {
         setContentView(R.layout.activity_categories_page);
         searchBar = findViewById(R.id.search_text);
 
-        ArrayList<FoodNearYouDomain> foodNearYouAdapterArrayList = HomePage.foodnearyou;
-        FoodNearYouDomain x;
-        if (foodNearYouAdapterArrayList != null){
-            x = foodNearYouAdapterArrayList.get(1);
-        }
-        else {
-            x = null;
-        }
         searchBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchBar.setText(x.getName());
+
+            Intent intent = new Intent(CategoriesPage.this, CategoriesSearch.class);
+            startActivity(intent);
+            finish();
             }
         });
+
 
 
 
