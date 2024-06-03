@@ -5,4 +5,14 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="signup">Sign Up</string>
     <string name="login">Login</string>
+
+    <string name="add_profile_info">Add Profile Information</string>
+    <string name="first_name_hint">First Name</string>
+    <string name="last_name_hint">Last Name</string>
+    <string name="attach_profile_picture">Add Profile Picture</string>
+    <string name="add_profile">Add Profile</string>
+    <string name="uploading_profile_image">Profile Image is uploading...</string>
+    <string name="upload_profile_success">Profile Image Uploaded</string>
+    <string name="upload_profile_failed">Profile Image Upload Failed</string>
+    <string name="fetch_url_failed">Failed to get download URL</string>
 </resources>
