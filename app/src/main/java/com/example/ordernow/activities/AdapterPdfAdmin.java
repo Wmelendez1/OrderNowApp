@@ -64,14 +64,16 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         ModelPdf model = pdfArrayList.get(position);
         String firstName = model.getFirstName();
         String lastName = model.getLastName();
-        long timestamp = model.getTimestamp();
-        String Age = model.getAge();
+        String age = model.getAge();
+        String username = model.getUsername();
+        String bio = model.getBio();
 
         // Set data to views
         holder.firstNameTv.setText(firstName);
         holder.lastNameTv.setText(lastName);
-        holder.AgeTv.setText(Age);
-
+        holder.AgeTv.setText(age);
+        holder.username.setText(username);
+        holder.Bio.setText(bio);
 
         // Load further details like category, pdf from URL, pdf size in separate functions
         loadPdfFromUrl(model, holder);
@@ -160,7 +162,7 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
     static class HolderPdfAdmin extends RecyclerView.ViewHolder {
         PDFView pdfView;
         ProgressBar progressBar;
-        EditText firstNameTv, lastNameTv, AgeTv; // Change TextView to EditText
+        EditText firstNameTv, lastNameTv, AgeTv, username, Bio; // Change TextView to EditText
         ImageButton moreBtn;
         TextView sizeTextView;
 
@@ -171,6 +173,8 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
             firstNameTv = itemView.findViewById(R.id.firstNameTv);
             lastNameTv = itemView.findViewById(R.id.lastNameTv);
             AgeTv = itemView.findViewById(R.id.AgeTv);
+            username = itemView.findViewById(R.id.username); // Initialize usernameTv
+            Bio = itemView.findViewById(R.id.Bio); // Initialize bioTv
 
         }
     }

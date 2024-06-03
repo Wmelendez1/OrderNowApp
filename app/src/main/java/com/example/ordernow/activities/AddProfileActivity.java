@@ -75,7 +75,7 @@ public class AddProfileActivity extends AppCompatActivity {
         loadProfiles();
     }
 
-    private String firstName = "", lastName = "" , Age = "";
+    private String firstName = "", lastName = "", Age = "", username = "", bio = "";
 
     private void validateData() {
         Log.d(TAG, "validateData: validating data...");
@@ -83,6 +83,8 @@ public class AddProfileActivity extends AppCompatActivity {
         firstName = binding.firstNameTv.getText().toString().trim();
         lastName = binding.lastNameTv.getText().toString().trim();
         Age = binding.AgeTv.getText().toString().trim();
+        username = binding.username.getText().toString().trim();
+        bio = binding.Bio.getText().toString().trim();
 
         if (TextUtils.isEmpty(firstName)) {
             Toast.makeText(this, "Enter First Name", Toast.LENGTH_SHORT).show();
@@ -90,16 +92,20 @@ public class AddProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Enter Last Name", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(Age)) {
             Toast.makeText(this, "Enter Age", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(username)) {
+            Toast.makeText(this, "Enter Username", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(bio)) {
+            Toast.makeText(this, "Enter Bio", Toast.LENGTH_SHORT).show();
         } else if (pdfUri == null) {
             Toast.makeText(this, "Pick PDF...", Toast.LENGTH_SHORT).show();
         } else {
-            uploadPdfToStorage(firstName, lastName, Age);
+            uploadPdfToStorage(firstName, lastName, Age, username, bio);
         }
     }
 
-    private void uploadPdfToStorage(String firstName, String lastName, String Age) {
+    private void uploadPdfToStorage(String firstName, String lastName, String Age, String username, String bio) {
         Log.d(TAG, "uploadPdfToStorage: upload to storage...");
-        progressDialog.setMessage("Uploading PDF...");
+        progressDialog.setMessage("Uploading Profile Picture...");
         progressDialog.show();
 
         long timestamp = System.currentTimeMillis();
@@ -107,42 +113,30 @@ public class AddProfileActivity extends AppCompatActivity {
         StorageReference pdfStorageReference = FirebaseStorage.getInstance().getReference().child("ProfilePDFs").child(pdfFileName);
 
         pdfStorageReference.putFile(pdfUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Log.d(TAG, "onSuccess: PDF uploaded to storage...");
-                        Log.d(TAG, "onSuccess: getting pdf url...");
+                .addOnSuccessListener(taskSnapshot -> {
+                    Log.d(TAG, "onSuccess: PDF uploaded to storage...");
+                    Log.d(TAG, "onSuccess: getting pdf url...");
 
-                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                        uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                String uploadPdfUrl = "" + uri.toString();
-                                uploadPdfInfoToDB(firstName, lastName, uploadPdfUrl, timestamp, Age);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                progressDialog.dismiss();
-                                Log.d(TAG, "onFailure: Failed to get PDF URL due to " + e.getMessage());
-                                Toast.makeText(AddProfileActivity.this, "Failed to get PDF URL due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
+                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                    uriTask.addOnSuccessListener(uri -> {
+                        String uploadPdfUrl = "" + uri.toString();
+                        uploadPdfInfoToDB(firstName, lastName, uploadPdfUrl, timestamp, Age, username, bio);
+                    }).addOnFailureListener(e -> {
                         progressDialog.dismiss();
-                        Log.d(TAG, "onFailure: PDF upload failed due to " + e.getMessage());
-                        Toast.makeText(AddProfileActivity.this, "PDF upload failed due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                        Log.d(TAG, "onFailure: Failed to get PDF URL due to " + e.getMessage());
+                        Toast.makeText(AddProfileActivity.this, "Failed to get PDF URL due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+                })
+                .addOnFailureListener(e -> {
+                    progressDialog.dismiss();
+                    Log.d(TAG, "onFailure: PDF upload failed due to " + e.getMessage());
+                    Toast.makeText(AddProfileActivity.this, "PDF upload failed due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
-    private void uploadPdfInfoToDB(String firstName, String lastName, String uploadPdfUrl, long timestamp, String Age) {
+    private void uploadPdfInfoToDB(String firstName, String lastName, String uploadPdfUrl, long timestamp, String Age, String username, String bio) {
         Log.d(TAG, "uploadPdfInfoToDB: uploading PDF info to firebase db...");
-        progressDialog.setMessage("Uploading PDF info...");
+        progressDialog.setMessage("Uploading Profile Info...");
         String uid = firebaseAuth.getUid();
 
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -153,25 +147,22 @@ public class AddProfileActivity extends AppCompatActivity {
         hashMap.put("url", "" + uploadPdfUrl);
         hashMap.put("timestamp", timestamp);
         hashMap.put("Age", "" + Age);
+        hashMap.put("username", "" + username);
+        hashMap.put("Bio", "" + bio);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Profiles");
         ref.child("" + timestamp)
                 .setValue(hashMap)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        progressDialog.dismiss();
-                        Log.d(TAG, "onSuccess: Successfully uploaded...");
-                        Toast.makeText(AddProfileActivity.this, "Successfully uploaded...", Toast.LENGTH_SHORT).show();
-                    }
+                .addOnSuccessListener(unused -> {
+                    progressDialog.dismiss();
+                    Log.d(TAG, "onSuccess: Successfully uploaded...");
+                    Toast.makeText(AddProfileActivity.this, "Successfully uploaded...", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(AddProfileActivity.this, ProfileLayout.class));
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressDialog.dismiss();
-                        Log.d(TAG, "onFailure: Failed to upload to db due to " + e.getMessage());
-                        Toast.makeText(AddProfileActivity.this, "Failed to upload to db due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                .addOnFailureListener(e -> {
+                    progressDialog.dismiss();
+                    Log.d(TAG, "onFailure: Failed to upload to db due to " + e.getMessage());
+                    Toast.makeText(AddProfileActivity.this, "Failed to upload to db due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 

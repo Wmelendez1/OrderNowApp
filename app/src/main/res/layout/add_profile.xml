@@ -120,14 +120,50 @@
         android:textColorHint="@color/black"
         android:textSize="16sp" />
 
+    <com.google.android.material.textfield.TextInputEditText
+
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/AgeTv"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/shape_edittext01"
+        android:drawablePadding="10sp"
+        android:gravity="center_vertical"
+        android:hint="Username"
+        android:padding="10sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="16sp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+
+        android:id="@+id/Bio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/username"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/shape_edittext01"
+        android:drawablePadding="10sp"
+        android:gravity="center_vertical"
+        android:hint="Bio"
+        android:padding="10sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="16sp" />
+
 
     <!--Submit button-->
     <Button
         android:id="@+id/submitBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/Bio"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="400dp"
         android:layout_marginEnd="30dp"
         android:text="Add Profile"
         android:textColor="@color/black" />

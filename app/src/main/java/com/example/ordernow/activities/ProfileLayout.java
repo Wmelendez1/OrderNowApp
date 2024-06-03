@@ -2,98 +2,144 @@ package com.example.ordernow.activities;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.Manifest;
+import android.widget.Toast;
 
+import com.example.ordernow.databinding.ActivityProfileLayoutBinding;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.ordernow.databinding.ActivityProfileLayoutBinding;
+import com.example.ordernow.activities.AdapterPdfAdmin;
+import com.example.ordernow.activities.ModelPdf;
+import com.example.ordernow.databinding.ActivitySignUpBinding;
+import com.example.ordernow.databinding.AddProfileBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import com.example.ordernow.R;
-import com.google.android.material.textfield.TextInputEditText;
+import java.util.ArrayList;
+
+import java.util.HashMap;
+
 
 public class ProfileLayout extends AppCompatActivity {
 
+    // View binding
+    private ActivityProfileLayoutBinding binding;
+    private AddProfileBinding AddProfilebinding;
+    private ActivitySignUpBinding SignupBinding;
+
+    // Firebase
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference profileRef;
+    private String id;
+
+    // Profile information
+    private String firstName, lastName, Age, email, username, bio;
+    private Uri pdfUri;
+
+    private static final String TAG = "PROFILE_TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_layout);
-        //button st up
-        ImageButton backBtn = findViewById(R.id.backBtnProfile);
-        ImageButton editprofileBtn = findViewById(R.id.editProfileBtn);
-        //need this bool for the edit texts
+        binding = ActivityProfileLayoutBinding.inflate(getLayoutInflater());
+        AddProfilebinding = AddProfileBinding.inflate(getLayoutInflater());
+        SignupBinding = ActivitySignUpBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        ImageButton editPicBtn = findViewById(R.id.editProfilePicBtn);
-        ImageButton saveProfileBtn = findViewById(R.id.saveBtn);
-        // text view set ups
-        EditText firstname = findViewById(R.id.firstnameET);
-        EditText lastname = findViewById(R.id.lastNameET);
-        TextInputEditText aboutMe = findViewById(R.id.aboutmeET);
+        Intent intent = getIntent();
+        email = intent.getStringExtra("email");
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null) {
+            String email = user.getEmail();
+            if (email != null) {
+                profileRef = FirebaseDatabase.getInstance().getReference("Profiles");
+                retrieveProfileInfo(email);
+            }
+        } else {
+            Log.e(TAG, "No user is currently signed in.");
+        }
 
-        // on clicks
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        // Back button click listener
+        binding.backBtnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // functionality to get to home page
+                onBackPressed();
             }
         });
 
-        editprofileBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editprofileBtn.setVisibility(View.INVISIBLE);
-                editprofileBtn.setClickable(false);
-                saveProfileBtn.setVisibility(View.VISIBLE);
-                saveProfileBtn.setClickable(true);
-                editPicBtn.setVisibility(View.VISIBLE);
-                editPicBtn.setClickable(true);
-                if (!(firstname.isEnabled())) {
-                    firstname.setEnabled(true);
-                }
-                if (!(lastname.isEnabled())) {
-                    lastname.setEnabled(true);
-                }
-                if (!(aboutMe.isEnabled())) {
-                    aboutMe.setEnabled(true);
-                }
-            }
-        });
-
-        editPicBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivity(intent);
-            }
-        });
-
-
-        saveProfileBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editprofileBtn.setVisibility(View.VISIBLE);
-                editprofileBtn.setClickable(true);
-                saveProfileBtn.setVisibility(View.INVISIBLE);
-                saveProfileBtn.setClickable(false);
-                editPicBtn.setVisibility(View.INVISIBLE);
-                editPicBtn.setClickable(false);
-                if ((firstname.isEnabled())) {
-                    firstname.setEnabled(false);
-                }
-                if ((lastname.isEnabled())) {
-                    lastname.setEnabled(false);
-                }
-                if ((aboutMe.isEnabled())) {
-                    aboutMe.setEnabled(false);
-                }
-            }
-        });
 
     }
+    private void retrieveProfileInfo(String Email) {
+        profileRef.orderByChild("email").equalTo(email).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (ds.exists()) {
+                        firstName = ds.child("firstName").getValue(String.class);
+                        lastName = ds.child("lastName").getValue(String.class);
+                        Age = ds.child("age").getValue(String.class);
+                        email = ds.child("email").getValue(String.class);
+                        bio = ds.child("Bio").getValue(String.class);
+                        username = ds.child("username").getValue(String.class);
 
+                        // Log the retrieved data to verify
+                        Log.d(TAG, "First Name: " + firstName);
+                        Log.d(TAG, "Last Name: " + lastName);
+                        Log.d(TAG, "Age: " + Age);
+                        Log.d(TAG, "Email: " + email);
+                        Log.d(TAG, "Bio: " + bio);
+                        Log.d(TAG, "username: " + username);
+
+                        // Update UI with retrieved profile information
+                        binding.firstnameET.setText(firstName);
+                        binding.lastNameET.setText(lastName);
+                        binding.aboutmeET.setText(bio);
+                        binding.username.setText(username);
+
+
+                    }
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "DatabaseError: " + error.getMessage());
+            }
+        });
+    }
+
+    private void uploadInfoProfile(String firstName, String lastName, String age) {
+        String uid = firebaseAuth.getUid();
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("firstName", firstName);
+        hashMap.put("lastName", lastName);
+        hashMap.put("age", age);
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Profiles");
+        ref.child(uid).setValue(hashMap)
+                .addOnSuccessListener(aVoid -> Log.d(TAG, "Profile updated successfully"))
+                .addOnFailureListener(e -> Log.e(TAG, "Failed to update profile: " + e.getMessage()));
+    }
 }

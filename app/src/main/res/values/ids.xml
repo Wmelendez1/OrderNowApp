@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="email" type="id" />
-    <item name="password" type="id" />
-    <item name="conpassword" type="id" />
-    <item name="progressBar" type="id" />
-    <item name="signup_button" type="id" />
+        <item name="email" type="id"/>
+        <item name="password" type="id"/>
+        <item name="conpassword" type="id"/>
+        <item name="progressBar" type="id"/>
+        <item name="signup_button" type="id"/>
+        <item name="backBtnProfile" type="id"/>
+        <item name="editProfileBtn" type="id"/>
+        <item name="editProfilePicBtn" type="id"/>
+        <item name="saveBtn" type="id"/>
+        <item name="firstnameET" type="id"/>
+        <item name="lastNameET" type="id"/>
+        <item name="aboutmeET" type="id"/>
+        <item name="toolbar" type="id"/>
+        <item name="profileTv" type="id"/>
+        <item name="profilePicIV" type="id"/>
+        <item name="username" type="id"/>
+        <item name="textInputLayout" type="id"/>
+        <item name="favorite_cuisines_container" type="id"/>
+        <item name="favorite_cuisines_label" type="id"/>
+
+
 </resources>
+
