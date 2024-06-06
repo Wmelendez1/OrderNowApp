@@ -23,7 +23,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/navmenu"
                 android:layout_width="23dp"
                 android:layout_height="53dp"
                 app:layout_constraintBottom_toBottomOf="@+id/ordernowtext"
@@ -50,7 +50,7 @@
 
             <AutoCompleteTextView
                 android:id="@+id/enteraddress"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:backgroundTint="#F6ECEC"
@@ -211,7 +211,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

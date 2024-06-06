@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.OrderNow" parent="Base.Theme.OrderNow" />
+    <style name="Theme.OrderNow.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.OrderNow.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.OrderNow.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

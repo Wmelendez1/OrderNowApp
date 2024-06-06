@@ -6,4 +6,8 @@
     <string name="signup">Sign Up</string>
     <string name="login">Login</string>
     <string name="food_choices_scrollview_content_description" />
+    <string name="firebaseApiKey">AIzaSyBN83ePWwtBmmjtt3Z7Zc41McQ8jnmA5JE</string>
+    <string name="title_activity_navigation">Navigation</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

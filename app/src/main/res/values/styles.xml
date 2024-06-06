@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="NavigationViewTextAppearance">
+        <item name="android:textSize">20sp</item> <!-- Adjust the font size as needed -->
+        <item name="android:fontFamily">@font/cooperhewitt_medium</item>
+
+    </style>
+
+</resources>

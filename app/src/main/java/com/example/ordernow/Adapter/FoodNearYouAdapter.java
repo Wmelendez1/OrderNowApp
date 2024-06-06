@@ -51,6 +51,27 @@ public class FoodNearYouAdapter extends RecyclerView.Adapter<FoodNearYouAdapter.
                 holder.homefnylayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.cat_background));
                 break;
             }
+            case 1 : {
+                picUrl = "dominoss";
+                holder.homefnylayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.cat_background));
+                break;
+            }
+            case 2 : {
+                picUrl = "jollibee";
+                holder.homefnylayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.cat_background));
+                break;
+            }
+            case 3 : {
+                picUrl = "tacobell";
+                holder.homefnylayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.cat_background));
+                break;
+            }
+            case 4 : {
+                picUrl = "wendys";
+                holder.homefnylayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.cat_background));
+                break;
+            }
+
         }
 
         //get resource id for drawable with provided name
