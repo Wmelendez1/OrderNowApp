@@ -4,6 +4,9 @@ import android.widget.Filter;
 
 import java.util.ArrayList;
 
+import Adapters.AdapterPdfAdmin;
+import Models.ModelPdf;
+
 public class FilterPdfAdmin extends Filter {
 
     //arrayList in which we want to search
