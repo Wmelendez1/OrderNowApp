@@ -20,18 +20,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderNow">
 
-        <activity
-            android:exported="true"
-            android:name=".activities.PastOrders">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
 
         <!-- Activities -->
+        <activity
+            android:exported="false"
+            android:name=".activities.PastOrders"/>
+
         <activity
             android:name=".activities.ProfileLayout"
             android:exported="false" />
@@ -44,15 +38,16 @@
         <activity
             android:name=".activities.SignUp"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".activities.WelcomeScreen"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+        <activity
+            android:name=".activities.WelcomeScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity> &lt;!&ndash; Optional: FileProvider for sharing files &ndash;&gt;-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- Optional: FileProvider for sharing files -->
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
