@@ -21,6 +21,9 @@
             android:name=".activities.AddProfile"
             android:exported="false" />
         <activity
+            android:name=".activities.Login"
+            android:exported="false" />
+        <activity
             android:name=".activities.SignUp"
             android:exported="false" />
         <activity
