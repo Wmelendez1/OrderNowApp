@@ -30,6 +30,8 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import Models.ModelPdf;
+
 public class AddProfileActivity extends AppCompatActivity {
     private AddProfileBinding binding;
     private FirebaseAuth firebaseAuth;

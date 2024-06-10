@@ -1,6 +1,4 @@
-package com.example.ordernow.activities;
-
-import static com.example.ordernow.activities.Constants.MAX_BYTES_PDF;
+package Adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -18,13 +16,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ordernow.R;
-import com.example.ordernow.databinding.ActivityProfileLayoutBinding;
 import com.example.ordernow.activities.FilterPdfAdmin;
+import com.example.ordernow.databinding.ActivityProfileLayoutBinding;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+
+import Models.ModelPdf;
 
 public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.HolderPdfAdmin> implements Filterable {
 
