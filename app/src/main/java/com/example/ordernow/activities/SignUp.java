@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.ordernow.databinding.ActivitySignUpBinding;
@@ -25,6 +27,7 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         // Set status bar color
         getWindow().setStatusBarColor(Color.parseColor("#36B5FF"));
@@ -52,7 +55,7 @@ public class SignUp extends AppCompatActivity {
                             if (user != null) {
                                 // Navigate to main activity upon successful sign-up
                                 startActivity(new Intent(SignUp.this, AddProfileActivity.class));
-                                finish(); // Close the sign-up activity
+                                //finish(); // Close the sign-up activity
                             }
                         } else {
                             // If sign-in fails, display a message to the user.
@@ -63,6 +66,11 @@ public class SignUp extends AppCompatActivity {
                     });
 
         });
+
+        binding.loginreg.setOnClickListener(v -> {
+        startActivity(new Intent(SignUp.this, Login.class)); //starts activity
+        });
+
     }
 }
 

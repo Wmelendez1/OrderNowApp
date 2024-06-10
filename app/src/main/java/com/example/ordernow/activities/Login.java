@@ -1,17 +1,18 @@
 package com.example.ordernow.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import com.example.ordernow.R;
+import com.example.ordernow.databinding.ActivityLoginBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
+    private ActivityLoginBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,6 @@ public class Login extends AppCompatActivity {
         // button set up
         Button signUpBtn = findViewById(R.id.signup_button);
         Button loginBtn = findViewById(R.id.loginButton);
-
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,6 +33,7 @@ public class Login extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
                 // intent to homepage
                 Intent LoggingIn = new Intent(); // add intent later
                 startActivity(LoggingIn);

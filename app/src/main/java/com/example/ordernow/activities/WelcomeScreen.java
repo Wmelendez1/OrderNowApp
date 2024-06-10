@@ -31,6 +31,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
         //set buttons here
         Button signUpButton = findViewById(R.id.signupButton);
+        Button loginButton = findViewById(R.id.loginButton);
 
         setVariable();
         getWindow().setStatusBarColor(getResources().getColor(R.color.themecolor));
@@ -40,6 +41,15 @@ public class WelcomeScreen extends AppCompatActivity {
             public void onClick(View v) {
                 //creating intent to start signup activitry
                 Intent intent = new Intent(WelcomeScreen.this, SignUp.class);
+                startActivity(intent); //starts activity
+            }
+        });
+
+        loginButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomeScreen.this, Login.class);
                 startActivity(intent); //starts activity
             }
         });
