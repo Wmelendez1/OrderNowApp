@@ -24,4 +24,8 @@ public class CategoryDomain {
     public void setPic(String pic) {
         this.pic = pic;
     }
+    public void add(String title, String pic){
+        this.title = title;
+        this.pic = pic;
+    }
 }

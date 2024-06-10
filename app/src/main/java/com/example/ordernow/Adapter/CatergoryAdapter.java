@@ -3,6 +3,8 @@ package com.example.ordernow.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +19,7 @@ import com.example.ordernow.R;
 
 import java.util.ArrayList;
 
-public class CatergoryAdapter extends RecyclerView.Adapter<CatergoryAdapter.ViewHolder> {
+public class CatergoryAdapter extends RecyclerView.Adapter<CatergoryAdapter.ViewHolder> implements Filterable {
 
     //list to hold data for category items
     ArrayList<CategoryDomain> categoryDomains;
@@ -25,6 +27,20 @@ public class CatergoryAdapter extends RecyclerView.Adapter<CatergoryAdapter.View
     //constructor to initialize the adapter
     public CatergoryAdapter(ArrayList<CategoryDomain> categoryDomains) {
         this.categoryDomains = categoryDomains;
+    }
+    @Override
+    public Filter getFilter()
+    {
+        return  new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                return null;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+            ;
     }
 
     //method to create viewholder object

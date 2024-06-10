@@ -11,6 +11,7 @@ import android.widget.ListView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ordernow.Adapter.CatergoryAdapter;
@@ -27,24 +28,55 @@ import java.util.ArrayList;
 
 public class CategoriesSearch extends AppCompatActivity {
     ListView lv;
-    ArrayList<String> category;
-    ArrayAdapter<String> adapter;
+    private RecyclerView.Adapter adapter;
+    private CatergoryAdapter catergoryAdapter;
+    private RecyclerView recyclerViewCategories;
+    private ArrayList<CategoryDomain> category;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_search);
-        //add categories
-        category = new ArrayList<>();
-        category.add("Pizza");
-        category.add("Burger");
-        category.add("Breakfast");
-        category.add("Asian");
-        category.add("Fast Food");
+        createRecycleView();
 
-        lv = findViewById(R.id.list_item);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, category);
-        lv.setAdapter(adapter);
+
     }
+    private void createRecycleView() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerViewCategories = findViewById(R.id.RV);
+        recyclerViewCategories.setLayoutManager(linearLayoutManager);
+
+        //add categories
+        ArrayList<CategoryDomain> category = new ArrayList<>();
+        category.add(new CategoryDomain("Pizza", "pizza"));
+        category.add(new CategoryDomain("Burger", "burger"));
+        category.add(new CategoryDomain("Breakfast", "pancake"));
+        category.add(new CategoryDomain("Chinese", "chinesefood"));
+        category.add(new CategoryDomain("Fast Food", "fastfood"));
+
+        adapter = new CatergoryAdapter(category);
+        recyclerViewCategories.setAdapter(adapter);
+        recyclerViewCategories.setLayoutManager(linearLayoutManager);
+
+        catergoryAdapter = new CatergoryAdapter(category);
+        SearchView searchView = findViewById(R.id.SV);
+        searchView.setQueryHint("Search Here");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                catergoryAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,11 +93,12 @@ public class CategoriesSearch extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
+                catergoryAdapter.getFilter().filter(newText);
                 return false;
             }
         });
 
         return super.onCreateOptionsMenu(menu);
     }
+
 }

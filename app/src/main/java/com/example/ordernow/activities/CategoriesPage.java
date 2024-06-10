@@ -51,7 +51,7 @@ public class CategoriesPage extends AppCompatActivity {
 
             Intent intent = new Intent(CategoriesPage.this, CategoriesSearch.class);
             startActivity(intent);
-            finish();
+            CategoriesPage.this.finish();
             }
         });
 
