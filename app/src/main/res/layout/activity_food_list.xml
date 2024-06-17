@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/foodlistview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.FoodList">
+
+    <ImageView
+        android:id="@+id/foodlisttoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/themecolor"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@id/foodlistscrollview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/foodlistbackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/foodplaceName"
+        app:layout_constraintEnd_toStartOf="@+id/foodplaceName"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="@+id/foodlisttoolbar"
+        app:layout_constraintTop_toTopOf="@+id/foodplaceName"
+        app:srcCompat="@drawable/back_arrow" />
+
+    <TextView
+        android:id="@+id/foodplaceName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cooperhewitt_semibold"
+        android:text="name"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/foodlisttoolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/foodlisttoolbar"
+        app:layout_constraintTop_toTopOf="@+id/foodlisttoolbar" />
+
+    <ScrollView
+        android:id="@+id/foodlistscrollview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/foodlisttoolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/foodlistrecyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/checkout"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_margin="17dp"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/cooperhewitt_semibold"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="View Cart"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
