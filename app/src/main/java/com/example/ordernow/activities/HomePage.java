@@ -75,11 +75,11 @@ public class HomePage extends AppCompatActivity {
 
         //add categories
         ArrayList<CategoryDomain> category = new ArrayList<>();
-        category.add(new CategoryDomain("Pizza", "pizza"));
-        category.add(new CategoryDomain("Burger", "burger"));
-        category.add(new CategoryDomain("Breakfast", "pancake"));
-        category.add(new CategoryDomain("Chinese", "chinesefood"));
-        category.add(new CategoryDomain("Fast Food", "fastfood"));
+        category.add(new CategoryDomain("Pizza", "Pizza","pizza"));
+        category.add(new CategoryDomain("Burger", "Burger", "burger"));
+        category.add(new CategoryDomain("Breakfast", "Breakfast","pancake"));
+        category.add(new CategoryDomain("Chinese", "Chinese","chinesefood"));
+        category.add(new CategoryDomain("Fast Food", "Fast Food","fastfood"));
 
         adapter = new CatergoryAdapter(category);
         recyclerViewCategories.setAdapter(adapter);

@@ -1,10 +1,13 @@
 package com.example.ordernow.activities;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -27,9 +30,8 @@ import java.util.ArrayList;
 
 
 public class CategoriesSearch extends AppCompatActivity {
-    ListView lv;
     private RecyclerView.Adapter adapter;
-    private CatergoryAdapter catergoryAdapter;
+    private CatergoryAdapter categoryAdapter;
     private RecyclerView recyclerViewCategories;
     private ArrayList<CategoryDomain> category;
 
@@ -39,8 +41,6 @@ public class CategoriesSearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_search);
         createRecycleView();
-
-
     }
     private void createRecycleView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -48,20 +48,19 @@ public class CategoriesSearch extends AppCompatActivity {
         recyclerViewCategories.setLayoutManager(linearLayoutManager);
 
         //add categories
-        ArrayList<CategoryDomain> category = new ArrayList<>();
-        category.add(new CategoryDomain("Pizza", "pizza"));
-        category.add(new CategoryDomain("Burger", "burger"));
-        category.add(new CategoryDomain("Breakfast", "pancake"));
-        category.add(new CategoryDomain("Chinese", "chinesefood"));
-        category.add(new CategoryDomain("Fast Food", "fastfood"));
+        category = new ArrayList<>();
+        category.add(new CategoryDomain("Chinese", "Chinese","chinesefood"));
+        category.add(new CategoryDomain("Fast Food", "Fast Food","fastfood"));
+        category.add(new CategoryDomain("Pizza", "Pizza","pizza"));
+        category.add(new CategoryDomain("Burger", "Burger", "burger"));
+        category.add(new CategoryDomain("Breakfast", "Breakfast","pancake"));
 
         adapter = new CatergoryAdapter(category);
         recyclerViewCategories.setAdapter(adapter);
         recyclerViewCategories.setLayoutManager(linearLayoutManager);
 
-        catergoryAdapter = new CatergoryAdapter(category);
+        categoryAdapter = new CatergoryAdapter(category);
         SearchView searchView = findViewById(R.id.SV);
-        searchView.setQueryHint("Search Here");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -70,13 +69,11 @@ public class CategoriesSearch extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                catergoryAdapter.getFilter().filter(newText);
-                return false;
+                categoryAdapter.filter(newText);
+                return true;
             }
         });
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,7 +90,7 @@ public class CategoriesSearch extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                catergoryAdapter.getFilter().filter(newText);
+                categoryAdapter.filter(newText);
                 return false;
             }
         });

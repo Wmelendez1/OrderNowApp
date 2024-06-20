@@ -18,30 +18,40 @@ import com.example.ordernow.Domain.CategoryDomain;
 import com.example.ordernow.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CatergoryAdapter extends RecyclerView.Adapter<CatergoryAdapter.ViewHolder> implements Filterable {
+public class CatergoryAdapter extends RecyclerView.Adapter<CatergoryAdapter.ViewHolder> {
 
     //list to hold data for category items
     ArrayList<CategoryDomain> categoryDomains;
+    private ArrayList<CategoryDomain> catSearchList = null;
 
     //constructor to initialize the adapter
     public CatergoryAdapter(ArrayList<CategoryDomain> categoryDomains) {
         this.categoryDomains = categoryDomains;
+        this.catSearchList = new ArrayList<CategoryDomain>();
+        this.catSearchList.addAll(categoryDomains);
     }
-    @Override
-    public Filter getFilter()
-    {
-        return  new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                return null;
+
+    //custom filter for CategoriesSearch
+    public void filter(String text){
+        text = text.toLowerCase();
+        categoryDomains.clear();
+        if(text.length() == 0){
+            categoryDomains.addAll(catSearchList);
+        }
+        else{
+            for (CategoryDomain cd : catSearchList){
+                if (cd.getTitle().toLowerCase().contains(text)){
+                    categoryDomains.add(cd);
+                }
             }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-
-            ;
+        }
+        notifyDataSetChanged();
     }
+
+
+
 
     //method to create viewholder object
     @Override
@@ -53,45 +63,18 @@ public class CatergoryAdapter extends RecyclerView.Adapter<CatergoryAdapter.View
     //bind data to viewholder objects
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.categoryName.setText(categoryDomains.get(position).getTitle());
-        String picUrl = "";
+        CategoryDomain cd = categoryDomains.get(position);
+        holder.categoryName.setText(cd.getTitle());
+        String picUrl = cd.getPic();
 
         //add cases and enter photo name added to res/drawable
-        switch(position){
-            case 0 : {
-                picUrl ="pizza";
-                holder.homecategoryLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.cat_background));
-                break;
-            }
-            case 1 : {
-                picUrl ="burger";
-                holder.homecategoryLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.cat_background));
-                break;
-            }
-            case 2 : {
-                picUrl ="pancake";
-                holder.homecategoryLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.cat_background));
-                break;
-            }
-            case 3 : {
-                picUrl ="chinesefood";
-                holder.homecategoryLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.cat_background));
-                break;
-            }
-            case 4 : {
-                picUrl ="fastfood";
-                holder.homecategoryLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.cat_background));
-                break;
-            }
-        }
+        holder.homecategoryLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.cat_background));
 
         //get resource id for drawable with provided name
         int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView .getContext().getPackageName());
 
+        holder.categoryPic.setImageResource(drawableResourceId);
         //loads image to ImageView
-        Glide.with(holder. itemView.getContext())
-                .load(drawableResourceId)
-                .into(holder.categoryPic);
     }
 
     //returns total number in list
@@ -101,10 +84,10 @@ public class CatergoryAdapter extends RecyclerView.Adapter<CatergoryAdapter.View
     }
 
     //viewholder class references to each item
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView categoryName;
-        ImageView categoryPic;
-        ConstraintLayout homecategoryLayout;
+    class ViewHolder extends RecyclerView.ViewHolder{
+        final TextView categoryName;
+        final ImageView categoryPic;
+        final ConstraintLayout homecategoryLayout;
 
         //constructor to initialize views
         public ViewHolder(@NonNull View itemView) {

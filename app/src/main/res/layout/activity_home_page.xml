@@ -68,8 +68,8 @@
 
             <ImageView
                 android:id="@+id/whitepin"
-                android:layout_width="19dp"
-                android:layout_height="24dp"
+                android:layout_width="11dp"
+                android:layout_height="17dp"
                 android:layout_marginStart="4dp"
                 app:layout_constraintBottom_toBottomOf="@+id/enteraddress"
                 app:layout_constraintStart_toEndOf="@+id/enteraddress"
@@ -77,30 +77,6 @@
                 app:layout_constraintVertical_bias="0.47000003"
                 app:srcCompat="@drawable/whitepin" />
 
-            <EditText
-                android:id="@+id/search_text"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="24dp"
-                android:background="@drawable/search_background"
-                android:backgroundTint="#EDE9E9"
-                android:drawableStart="@android:drawable/ic_menu_search"
-                android:ems="10"
-                android:hint="Search food, fast food, or restaurants"
-                android:inputType="text"
-                android:paddingStart="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="15sp"
-                android:textStyle="italic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/enteraddress"
-                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/orderStatusTextView"
@@ -132,6 +108,16 @@
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/cooking" />
+
+            <ImageButton
+                android:id="@+id/search_text"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/quantum_ic_search_grey600_24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
