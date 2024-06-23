@@ -6,12 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.ordernow.R;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
-import Adapters.OrderAdapter;
-import Models.Order;
+import com.example.ordernow.Adapter.OrderAdapter;
+import com.example.ordernow.Models.Order;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
