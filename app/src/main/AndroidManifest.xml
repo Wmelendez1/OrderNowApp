@@ -18,12 +18,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderNow">
-<!--        <activity-->
-<!--            android:name=".activities.Alerts"-->
-<!--            android:exported="false" />-->
-        <!-- <activity -->
-        <!-- android:name=".activities.Favorites" -->
-        <!-- android:exported="false" /> -->
+        <activity
+            android:name=".activities.Alerts"
+            android:exported="false" />
+         <activity
+         android:name=".activities.Favorites"
+         android:exported="false" />
         <activity
             android:name=".activities.ProfileLayout"
             android:exported="false" />
@@ -40,7 +40,7 @@
             android:name=".activities.SignUp"
             android:exported="false" />
         <activity
-            android:name=".activities.Alerts"
+            android:name=".activities.WelcomeScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
