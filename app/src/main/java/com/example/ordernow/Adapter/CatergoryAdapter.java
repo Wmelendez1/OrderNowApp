@@ -24,30 +24,10 @@ public class CatergoryAdapter extends RecyclerView.Adapter<CatergoryAdapter.View
 
     //list to hold data for category items
     ArrayList<CategoryDomain> categoryDomains;
-    private ArrayList<CategoryDomain> catSearchList = null;
 
     //constructor to initialize the adapter
     public CatergoryAdapter(ArrayList<CategoryDomain> categoryDomains) {
         this.categoryDomains = categoryDomains;
-        this.catSearchList = new ArrayList<CategoryDomain>();
-        this.catSearchList.addAll(categoryDomains);
-    }
-
-    //custom filter for CategoriesSearch
-    public void filter(String text){
-        text = text.toLowerCase();
-        categoryDomains.clear();
-        if(text.length() == 0){
-            categoryDomains.addAll(catSearchList);
-        }
-        else{
-            for (CategoryDomain cd : catSearchList){
-                if (cd.getTitle().toLowerCase().contains(text)){
-                    categoryDomains.add(cd);
-                }
-            }
-        }
-        notifyDataSetChanged();
     }
 
 
@@ -85,9 +65,9 @@ public class CatergoryAdapter extends RecyclerView.Adapter<CatergoryAdapter.View
 
     //viewholder class references to each item
     class ViewHolder extends RecyclerView.ViewHolder{
-        final TextView categoryName;
-        final ImageView categoryPic;
-        final ConstraintLayout homecategoryLayout;
+        TextView categoryName;
+        ImageView categoryPic;
+        ConstraintLayout homecategoryLayout;
 
         //constructor to initialize views
         public ViewHolder(@NonNull View itemView) {
