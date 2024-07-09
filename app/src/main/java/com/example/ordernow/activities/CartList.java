@@ -15,7 +15,10 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ordernow.Adapter.CartListAdapter;
+import com.example.ordernow.Domain.FoodNearYouDomain;
 import com.example.ordernow.Helper.ManagementCart;
+import com.example.ordernow.Interface.ChangeQuantityListener;
 import com.example.ordernow.R;
 
 public class CartList extends AppCompatActivity {
@@ -27,6 +30,8 @@ public class CartList extends AppCompatActivity {
     private double tax;
     private ScrollView scrollView;
     private ImageView cartbackButton;
+
+    private FoodNearYouDomain foodNearYouDomain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +65,46 @@ public class CartList extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        initList();
+        CalculateCart();
     }
 
     private void initList() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        adapter = new CartListAdapter(managementCart.getCartList(), this, new ChangeQuantityListener() {
+            @Override
+            public void changed() {
+                CalculateCart();
+            }
+        });
+
+        recyclerView.setAdapter(adapter);
+
+        //cart will be visible ONLY IF theres something in the cart
+        if (managementCart.getCartList().isEmpty()) {
+            cartemptyText.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.GONE);
+        } else {
+            cartemptyText.setVisibility(View.GONE);
+            scrollView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    //calculates the cart and sets data into the view
+    private void CalculateCart() {
+        double taxPercent = 0.06; //example til we feed with data. Florida food sales tax
+        double deliveryFeeAmount = 2.99;
+
+        double subTotalAmount = (double) Math.round(managementCart.getSubtotal() * 100) / 100;
+        tax = (double) Math.round((subTotalAmount * taxPercent) * 100) / 100;
+        double total = (double) Math.round((subTotalAmount + tax + deliveryFeeAmount) * 100) / 100;
+
+        subTotal.setText("$" + subTotalAmount);
+        taxes.setText("$" + tax);
+        deliveryFee.setText("$" + deliveryFeeAmount);
+        totalPrice.setText("$" + total);
     }
 }

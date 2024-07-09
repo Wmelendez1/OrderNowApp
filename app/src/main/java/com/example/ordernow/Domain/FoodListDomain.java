@@ -1,6 +1,8 @@
 package com.example.ordernow.Domain;
 
-public class FoodListDomain {
+import java.io.Serializable;
+
+public class FoodListDomain implements Serializable {
     private String foodname;
     private String pic;
     private String description;

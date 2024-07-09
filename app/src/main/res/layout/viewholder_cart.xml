@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/pic"
+        android:id="@+id/foodpic"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="4dp"
@@ -27,15 +27,15 @@
         android:text="foodname"
         android:textColor="@color/black"
         android:textSize="17sp"
-        app:layout_constraintStart_toEndOf="@+id/pic"
-        app:layout_constraintTop_toTopOf="@+id/pic" />
+        app:layout_constraintStart_toEndOf="@+id/foodpic"
+        app:layout_constraintTop_toTopOf="@+id/foodpic" />
 
     <ImageView
         android:id="@+id/minusButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/pic"
+        app:layout_constraintBottom_toBottomOf="@+id/foodpic"
         app:layout_constraintStart_toStartOf="@+id/foodname"
         app:srcCompat="@drawable/minus" />
 
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toTopOf="@+id/minusButton" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/plusButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -60,6 +60,20 @@
         app:layout_constraintStart_toEndOf="@+id/itemCount"
         app:layout_constraintTop_toTopOf="@+id/itemCount"
         app:srcCompat="@drawable/plus" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cooperhewitt_semibold"
+        android:text="$"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/price"
+        app:layout_constraintEnd_toStartOf="@+id/price"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintStart_toEndOf="@+id/foodname"
+        app:layout_constraintTop_toTopOf="@+id/price" />
 
     <TextView
         android:id="@+id/price"
@@ -74,15 +88,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/foodname" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:fontFamily="@font/cooperhewitt_semibold"
-        android:text="$"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/foodPrice"
-        app:layout_constraintEnd_toStartOf="@+id/foodPrice"
-        app:layout_constraintTop_toTopOf="@+id/foodPrice" />
 </androidx.constraintlayout.widget.ConstraintLayout>

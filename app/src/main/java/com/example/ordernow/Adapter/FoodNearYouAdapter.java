@@ -41,11 +41,11 @@ public class FoodNearYouAdapter extends RecyclerView.Adapter<FoodNearYouAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FoodNearYouDomain currentItem = foodNearYouDomains.get(position);
 
-        holder.fnyName.setText(foodNearYouDomains.get(position).getName());
-        holder.fnyNumReviews.setText(String.valueOf(foodNearYouDomains.get(position).getNumberReviews()));
-        holder.fnyDistance.setText(foodNearYouDomains.get(position).getDistance());
-        holder.fnydeliveryFee.setText(foodNearYouDomains.get(position).getDeliveryFee());
-        holder.fnyTime.setText(foodNearYouDomains.get(position).getTime());
+        holder.fnyName.setText(currentItem.getName());
+        holder.fnyNumReviews.setText(String.valueOf(currentItem.getNumberReviews()));
+        holder.fnyDistance.setText(currentItem.getDistance());
+        holder.fnydeliveryFee.setText(currentItem.getDeliveryFee());
+        holder.fnyTime.setText(currentItem.getTime());
         String picUrl = "";
 
         //add cases and enter photo name added to res/drawable

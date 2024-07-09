@@ -5,7 +5,9 @@
     android:id="@+id/cartview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activities.CartList">
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/carttoolbar"
@@ -14,9 +16,7 @@
         android:background="@color/themecolor"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@id/cartscrollview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -190,7 +190,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/checkout"
+                android:id="@+id/checkoutBtn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="17dp"
@@ -211,8 +211,8 @@
         android:fontFamily="@font/cooperhewitt_mediumitalic"
         android:text="Your cart is empty..."
         android:textColor="@color/black"
-        android:textSize="17sp"
-        android:visibility="gone"
+        android:textSize="24sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/cartscrollview"
         app:layout_constraintEnd_toEndOf="@+id/cartscrollview"
         app:layout_constraintStart_toStartOf="@+id/cartscrollview"

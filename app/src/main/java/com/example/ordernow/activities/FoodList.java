@@ -15,15 +15,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.ordernow.Adapter.CatergoryAdapter;
+import com.example.ordernow.Adapter.FoodListAdapter;
+import com.example.ordernow.Domain.FoodListDomain;
 import com.example.ordernow.R;
+
+import java.util.ArrayList;
 
 public class FoodList extends AppCompatActivity {
 
     private RecyclerView.Adapter adapterfoodList;
-    private int restaurantId;
+    private int restaurantId; //use in future
     private String restaurantName;
     private ImageView foodlistbackButton;
     private ImageView restaurantLogo;
+    private TextView viewcartBtn;
     private TextView foodPlaceNameTextView;
     private RecyclerView recyclerView;
     private String restaurantLogoUrl;
@@ -40,6 +46,7 @@ public class FoodList extends AppCompatActivity {
         foodPlaceNameTextView = findViewById(R.id.foodplaceName);
         recyclerView = findViewById(R.id.foodlistrecyclerview);
         restaurantLogo = findViewById(R.id.foodlisttoolbar);
+        viewcartBtn = findViewById(R.id.viewCartBtn);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.foodlistview), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -49,12 +56,19 @@ public class FoodList extends AppCompatActivity {
 
         getIntentExtra();
         setupUI();
-        fetchMenu();
 
         foodlistbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FoodList.this, HomePage.class);
+                startActivity(intent);
+            }
+        });
+
+        viewcartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FoodList.this, CartList.class);
                 startActivity(intent);
             }
         });
@@ -74,9 +88,48 @@ public class FoodList extends AppCompatActivity {
                 .into(restaurantLogo);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        fetchMenu();
     }
 
     private void fetchMenu() {
       //TODO: fetch items from FoodListAdapter
+        ArrayList<FoodListDomain> menuItems = null;
+
+        if (restaurantName != null) {
+            if (restaurantName.equals("McDonald's")) {
+                menuItems = getMenu1();
+            } else if (restaurantName.equals("Wendy's")) {
+                menuItems = getMenu2();
+            } else {
+                //handle uknown errors
+                
+            }
+
+            if (menuItems != null) {
+                adapterfoodList = new FoodListAdapter(menuItems);
+                recyclerView.setAdapter(adapterfoodList);
+            }
+        } else {
+            //handle case where restaurant name is null
+            finish();
+        }
+    }
+
+    private ArrayList<FoodListDomain> getMenu1() {
+        ArrayList<FoodListDomain> menuItems = new ArrayList<>();
+
+        menuItems.add(new FoodListDomain("Big Mac", "burgerz", "BARger", 4.99));
+        menuItems.add(new FoodListDomain("French Fries", "fries", "yes fries", 2.49));
+
+        return menuItems;
+    }
+
+    private ArrayList<FoodListDomain> getMenu2() {
+        ArrayList<FoodListDomain> menuItems = new ArrayList<>();
+
+        menuItems.add(new FoodListDomain("Wendymac", "burgerz", "BARger", 2.99));
+        menuItems.add(new FoodListDomain("Australian Fries", "fries", "yes fries", 1.49));
+
+        return menuItems;
     }
 }
