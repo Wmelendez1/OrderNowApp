@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,23 +16,38 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.ordernow.Adapter.CartListAdapter;
 import com.example.ordernow.Domain.FoodNearYouDomain;
 import com.example.ordernow.Helper.ManagementCart;
 import com.example.ordernow.Interface.ChangeQuantityListener;
 import com.example.ordernow.R;
+import com.stripe.android.PaymentConfiguration;
+import com.stripe.android.paymentsheet.PaymentSheet;
+import com.stripe.android.paymentsheet.PaymentSheetResult;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class CartList extends AppCompatActivity {
 
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerView;
     private ManagementCart managementCart;
-    TextView subTotal, deliveryFee, taxes, totalPrice, cartemptyText;
+    TextView subTotal, deliveryFee, taxes, totalPrice, cartemptyText, checkoutButton;
     private double tax;
     private ScrollView scrollView;
     private ImageView cartbackButton;
 
     private FoodNearYouDomain foodNearYouDomain;
+    private PaymentSheet paymentSheet;
+    private String clientSecret;
+    private PaymentSheet.CustomerConfiguration config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +65,7 @@ public class CartList extends AppCompatActivity {
         cartemptyText = findViewById(R.id.cartemptyText);
         scrollView = findViewById(R.id.cartscrollview);
         cartbackButton = findViewById(R.id.cartbackButton);
+        checkoutButton = findViewById(R.id.checkoutBtn);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.cartview), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -68,6 +85,58 @@ public class CartList extends AppCompatActivity {
 
         initList();
         CalculateCart();
+        fetchAPI();
+        checkoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                paymentSheet.presentWithPaymentIntent(clientSecret, new PaymentSheet.Configuration(
+                        "Order Now", config
+                ));
+            }
+        });
+        paymentSheet = new PaymentSheet(this, this::onPaymentSheetResult);
+
+    }
+    private void onPaymentSheetResult(final PaymentSheetResult paymentSheetResult)
+    {
+        if (paymentSheetResult instanceof PaymentSheetResult.Canceled){
+            Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
+        } else if (paymentSheetResult instanceof  PaymentSheetResult.Failed) {
+            Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
+        } else if (paymentSheetResult instanceof PaymentSheetResult.Completed) {
+            Toast.makeText(this, "Completed", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void fetchAPI()
+    {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "localhost:8000";
+        StringRequest request = new StringRequest(
+                Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            config = new PaymentSheet.CustomerConfiguration(
+                                    jsonObject.getString("customer"),
+                                    jsonObject.getString("ephemeralKey"));
+                            clientSecret = jsonObject.getString("paymentIntent");
+                            PaymentConfiguration.init(getApplicationContext(), jsonObject.getString("publishableKey"));
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+        queue.add(request);
     }
 
     private void initList() {
