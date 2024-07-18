@@ -23,8 +23,8 @@
                 android:id="@+id/foodpic"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                app:srcCompat="@drawable/bigmac"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"
+                app:srcCompat="@drawable/bigmac" />
 
             <TextView
                 android:id="@+id/foodname"
@@ -55,8 +55,8 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/cooperhewitt_medium"
                 android:text="description"
-                android:textSize="16sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -90,7 +90,56 @@
 
             </LinearLayout>
 
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/cooperhewitt_medium"
+                android:padding="10dp"
+                android:text="No Onions"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/cooperhewitt_medium"
+                android:padding="10dp"
+                android:text="No Cheese"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/cooperhewitt_medium"
+                android:padding="10dp"
+                android:text="No Pickles"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/cooperhewitt_medium"
+                android:padding="10dp"
+                android:text="No Lettuce"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
         </LinearLayout>
+
+
     </ScrollView>
 
     <TextView

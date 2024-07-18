@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/foodLayout"
-    android:layout_width="wrap_content"
+    android:layout_width="130dp"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:background="@drawable/cat_background"
@@ -21,28 +22,59 @@
 
     <ImageView
         android:id="@+id/addItem"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+
         app:layout_constraintBottom_toTopOf="@+id/foodname"
         app:layout_constraintEnd_toEndOf="@+id/foodpic"
-        app:layout_constraintStart_toEndOf="@+id/foodname"
+        app:layout_constraintStart_toEndOf="@+id/foodpic"
         app:layout_constraintTop_toTopOf="@+id/foodpic"
-        app:layout_constraintVertical_bias="0.88"
+        app:layout_constraintVertical_bias="0.615"
         app:srcCompat="@drawable/plus" />
 
     <TextView
-        android:id="@+id/foodname"
+        android:id="@+id/dollarSign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
+        android:fontFamily="@font/cooperhewitt_semibold"
+        android:paddingStart="10dp"
+        android:text="$"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/price"
+        app:layout_constraintEnd_toStartOf="@id/price"
+        app:layout_constraintStart_toStartOf="@+id/foodname"
+        app:layout_constraintTop_toTopOf="@+id/price" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/cooperhewitt_semibold"
+        android:text="price"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/foodname"
+        app:layout_constraintStart_toEndOf="@id/dollarSign"
+        app:layout_constraintTop_toBottomOf="@id/foodpic" />
+
+    <TextView
+        android:id="@+id/foodname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/cooperhewitt_semibold"
+        android:paddingStart="10dp"
         android:text="foodname"
         android:textColor="@color/black"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/foodpic"
-        app:layout_constraintStart_toStartOf="@+id/foodpic"
-        app:layout_constraintTop_toBottomOf="@+id/foodpic" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price"
+        tools:gravity="center" />
 </androidx.constraintlayout.widget.ConstraintLayout>

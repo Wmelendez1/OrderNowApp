@@ -16,6 +16,7 @@ import com.example.ordernow.Domain.FoodListDomain;
 import com.example.ordernow.Domain.FoodNearYouDomain;
 import com.example.ordernow.R;
 import com.example.ordernow.activities.FoodDetails;
+import com.google.protobuf.StringValue;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
         FoodListDomain currentItem = foodListDomainArrayList.get(position);
 
         holder.foodname.setText(currentItem.getFoodname());
+        double price = currentItem.getPrice();
+        holder.price.setText(Double.toString(price));
 
         //get resource id for drawable with provided name
         int drawableResId = holder.itemView.getContext().getResources().getIdentifier(currentItem.getPic(), "drawable", holder.itemView.getContext().getPackageName());
