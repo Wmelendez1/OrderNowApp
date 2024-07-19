@@ -1,6 +1,7 @@
 package com.example.ordernow.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
@@ -44,7 +45,7 @@ public class HomePage extends AppCompatActivity {
     private RecyclerView recyclerViewCategories;
     private RecyclerView recyclerViewFoodNearYou;
     private AutoCompleteTextView enterAddress;
-    private ImageView whitePin;
+    private ImageView whitePin, cartButton;
     private PlacesClient placesClient;
     private AutocompleteSessionToken sessionToken;
     private ImageView navMenu;
@@ -62,6 +63,7 @@ public class HomePage extends AppCompatActivity {
         whitePin = findViewById(R.id.whitepin);
         navMenu = findViewById(R.id.navmenu);
         drawerLayout = findViewById(R.id.drawer_layout);
+        cartButton = findViewById(R.id.cartbutton);
 
         //places sdk and firebaseAPI key
         String firebaseApiKey = getString(R.string.firebaseApiKey);
@@ -111,6 +113,15 @@ public class HomePage extends AppCompatActivity {
                 if (drawerLayout != null) {
                     drawerLayout.openDrawer(GravityCompat.START);
                 }
+            }
+        });
+
+        //go to cart
+        cartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomePage.this, CartList.class);
+                startActivity(intent);
             }
         });
     }

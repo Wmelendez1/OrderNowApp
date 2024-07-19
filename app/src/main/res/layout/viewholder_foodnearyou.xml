@@ -24,7 +24,7 @@
         app:srcCompat="@drawable/mcdonaldss" />
 
     <TextView
-        android:id="@+id/foodnearyouName"
+        android:id="@+id/foodplaceName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -51,10 +51,10 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/foodnearyouNumReview"
-        app:layout_constraintEnd_toEndOf="@id/foodnearyouName"
+        app:layout_constraintEnd_toEndOf="@id/foodplaceName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/foodnearyouName" />
+        app:layout_constraintTop_toBottomOf="@id/foodplaceName" />
 
     <TextView
         android:id="@+id/dot1"
@@ -71,7 +71,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/foodnearyouTime"
-        app:layout_constraintTop_toBottomOf="@id/foodnearyouName" />
+        app:layout_constraintTop_toBottomOf="@id/foodplaceName" />
 
     <TextView
         android:id="@+id/foodnearyouDistance"
@@ -86,7 +86,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/dot1"
-        app:layout_constraintTop_toBottomOf="@id/foodnearyouName"
+        app:layout_constraintTop_toBottomOf="@id/foodplaceName"
         app:layout_constraintVertical_bias="0.0"
         tools:textSize="14sp" />
 
@@ -105,7 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/foodnearyouDistance"
-        app:layout_constraintTop_toBottomOf="@id/foodnearyouName" />
+        app:layout_constraintTop_toBottomOf="@id/foodplaceName" />
 
     <TextView
         android:id="@+id/foodnearyoudeliveryFee"
@@ -120,7 +120,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/dot2"
-        app:layout_constraintTop_toBottomOf="@id/foodnearyouName"
+        app:layout_constraintTop_toBottomOf="@id/foodplaceName"
         app:layout_constraintVertical_bias="0.0"
         tools:textSize="14sp" />
 

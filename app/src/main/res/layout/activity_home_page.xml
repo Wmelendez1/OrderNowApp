@@ -48,6 +48,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/cartbutton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ordernowtext"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintStart_toEndOf="@+id/ordernowtext"
+                app:layout_constraintTop_toTopOf="@+id/ordernowtext"
+                app:srcCompat="@drawable/shoppingcart2" />
+
             <AutoCompleteTextView
                 android:id="@+id/enteraddress"
                 android:layout_width="0dp"
