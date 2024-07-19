@@ -1,5 +1,6 @@
 package com.example.ordernow.Adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.ordernow.Domain.FoodNearYouDomain;
 import com.example.ordernow.R;
+import com.example.ordernow.activities.FoodList;
 
 import java.util.ArrayList;
 
@@ -37,11 +39,13 @@ public class FoodNearYouAdapter extends RecyclerView.Adapter<FoodNearYouAdapter.
     //bind data to viewholder objects
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.fnyName.setText(foodNearYouDomains.get(position).getName());
-        holder.fnyNumReviews.setText(String.valueOf(foodNearYouDomains.get(position).getNumberReviews()));
-        holder.fnyDistance.setText(foodNearYouDomains.get(position).getDistance());
-        holder.fnydeliveryFee.setText(foodNearYouDomains.get(position).getDeliveryFee());
-        holder.fnyTime.setText(foodNearYouDomains.get(position).getTime());
+        FoodNearYouDomain currentItem = foodNearYouDomains.get(position);
+
+        holder.fnyName.setText(currentItem.getName());
+        holder.fnyNumReviews.setText(String.valueOf(currentItem.getNumberReviews()));
+        holder.fnyDistance.setText(currentItem.getDistance());
+        holder.fnydeliveryFee.setText(currentItem.getDeliveryFee());
+        holder.fnyTime.setText(currentItem.getTime());
         String picUrl = "";
 
         //add cases and enter photo name added to res/drawable
@@ -81,6 +85,15 @@ public class FoodNearYouAdapter extends RecyclerView.Adapter<FoodNearYouAdapter.
         Glide.with(holder. itemView.getContext())
                 .load(drawableResourceId)
                 .into(holder.fnyLogo);
+
+        String finalPicUrl = picUrl;
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.itemView.getContext(), FoodList.class);
+            intent.putExtra("RestaurantId", position);
+            intent.putExtra("RestaurantName", currentItem.getName());
+            intent.putExtra("RestaurantLogo", finalPicUrl);
+            holder.itemView.getContext().startActivity(intent);
+        });
     }
 
     //returns total number in list
@@ -104,7 +117,7 @@ public class FoodNearYouAdapter extends RecyclerView.Adapter<FoodNearYouAdapter.
             super(itemView);
 
             fnyLogo = itemView.findViewById(R.id.foodnearyoulogo);
-            fnyName =  itemView.findViewById((R.id.foodnearyouName));
+            fnyName =  itemView.findViewById((R.id.foodplaceName));
             fnyNumReviews =  itemView.findViewById((R.id.foodnearyouNumReview));
             fnyDistance =  itemView.findViewById((R.id.foodnearyouDistance));
             fnydeliveryFee =  itemView.findViewById((R.id.foodnearyoudeliveryFee));
