@@ -20,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ordernow.Adapter.CartListAdapter;
@@ -28,6 +29,7 @@ import com.example.ordernow.Helper.ManagementCart;
 import com.example.ordernow.Interface.ChangeQuantityListener;
 import com.example.ordernow.R;
 import com.stripe.android.PaymentConfiguration;
+import com.stripe.android.paymentsheet.CreateIntentCallback;
 import com.stripe.android.paymentsheet.PaymentSheet;
 import com.stripe.android.paymentsheet.PaymentSheetResult;
 
@@ -94,6 +96,7 @@ public class CartList extends AppCompatActivity {
                 ));
             }
         });
+
         paymentSheet = new PaymentSheet(this, this::onPaymentSheetResult);
 
     }
@@ -111,6 +114,28 @@ public class CartList extends AppCompatActivity {
     {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "localhost:8000";
+        JSONObject postJSON = null;
+        try {
+            postJSON.put("amount",Float.parseFloat(totalPrice.getText().toString()));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //Update server with cart information
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, postJSON, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(), "Response: "+response, Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        queue.add(jsonObjectRequest);
+
+        //Update Client with Payment Intent
         StringRequest request = new StringRequest(
                 Request.Method.GET, url,
                 new Response.Listener<String>() {
