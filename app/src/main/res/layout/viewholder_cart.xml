@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/foodpic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bigmac" />
+
+    <TextView
+        android:id="@+id/foodname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/cooperhewitt_semibold"
+        android:text="foodname"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintStart_toEndOf="@+id/foodpic"
+        app:layout_constraintTop_toTopOf="@+id/foodpic" />
+
+    <ImageView
+        android:id="@+id/minusButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/foodpic"
+        app:layout_constraintStart_toStartOf="@+id/foodname"
+        app:srcCompat="@drawable/minus" />
+
+    <TextView
+        android:id="@+id/itemCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/cooperhewitt_medium"
+        android:text="1"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/minusButton"
+        app:layout_constraintStart_toEndOf="@+id/minusButton"
+        app:layout_constraintTop_toTopOf="@+id/minusButton" />
+
+    <ImageView
+        android:id="@+id/plusButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/itemCount"
+        app:layout_constraintStart_toEndOf="@+id/itemCount"
+        app:layout_constraintTop_toTopOf="@+id/itemCount"
+        app:srcCompat="@drawable/plus" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cooperhewitt_semibold"
+        android:text="$"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/price"
+        app:layout_constraintEnd_toStartOf="@+id/price"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintStart_toEndOf="@+id/foodname"
+        app:layout_constraintTop_toTopOf="@+id/price" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/cooperhewitt_semibold"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/foodname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/foodname" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

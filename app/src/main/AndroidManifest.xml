@@ -19,11 +19,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderNow">
         <activity
-            android:name=".activities.Alerts"
+            android:name=".activities.FoodDetails"
             android:exported="false" />
-         <activity
-         android:name=".activities.Favorites"
-         android:exported="false" />
+        <activity
+            android:name=".activities.FoodList"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CartList"
+            android:exported="false" /> <!-- Activities -->
         <activity
             android:name=".activities.ProfileLayout"
             android:exported="false" />
