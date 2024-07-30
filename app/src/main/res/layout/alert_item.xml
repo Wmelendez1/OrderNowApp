@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/item_alert.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@color/white"
+    android:layout_margin="8dp">
+
+    <TextView
+        android:id="@+id/textViewAlertMessage"
+        android:layout_width="380dp"
+        android:layout_height="55dp"
+        android:text="Alert message "
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonMarkAsRead"
+            android:layout_width="188dp"
+            android:layout_height="wrap_content"
+            android:background="@color/gray02"
+            android:text="Mark as Read"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/themecolor"
+            tools:ignore="TextContrastCheck" />
+
+        <Button
+            android:id="@+id/buttonDelete"
+            android:layout_width="181dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@color/gray02"
+            android:text="Delete"
+            android:textColor="@color/themecolor"
+            tools:ignore="TextContrastCheck" />
+    </LinearLayout>
+</LinearLayout>
