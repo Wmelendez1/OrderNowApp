@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.Settings_PS">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/privSecTB"
+        android:layout_width="410dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="580dp"
+        android:background="@color/themecolor"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:title="Privacy &amp; Security"
+        app:titleMarginStart="110dp"
+        app:titleTextColor="@color/white" />
+
+    <ImageButton
+        android:id="@+id/backBttnPS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/material_on_surface_stroke"
+        app:layout_constraintBottom_toBottomOf="@+id/privSecTB"
+        app:layout_constraintEnd_toEndOf="@+id/privSecTB"
+        app:layout_constraintHorizontal_bias="0.018"
+        app:layout_constraintStart_toStartOf="@+id/privSecTB"
+        app:layout_constraintTop_toTopOf="@+id/privSecTB"
+        app:srcCompat="@drawable/back_arrow"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/locationDisclaimerTV"
+        android:layout_width="392dp"
+        android:layout_height="154dp"
+        android:autoLink="none"
+        android:text="To ensure the optimal functionality and user experience of our app, it is essential that your device's location settings are turned on. By using this app, you acknowledge and agree that enabling location services is necessary for certain features and services to operate correctly. Your location data will be used in accordance with our Privacy Policy to provide personalized content and services. If you choose to disable location settings, some features of the app may not function as intended."
+        android:textAlignment="center"
+        android:textColor="@color/gray02"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/privSecTB"
+        app:layout_constraintVertical_bias="0.382" />
+
+    <Switch
+        android:id="@+id/locationSwitch"
+        android:layout_width="341dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="28dp"
+        android:showText="true"
+        android:text="Allow Location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/privSecTB"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/PasswordETV"
+        android:layout_width="99dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="17dp"
+        android:background="?attr/selectableItemBackground"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:text="CurrentPassword"
+        app:layout_constraintBottom_toTopOf="@+id/locationDisclaimerTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toEndOf="@+id/changePassTV"
+        app:layout_constraintTop_toBottomOf="@+id/locationSwitch"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/changePassTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="24dp"
+        android:autoLink="none"
+        android:contextClickable="true"
+        android:text="Change Password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationSwitch" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
