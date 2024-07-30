@@ -19,10 +19,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderNow">
         <activity
-            android:name=".activities.FeedBack"
+            android:name=".activities.FoodDetails"
             android:exported="false" />
         <activity
-            android:name=".activities.Settings"
+            android:name=".activities.FoodList"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CartList"
             android:exported="false" /> <!-- Activities -->
         <activity
             android:name=".activities.ProfileLayout"
