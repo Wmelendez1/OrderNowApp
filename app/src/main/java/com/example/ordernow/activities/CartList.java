@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -35,6 +36,9 @@ import com.stripe.android.paymentsheet.PaymentSheetResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.github.kittinunf.fuel.Fuel;
+import com.github.kittinunf.fuel.core.FuelError;
+import com.github.kittinunf.fuel.core.Handler;
 
 public class CartList extends AppCompatActivity {
 
@@ -48,8 +52,9 @@ public class CartList extends AppCompatActivity {
 
     private FoodNearYouDomain foodNearYouDomain;
     private PaymentSheet paymentSheet;
-    private String clientSecret;
-    private PaymentSheet.CustomerConfiguration config;
+    private double total;
+    String paymentIntentClientSecret;
+    PaymentSheet.CustomerConfiguration customerConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,11 +93,13 @@ public class CartList extends AppCompatActivity {
         initList();
         CalculateCart();
         fetchAPI();
+
+
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                paymentSheet.presentWithPaymentIntent(clientSecret, new PaymentSheet.Configuration(
-                        "Order Now", config
+                paymentSheet.presentWithPaymentIntent(paymentIntentClientSecret, new PaymentSheet.Configuration(
+                        "Order Now", customerConfig
                 ));
             }
         });
@@ -103,65 +110,34 @@ public class CartList extends AppCompatActivity {
     private void onPaymentSheetResult(final PaymentSheetResult paymentSheetResult)
     {
         if (paymentSheetResult instanceof PaymentSheetResult.Canceled){
-            Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Payment Canceled", Toast.LENGTH_SHORT).show();
         } else if (paymentSheetResult instanceof  PaymentSheetResult.Failed) {
-            Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Payment Declined", Toast.LENGTH_SHORT).show();
         } else if (paymentSheetResult instanceof PaymentSheetResult.Completed) {
+            //TODO go to next page
             Toast.makeText(this, "Completed", Toast.LENGTH_SHORT).show();
         }
     }
+    //request information from server for paymentsheet configuration
     private void fetchAPI()
     {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "localhost:8000";
-        JSONObject postJSON = null;
-        try {
-            postJSON.put("amount",Float.parseFloat(totalPrice.getText().toString()));
+        Fuel.INSTANCE.post("https://illustrious-branch-couch.glitch.me/checkout", null).responseString(new Handler<String>() {
+            @Override
+            public void success(String s) {
+                try {
+                    final JSONObject result = new JSONObject(s);
+                    customerConfig = new PaymentSheet.CustomerConfiguration(
+                            result.getString("customer"),
+                            result.getString("ephemeralKey")
+                    );
+                    paymentIntentClientSecret = result.getString("paymentIntent");
+                    PaymentConfiguration.init(getApplicationContext(), result.getString("publishableKey"));
+                } catch (JSONException e) { /* handle error */ }
+            }
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        //Update server with cart information
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, postJSON, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(), "Response: "+response, Toast.LENGTH_LONG).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
+            public void failure(@NonNull FuelError fuelError) { /* handle error */ }
         });
-        queue.add(jsonObjectRequest);
-
-        //Update Client with Payment Intent
-        StringRequest request = new StringRequest(
-                Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            config = new PaymentSheet.CustomerConfiguration(
-                                    jsonObject.getString("customer"),
-                                    jsonObject.getString("ephemeralKey"));
-                            clientSecret = jsonObject.getString("paymentIntent");
-                            PaymentConfiguration.init(getApplicationContext(), jsonObject.getString("publishableKey"));
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }
-        );
-        queue.add(request);
     }
 
     private void initList() {
@@ -194,7 +170,7 @@ public class CartList extends AppCompatActivity {
 
         double subTotalAmount = (double) Math.round(managementCart.getSubtotal() * 100) / 100;
         tax = (double) Math.round((subTotalAmount * taxPercent) * 100) / 100;
-        double total = (double) Math.round((subTotalAmount + tax + deliveryFeeAmount) * 100) / 100;
+        total = (double) Math.round((subTotalAmount + tax + deliveryFeeAmount) * 100) / 100;
 
         subTotal.setText("$" + subTotalAmount);
         taxes.setText("$" + tax);
