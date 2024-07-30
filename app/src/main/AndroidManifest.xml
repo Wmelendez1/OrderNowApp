@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderNow">
         <activity
-            android:name=".activities.Ad_Settings"
+            android:name=".activities.Settings_PS"
             android:exported="false" />
         <activity
             android:name=".activities.Settings"
