@@ -122,13 +122,14 @@
 
             <ImageButton
                 android:id="@+id/search_text"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/quantum_ic_search_grey600_24" />
+                app:srcCompat="@android:drawable/ic_menu_search" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
