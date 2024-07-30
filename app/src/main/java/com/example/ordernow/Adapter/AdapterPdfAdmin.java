@@ -1,4 +1,4 @@
-package Adapters;
+package com.example.ordernow.Adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -18,13 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ordernow.R;
 import com.example.ordernow.activities.FilterPdfAdmin;
 import com.example.ordernow.databinding.ActivityProfileLayoutBinding;
-import com.github.barteksc.pdfviewer.PDFView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-import Models.ModelPdf;
+import com.example.ordernow.Models.ModelPdf;
 
 public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.HolderPdfAdmin> implements Filterable {
 
@@ -127,25 +126,25 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         ref.getBytes(MAX_BYTES_PDF).addOnSuccessListener(bytes -> {
             Log.d(TAG, "onSuccess: " + model.getFirstName() + " successfully loaded");
 
-            // Set PDF bytes to PDFView
-            holder.pdfView.fromBytes(bytes)
-                    .pages(0) // Show only the first page
-                    .spacing(0)
-                    .swipeHorizontal(false)
-                    .enableSwipe(false)
-                    .onError(t -> {
-                        holder.progressBar.setVisibility(View.INVISIBLE);
-                        Log.d(TAG, "onError: " + t.getMessage());
-                    })
-                    .onPageError((page, t) -> {
-                        holder.progressBar.setVisibility(View.INVISIBLE);
-                        Log.d(TAG, "onPageError: " + t.getMessage());
-                    })
-                    .onLoad(nbPages -> {
-                        holder.progressBar.setVisibility(View.INVISIBLE);
-                        Log.d(TAG, "LoadComplete: PDF loaded");
-                    })
-                    .load();
+//            // Set PDF bytes to PDFView
+//            holder.pdfView.fromBytes(bytes)
+//                    .pages(0) // Show only the first page
+//                    .spacing(0)
+//                    .swipeHorizontal(false)
+//                    .enableSwipe(false)
+//                    .onError(t -> {
+//                        holder.progressBar.setVisibility(View.INVISIBLE);
+//                        Log.d(TAG, "onError: " + t.getMessage());
+//                    })
+//                    .onPageError((page, t) -> {
+//                        holder.progressBar.setVisibility(View.INVISIBLE);
+//                        Log.d(TAG, "onPageError: " + t.getMessage());
+//                    })
+//                    .onLoad(nbPages -> {
+//                        holder.progressBar.setVisibility(View.INVISIBLE);
+//                        Log.d(TAG, "LoadComplete: PDF loaded");
+//                    })
+//                    .load();
         }).addOnFailureListener(e -> {
             holder.progressBar.setVisibility(View.INVISIBLE);
             Log.d(TAG, "onFailure: Failed to load PDF from URL due to " + e.getMessage());
@@ -158,7 +157,7 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
     }
 
     static class HolderPdfAdmin extends RecyclerView.ViewHolder {
-        PDFView pdfView;
+//        PDFView pdfView;
         ProgressBar progressBar;
         EditText firstNameTv, lastNameTv, AgeTv; // Change TextView to EditText
         ImageButton moreBtn;
@@ -166,7 +165,7 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
 
         public HolderPdfAdmin(@NonNull View itemView) {
             super(itemView);
-            pdfView = itemView.findViewById(R.id.pdfView);
+//            pdfView = itemView.findViewById(R.id.pdfView);
             progressBar = itemView.findViewById(R.id.progressBar);
             firstNameTv = itemView.findViewById(R.id.firstNameTv);
             lastNameTv = itemView.findViewById(R.id.lastNameTv);

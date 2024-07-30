@@ -4,8 +4,8 @@ import android.widget.Filter;
 
 import java.util.ArrayList;
 
-import Adapters.AdapterPdfAdmin;
-import Models.ModelPdf;
+import com.example.ordernow.Adapter.AdapterPdfAdmin;
+import com.example.ordernow.Models.ModelPdf;
 
 public class FilterPdfAdmin extends Filter {
 
