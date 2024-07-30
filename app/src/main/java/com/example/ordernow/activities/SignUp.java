@@ -51,7 +51,7 @@ public class SignUp extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
                                 // Navigate to main activity upon successful sign-up
-                                startActivity(new Intent(SignUp.this, AddProfile.class));
+                                startActivity(new Intent(SignUp.this, AddProfileActivity.class));
                                 finish(); // Close the sign-up activity
                             }
                         } else {

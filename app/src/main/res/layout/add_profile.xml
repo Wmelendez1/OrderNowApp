@@ -1,61 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/themecolor"
-    tools:context=".activities.AddProfile">
-
+    tools:context=".activities.AddProfileActivity">
 
     <!--ToolBar-->
+
+    <!--Back button-->
     <RelativeLayout
         android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
-        android:layout_height="250dp"/>
+        android:layout_height="250dp" />
+
+    <ImageButton
+        android:id="@+id/backBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="backbtn"
+        android:padding="10dp"
+        android:src="@drawable/ic_back_white" />
+
+    <!--Title-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Add Profile Information"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
 
 
-        <!--Back button-->
-        <ImageButton
-            android:id="@+id/backBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="backbtn"
-            android:padding="10dp"
-            android:src="@drawable/ic_back_white" />
-
-        <!--Title-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Add Profile Information"
-            android:textColor="@color/white"
-            android:textSize="28sp" />
-
-        <!--Attach image button-->
-        <ImageButton
-            android:id="@+id/attachBtn"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="attachBtn"
-            android:padding="5dp"
-            android:src="@drawable/ic_attach_white" />
-
-
+    <!--Attach image button-->
+    <ImageButton
+        android:id="@+id/attachBtn"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="attachBtn"
+        android:padding="5dp"
+        android:src="@drawable/ic_attach_white" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/titleTil"
@@ -66,7 +63,7 @@
         android:layout_marginEnd="30dp"
         app:hintEnabled="false">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/firstNameTv"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -78,7 +75,6 @@
             android:background="@drawable/shape_edittext01"
             android:drawablePadding="10dp"
             android:hint="First Name" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -91,7 +87,7 @@
         android:layout_marginEnd="30dp"
         app:hintEnabled="false">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/lastNameTv"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -99,22 +95,42 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="16sp"
-            android:inputType="textMultiLine|textCapSentences"
+            android:inputType="textPersonName|textCapWords"
             android:background="@drawable/shape_edittext01"
             android:drawablePadding="10dp"
             android:hint="Last Name" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!--Pick Category from dialog-->
+
+    <com.google.android.material.textfield.TextInputEditText
+
+        android:id="@+id/AgeTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lastNameTil"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/shape_edittext01"
+        android:drawablePadding="10sp"
+        android:gravity="center_vertical"
+        android:hint=" Age"
+        android:padding="10sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="16sp" />
+
+
+    <!--Submit button-->
     <Button
         android:id="@+id/submitBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
         android:layout_marginTop="400dp"
+        android:layout_marginEnd="30dp"
         android:text="Add Profile"
         android:textColor="@color/black" />
 
 </RelativeLayout>
+

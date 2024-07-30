@@ -40,18 +40,9 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/bookRv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbarRl"
-        android:layout_marginTop="3dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/profile_layout" />
+
 
     <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="148dp"
         android:layout_marginBottom="5dp"
@@ -73,17 +64,19 @@
                 android:background="@color/gray01">
 
                 <!-- PDF View -->
+
+                <!-- Progress Bar -->
                 <com.github.barteksc.pdfviewer.PDFView
                     android:id="@+id/pdfView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" >
 
-                <!-- Progress Bar -->
                 <ProgressBar
                     android:id="@+id/progressBar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:visibility="gone" />
+                </com.github.barteksc.pdfviewer.PDFView>
 
             </RelativeLayout>
 
