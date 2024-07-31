@@ -4,43 +4,44 @@ import android.widget.Filter;
 
 import java.util.ArrayList;
 
-import Adapters.AdapterPdfAdmin;
-import Models.ModelPdf;
+import com.example.ordernow.Adapter.AdapterPdfAdmin;
+import com.example.ordernow.Models.ModelPdf;
+
+import java.util.List;  // Import List class
 
 public class FilterPdfAdmin extends Filter {
 
-    //arrayList in which we want to search
+    // ArrayList in which we want to search
     ArrayList<ModelPdf> filterList;
-    //adapter in which filter need to be implemented
+    // Adapter in which filter needs to be implemented
     AdapterPdfAdmin adapterPdfAdmin;
 
-    //constructor
+    // Constructor
     public FilterPdfAdmin(ArrayList<ModelPdf> filterList, AdapterPdfAdmin adapterPdfAdmin) {
         this.filterList = filterList;
         this.adapterPdfAdmin = adapterPdfAdmin;
     }
 
-
     @Override
     protected FilterResults performFiltering(CharSequence constraint) {
         FilterResults results = new FilterResults();
-        //value should not be null and empty
+        // Value should not be null and empty
         if (constraint != null && constraint.length() > 0) {
-            //change to upper case, or lower case to avoid case sensitivity
-            constraint = constraint.toString().toUpperCase();
+            // Change to upper case to avoid case sensitivity
+            String filterPattern = constraint.toString().toUpperCase().trim();
+
             ArrayList<ModelPdf> filterModels = new ArrayList<>();
-            for (int i=0; i<filterList.size(); i++){
-                //validate
-                if (filterList.get(i).getFirstName().toUpperCase().contains(constraint)){
-                    //add to filtered list
-                    filterModels.add(filterList.get(i));
+            for (ModelPdf model : filterList) {
+                // Validate
+                if (model.getFirstName().toUpperCase().contains(filterPattern)) {
+                    // Add to filtered list
+                    filterModels.add(model);
                 }
             }
 
             results.count = filterModels.size();
             results.values = filterModels;
-        }
-        else {
+        } else {
             results.count = filterList.size();
             results.values = filterList;
         }
@@ -48,11 +49,14 @@ public class FilterPdfAdmin extends Filter {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void publishResults(CharSequence constraint, FilterResults results) {
-        //apply filter changes
-        adapterPdfAdmin.pdfArrayList = (ArrayList<ModelPdf>)results.values;
+        // Apply filter changes
+        if (results.values instanceof List) {
+            adapterPdfAdmin.pdfArrayList = (ArrayList<ModelPdf>) results.values;
+        }
 
-        //notify changes
+        // Notify changes
         adapterPdfAdmin.notifyDataSetChanged();
     }
 }

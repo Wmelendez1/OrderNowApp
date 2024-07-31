@@ -1,4 +1,4 @@
-package Models;
+package com.example.ordernow.Models;
 
 import java.util.Date;
 

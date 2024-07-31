@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.ordernow"
     android:appComponentFactory="androidx.core.app.CoreComponentFactory"
     tools:replace="android:appComponentFactory">
     <!-- Permissions -->
@@ -19,13 +18,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderNow">
-
-
-        <!-- Activities -->
         <activity
-            android:exported="false"
-            android:name=".activities.PastOrders"/>
-
+            android:name=".activities.InviteSetting"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Settings"
+            android:exported="false" /> <!-- Activities -->
         <activity
             android:name=".activities.ProfileLayout"
             android:exported="false" />
@@ -34,6 +32,9 @@
             android:exported="false" />
         <activity
             android:name=".activities.Login"
+            android:exported="false" />
+        <activity
+            android:name=".activities.HomePage"
             android:exported="false" />
         <activity
             android:name=".activities.SignUp"
@@ -47,14 +48,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- Optional: FileProvider for sharing files -->
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:grantUriPermissions="true">
-        </provider>
-
+            android:grantUriPermissions="true" />
     </application>
 
 </manifest>
