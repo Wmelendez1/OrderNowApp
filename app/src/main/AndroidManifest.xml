@@ -40,7 +40,7 @@
             android:name=".activities.SignUp"
             android:exported="false" />
         <activity
-            android:name=".activities.WelcomeScreen"
+            android:name=".activities.CartList"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,7 +1,10 @@
 package com.example.ordernow.activities;
 
+
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -17,18 +20,14 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+
 import com.example.ordernow.Adapter.CartListAdapter;
 import com.example.ordernow.Domain.FoodNearYouDomain;
 import com.example.ordernow.Helper.ManagementCart;
 import com.example.ordernow.Interface.ChangeQuantityListener;
 import com.example.ordernow.R;
+import com.github.kittinunf.fuel.core.Body;
+import com.github.kittinunf.fuel.core.requests.DefaultBody;
 import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.paymentsheet.CreateIntentCallback;
 import com.stripe.android.paymentsheet.PaymentSheet;
@@ -39,6 +38,10 @@ import org.json.JSONObject;
 import com.github.kittinunf.fuel.Fuel;
 import com.github.kittinunf.fuel.core.FuelError;
 import com.github.kittinunf.fuel.core.Handler;
+
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CartList extends AppCompatActivity {
 
@@ -53,6 +56,7 @@ public class CartList extends AppCompatActivity {
     private FoodNearYouDomain foodNearYouDomain;
     private PaymentSheet paymentSheet;
     private double total;
+    private boolean apiFlag;
     String paymentIntentClientSecret;
     PaymentSheet.CustomerConfiguration customerConfig;
 
@@ -121,7 +125,17 @@ public class CartList extends AppCompatActivity {
     //request information from server for paymentsheet configuration
     private void fetchAPI()
     {
-        Fuel.INSTANCE.post("https://illustrious-branch-couch.glitch.me/checkout", null).responseString(new Handler<String>() {
+        String amount = String.valueOf(total);
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("amount", amount);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        Fuel.INSTANCE.post("https://illustrious-branch-couch.glitch.me/checkout", null)
+                .body(amount, Charset.forName("utf-8"))
+                .responseString(new Handler<String>() {
             @Override
             public void success(String s) {
                 try {
@@ -136,7 +150,9 @@ public class CartList extends AppCompatActivity {
             }
 
             @Override
-            public void failure(@NonNull FuelError fuelError) { /* handle error */ }
+            public void failure(@NonNull FuelError fuelError) {
+                Toast.makeText(getApplicationContext(), "Payment Failed. Please Try again.", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
