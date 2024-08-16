@@ -19,6 +19,7 @@
         <item name="textInputLayout" type="id"/>
         <item name="favorite_cuisines_container" type="id"/>
         <item name="favorite_cuisines_label" type="id"/>
+        <item name="submitBtn2" type="id"/>
 
 
 </resources>

@@ -1,7 +1,5 @@
 package com.example.ordernow.activities;
 
-import static com.example.ordernow.activities.Constants.MAX_BYTES_PDF;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ordernow.R;
 import com.example.ordernow.databinding.ActivityProfileLayoutBinding;
-import com.example.ordernow.activities.FilterPdfAdmin;
+import com.example.ordernow.databinding.AddcontentBinding;
+import com.example.ordernow.databinding.AddcontentrowBinding;
+import com.example.ordernow.activities.ModelPdf;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -30,11 +30,14 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
 
     private Context context;
     public ArrayList<ModelPdf> pdfArrayList, filterList;
+
     private ActivityProfileLayoutBinding binding;
+
     public FilterPdfAdmin filter;
 
     private static final String TAG = "PDF_ADAPTER_TAG";
     private static final long MAX_BYTES_PDF = 50000000; // 50 MB
+
 
     public AdapterPdfAdmin(Context context, ArrayList<ModelPdf> pdfArrayList) {
         this.context = context;
@@ -56,7 +59,12 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         View view = LayoutInflater.from(context).inflate(R.layout.activity_profile_layout, parent, false);
         binding = ActivityProfileLayoutBinding.inflate(LayoutInflater.from(context), parent, false);
         return new HolderPdfAdmin(binding.getRoot());
+
+
+
+
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull HolderPdfAdmin holder, int position) {
@@ -67,6 +75,11 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         String age = model.getAge();
         String username = model.getUsername();
         String bio = model.getBio();
+        String url = model.getUrl();
+        String ContentTitle = model.getContentTitle();
+        String ContentDescription = model.getContentDescription();
+        String ContentPdf = model.getContentPdf();
+
 
         // Set data to views
         holder.firstNameTv.setText(firstName);
@@ -74,6 +87,12 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         holder.AgeTv.setText(age);
         holder.username.setText(username);
         holder.Bio.setText(bio);
+        holder.pdfUrl = url;
+
+
+
+
+
 
         // Load further details like category, pdf from URL, pdf size in separate functions
         loadPdfFromUrl(model, holder);
@@ -115,9 +134,10 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         });
     }
 
-    private void loadPdfFromUrl(ModelPdf model, HolderPdfAdmin holder) {
+    public void loadPdfFromUrl(ModelPdf model, HolderPdfAdmin holder) {
         // Load PDF from URL and display in PDFView
         String pdfUrl = model.getUrl();
+        String id = model.getId();
         Log.d(TAG, "PDF URL: " + pdfUrl); // Log the URL
 
         if (pdfUrl == null || pdfUrl.isEmpty()) {
@@ -159,7 +179,10 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         return pdfArrayList.size();
     }
 
-    static class HolderPdfAdmin extends RecyclerView.ViewHolder {
+    class HolderPdfAdmin extends RecyclerView.ViewHolder {
+
+        String pdfUrl;
+
         PDFView pdfView;
         ProgressBar progressBar;
         EditText firstNameTv, lastNameTv, AgeTv, username, Bio; // Change TextView to EditText
@@ -168,7 +191,8 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
 
         public HolderPdfAdmin(@NonNull View itemView) {
             super(itemView);
-            pdfView = itemView.findViewById(R.id.pdfView);
+            pdfView = itemView.findViewById(R.id.Content);
+
             progressBar = itemView.findViewById(R.id.progressBar);
             firstNameTv = itemView.findViewById(R.id.firstNameTv);
             lastNameTv = itemView.findViewById(R.id.lastNameTv);
@@ -176,6 +200,13 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
             username = itemView.findViewById(R.id.username); // Initialize usernameTv
             Bio = itemView.findViewById(R.id.Bio); // Initialize bioTv
 
+
+
+
+
         }
+
+
+
     }
 }

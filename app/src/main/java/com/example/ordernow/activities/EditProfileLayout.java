@@ -1,5 +1,6 @@
 package com.example.ordernow.activities;
 
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,8 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ordernow.databinding.AddProfileBinding;
-
+import com.example.ordernow.databinding.ActivityEditProfileLayoutBinding;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,13 +24,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AddProfileActivity extends AppCompatActivity {
-    private AddProfileBinding binding;
+public class EditProfileLayout extends AppCompatActivity {
+    private ActivityEditProfileLayoutBinding binding;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
     private Uri pdfUri;
@@ -43,7 +43,7 @@ public class AddProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = AddProfileBinding.inflate(getLayoutInflater());
+        binding = ActivityEditProfileLayoutBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -63,7 +63,7 @@ public class AddProfileActivity extends AppCompatActivity {
 
     }
 
-    private String firstName = "", lastName = "", Age = "", username = "", bio = "",uploadContentPdfUrl = "", title = "", description = "" ;
+    private String firstName = "", lastName = "", Age = "", username = "", bio = "";
 
     private void validateData() {
         Log.d(TAG, "validateData: validating data...");
@@ -87,12 +87,12 @@ public class AddProfileActivity extends AppCompatActivity {
         } else if (pdfUri == null) {
             Toast.makeText(this, "Pick PDF...", Toast.LENGTH_SHORT).show();
         } else {
-            uploadPdfToStorage(firstName, lastName, Age, username, bio, uploadContentPdfUrl, title, description );
+            uploadPdfToStorage(firstName, lastName, Age, username, bio);
         }
     }
 
 
-    private void uploadPdfToStorage(String firstName, String lastName, String Age, String username, String bio,String uploadContentPdfUrl,String title,String description) {
+    private void uploadPdfToStorage(String firstName, String lastName, String Age, String username, String bio) {
         Log.d(TAG, "uploadPdfToStorage: upload to storage...");
         progressDialog.setMessage("Uploading Profile Picture...");
         progressDialog.show();
@@ -122,19 +122,19 @@ public class AddProfileActivity extends AppCompatActivity {
                             Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                             uriTask.addOnSuccessListener(uri -> {
                                 String uploadPdfUrl = uri.toString();
-                                uploadPdfInfoToDB(firstName, lastName, uploadPdfUrl, timestamp, Age, username, bio, uploadContentPdfUrl,title, description);
+                                uploadPdfInfoToDB(firstName, lastName, uploadPdfUrl, timestamp, Age, username, bio);
                                 // Reset pdfUri after successful URL retrieval and database upload
                                 pdfUri = null;
                             }).addOnFailureListener(e -> {
                                 progressDialog.dismiss();
                                 Log.d(TAG, "onFailure: Failed to get PDF URL due to " + e.getMessage());
-                                Toast.makeText(AddProfileActivity.this, "Failed to get PDF URL due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileLayout.this, "Failed to get PDF URL due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
                             });
                         })
                         .addOnFailureListener(e -> {
                             progressDialog.dismiss();
                             Log.d(TAG, "onFailure: PDF upload failed due to " + e.getMessage());
-                            Toast.makeText(AddProfileActivity.this, "PDF upload failed due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditProfileLayout.this, "PDF upload failed due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         });
             }
 
@@ -142,11 +142,11 @@ public class AddProfileActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 progressDialog.dismiss();
                 Log.d(TAG, "onCancelled: Failed to query existing profile due to " + databaseError.getMessage());
-                Toast.makeText(AddProfileActivity.this, "Failed to query existing profile due to " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProfileLayout.this, "Failed to query existing profile due to " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
-    private void uploadPdfInfoToDB(String firstName, String lastName, String uploadPdfUrl, long timestamp, String Age, String username, String bio, String uploadContentPdfUrl, String title, String description) {
+    private void uploadPdfInfoToDB(String firstName, String lastName, String uploadPdfUrl, long timestamp, String Age, String username, String bio) {
         Log.d(TAG, "uploadPdfInfoToDB: uploading PDF info to firebase db...");
         progressDialog.setMessage("Uploading Profile Info...");
         String uid = firebaseAuth.getUid();
@@ -165,35 +165,31 @@ public class AddProfileActivity extends AppCompatActivity {
                 // Step 3: Upload the new profile info to the database
                 String profileId = ref.push().getKey();
 
-                // Create a HashMap for the profile node
-                HashMap<String, Object> profileMap = new HashMap<>();
-                profileMap.put("uid", uid);
-                profileMap.put("id", timestamp);
-                profileMap.put("firstName", firstName);
-                profileMap.put("lastName", lastName);
-                profileMap.put("url", uploadPdfUrl);
-                profileMap.put("timestamp", timestamp);
-                profileMap.put("Age", Age);
-                profileMap.put("username", username);
-                profileMap.put("Bio", bio);
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("uid", uid);
+                hashMap.put("id", timestamp);
+                hashMap.put("firstName", firstName);
+                hashMap.put("lastName", lastName);
+                hashMap.put("url", uploadPdfUrl);
+                hashMap.put("timestamp", timestamp);
+                hashMap.put("Age", Age);
+                hashMap.put("username", username);
+                hashMap.put("Bio", bio);
 
-
-
-                // Upload the profile info with the nested content node to the database
                 ref.child(String.valueOf(timestamp))
-                        .setValue(profileMap)
+                        .setValue(hashMap)
                         .addOnSuccessListener(unused -> {
                             progressDialog.dismiss();
                             Log.d(TAG, "onSuccess: Successfully uploaded...");
-                            Toast.makeText(AddProfileActivity.this, "Successfully uploaded...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditProfileLayout.this, "Successfully uploaded...", Toast.LENGTH_SHORT).show();
                             // Reset pdfUri after successful upload
                             pdfUri = null;
-                            startActivity(new Intent(AddProfileActivity.this, ProfileLayout.class));
+                            startActivity(new Intent(EditProfileLayout.this, ProfileLayout.class));
                         })
                         .addOnFailureListener(e -> {
                             progressDialog.dismiss();
                             Log.d(TAG, "onFailure: Failed to upload to db due to " + e.getMessage());
-                            Toast.makeText(AddProfileActivity.this, "Failed to upload to db due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditProfileLayout.this, "Failed to upload to db due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         });
             }
 
@@ -201,11 +197,10 @@ public class AddProfileActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 progressDialog.dismiss();
                 Log.d(TAG, "onCancelled: Failed to query existing profile due to " + databaseError.getMessage());
-                Toast.makeText(AddProfileActivity.this, "Failed to query existing profile due to " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProfileLayout.this, "Failed to query existing profile due to " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 
     private void pdfPickIntent() {
         Log.d(TAG, "pdfPickIntent: starting pdf pick intent");
@@ -253,7 +248,7 @@ public class AddProfileActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.d(TAG, "onCancelled: Failed to load profiles due to " + error.getMessage());
-                Toast.makeText(AddProfileActivity.this, "Failed to load profiles.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProfileLayout.this, "Failed to load profiles.", Toast.LENGTH_SHORT).show();
             }
         });
     }
