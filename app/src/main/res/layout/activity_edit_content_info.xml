@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.EditContentInfo">
+
+    <!--ToolBar-->
+    <RelativeLayout
+        android:id="@+id/toolbarRl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_toolbar01">
+
+        <!--Back button-->
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="backbtn"
+            android:padding="10dp"
+            android:src="@drawable/ic_back_white" />
+
+        <!--Icon:Image-->
+        <ImageView
+            android:id="@+id/iconIv"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:layout_below="@id/backBtn"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="icon"
+            app:srcCompat="@drawable/onlogo2" />
+
+        <!--Title-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iconIv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Edit Post"
+            android:textColor="@color/white"
+            android:textSize="28sp" />
+
+        <!--Attach pdf button-->
+        <ImageButton
+            android:id="@+id/attachBtn"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="attachBtn"
+            android:padding="5dp"
+            android:src="@drawable/addcontent" />
+
+
+
+    </RelativeLayout>
+
+    <!-- PDFView to display the image being edited -->
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/ContentPdf"
+        android:layout_width="230dp"
+        android:layout_height="260dp"
+        android:layout_below="@id/toolbarRl"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+    <!-- Existing Title -->
+
+    <!--Title Input-->
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titleTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="500dp"
+        app:hintEnabled="false">
+
+        <EditText
+            android:id="@+id/titleEt"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/shape_edittext01"
+            android:drawablePadding="10dp"
+            android:hint="Post Title"
+            android:inputType="textPersonName|textCapWords"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray01"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <!--Description Input-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/descriptionTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="540dp"
+        app:hintEnabled="false">
+
+        <EditText
+            android:id="@+id/descriptionEt"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/shape_edittext01"
+            android:drawablePadding="10dp"
+            android:hint="Post Description"
+            android:inputType="textMultiLine|textCapSentences"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray01"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--Submit Button-->
+<RelativeLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageButton
+        android:id="@+id/submitBtn2"
+        android:layout_width="500dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="40dp"
+        android:background="@null"
+        android:padding="70dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/uploadbutton2" />
+</RelativeLayout>
+
+</RelativeLayout>

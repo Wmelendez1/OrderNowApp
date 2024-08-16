@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,17 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="250dp" />
 
-    <ImageView
-        android:id="@+id/iconIv"
-        android:layout_width="1100dp"
-        android:layout_height="110dp"
-        android:layout_below="@id/backBtn"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="backbtn"
-        app:srcCompat= "@drawable/onlogo2"
-        tools:srcCompat= "@drawable/onlogo2"/>
-
-
     <ImageButton
         android:id="@+id/backBtn"
         android:layout_width="48dp"
@@ -38,6 +28,18 @@
         android:padding="10dp"
         android:src="@drawable/ic_back_white" />
 
+
+    <ImageView
+        android:id="@+id/iconIv"
+        android:layout_width="1100dp"
+        android:layout_height="110dp"
+        android:layout_below="@id/backBtn"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="backbtn"
+        app:srcCompat= "@drawable/onlogo2"
+        tools:srcCompat= "@drawable/onlogo2"/>
+
+
     <!--Title-->
     <TextView
         android:layout_width="wrap_content"
@@ -45,7 +47,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="225dp"
         android:fontFamily="sans-serif-condensed"
-        android:text="Add Profile Information"
+        android:text="Edit Profile Information"
         android:textColor="@color/white"
         android:textSize="28sp" />
 
@@ -64,7 +66,6 @@
         android:contentDescription="addContent"
         android:padding="5dp"
         android:src="@drawable/addcontent" />
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/titleTil"
@@ -177,7 +178,7 @@
         android:layout_below="@+id/Bio"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:text="Add Profile"
+        android:text="Edit Profile"
         android:textColor="@color/black" />
 
 </RelativeLayout>

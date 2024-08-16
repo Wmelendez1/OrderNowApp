@@ -9,6 +9,12 @@ public class ModelPdf {
     private String url;
     private String username;
 
+    private String ContentTitle;
+
+    private String ContentDescription;
+
+    private String ContentPdf;
+
     private String Bio;
 
 
@@ -20,7 +26,8 @@ public class ModelPdf {
 
 
     // Constructor for all parameters
-    public ModelPdf(String uid, String id, String firstName, String lastName, String url, long timestamp, String Age, String email) {
+    public ModelPdf(String uid, String id, String firstName, String lastName, String url, long timestamp, String Age, String email, String ContentTitle,
+                    String ContentDescription, String ContentPdf) {
         this.uid = uid;
         this.id = id;
         this.firstName = firstName;
@@ -30,6 +37,9 @@ public class ModelPdf {
         this.Age = Age;
         this.username = username;
         this.Bio = Bio;
+        this.ContentTitle = ContentTitle;
+        this.ContentDescription = ContentDescription;
+        this.ContentPdf = ContentPdf;
     }
 
     // Getter and setter methods
@@ -105,4 +115,27 @@ public class ModelPdf {
         Bio = bio;
     }
 
+    public String getContentTitle() {
+        return ContentTitle;
+    }
+
+    public void setContentTitle(String contentTitle) {
+        ContentTitle = contentTitle;
+    }
+
+    public String getContentDescription() {
+        return ContentDescription;
+    }
+
+    public void setContentDescription(String contentDescription) {
+        ContentDescription = contentDescription;
+    }
+
+    public String getContentPdf() {
+        return ContentPdf;
+    }
+
+    public void setContentPdf(String contentPdf) {
+        ContentPdf = contentPdf;
+    }
 }
