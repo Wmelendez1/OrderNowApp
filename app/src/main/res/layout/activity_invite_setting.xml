@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray01"
+    tools:context=".activities.InviteSetting">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/inviteTB"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:background="@color/themecolor"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:title="Invite Friends"
+        app:titleMarginStart="130dp"
+        app:titleTextColor="@color/white" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/inviteTB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_arrow"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="344dp"
+        android:layout_height="261dp"
+        android:background="@android:drawable/editbox_dropdown_light_frame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inviteTB"
+        app:layout_constraintVertical_bias="0.15">
+
+        <TextView
+            android:id="@+id/inviteTVBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Invite Your Friends! "
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.066" />
+
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@android:drawable/editbox_background"
+            android:editable="false"
+            android:ems="10"
+            android:inputType="text"
+            android:text="https://sharethelink/to/our/app/dummy/link"
+            android:textColor="@color/gray02"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inviteTVMgs"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/inviteTVMgs"
+            android:layout_width="248dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="13dp"
+            android:text="Copy our link and send it over to your friends for a free meal on us!"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/editTextText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inviteTVBold"
+            app:layout_constraintVertical_bias="0.21" />
+
+        <Button
+            android:id="@+id/copyLinkBttn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:backgroundTint="@color/gray01"
+            android:drawableLeft="@drawable/baseline_link_24"
+            android:text="Copy Link"
+            android:textColor="@color/themecolor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextText"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="HardcodedText,RtlHardcoded" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
