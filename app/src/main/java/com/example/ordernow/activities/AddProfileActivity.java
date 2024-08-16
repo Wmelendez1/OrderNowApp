@@ -29,6 +29,8 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.example.ordernow.Models.ModelPdf;
+
 public class AddProfileActivity extends AppCompatActivity {
     private AddProfileBinding binding;
     private FirebaseAuth firebaseAuth;

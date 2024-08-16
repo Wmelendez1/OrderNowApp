@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import com.example.ordernow.Adapter.AdapterPdfAdmin;
+import com.example.ordernow.Models.ModelPdf;
+
+import java.util.List;  // Import List class
+
 public class FilterPdfAdmin extends Filter {
 
     // ArrayList in which we want to search

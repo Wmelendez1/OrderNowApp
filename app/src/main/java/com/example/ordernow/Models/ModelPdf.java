@@ -1,4 +1,4 @@
-package com.example.ordernow.activities;
+package com.example.ordernow.Models;
 
 public class ModelPdf {
     // Variables
