@@ -4,36 +4,29 @@ package com.example.ordernow.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Filter;
 
-
-import com.example.ordernow.databinding.ActivityProfileLayoutBinding;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import android.widget.Filter;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ordernow.R;
+import com.example.ordernow.databinding.ActivityProfileLayoutBinding;
 import com.github.barteksc.pdfviewer.PDFView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.example.ordernow.R;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-
-import java.util.HashMap;
 
 
 public class ProfileLayout extends AppCompatActivity implements SelectListener {
@@ -217,6 +210,7 @@ public class ProfileLayout extends AppCompatActivity implements SelectListener {
             @Override
             public void onClick(View v) {
 
+
             }
         });
 
@@ -323,14 +317,11 @@ public class ProfileLayout extends AppCompatActivity implements SelectListener {
             // Set PDF bytes to PDFView
             profilePicIV.fromBytes(bytes)
                     .pages(0) // Show only the first page
-                    .spacing(0)
+
                     .swipeHorizontal(false)
                     .enableSwipe(false)
                     .onError(t -> {
                         Log.d(TAG, "onError: " + t.getMessage());
-                    })
-                    .onPageError((page, t) -> {
-                        Log.d(TAG, "onPageError: " + t.getMessage());
                     })
                     .onLoad(nbPages -> {
                         Log.d(TAG, "LoadComplete: PDF loaded");
@@ -370,15 +361,13 @@ public class ProfileLayout extends AppCompatActivity implements SelectListener {
             // Set PDF bytes to ContentPdf
             ContentPdf.fromBytes(bytes)
                     .pages(0) // Show only the first page
-                    .spacing(0)
+
                     .swipeHorizontal(false)
                     .enableSwipe(false)
                     .onError(t -> {
                         Log.d(TAG, "onError: " + t.getMessage());
                     })
-                    .onPageError((page, t) -> {
-                        Log.d(TAG, "onPageError: " + t.getMessage());
-                    })
+
                     .onLoad(nbPages -> {
                         Log.d(TAG, "LoadComplete: PDF loaded");
                     })

@@ -6,14 +6,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-
+import com.example.ordernow.databinding.ActivityEditContentInfoBinding;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,9 +25,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import com.example.ordernow.R;
-import com.example.ordernow.databinding.ActivityEditContentInfoBinding;
 
 public class EditContentInfo extends AppCompatActivity {
     private ActivityEditContentInfoBinding binding;  // Ensure you create this layout file
@@ -363,14 +359,11 @@ public class EditContentInfo extends AppCompatActivity {
             // Set PDF bytes to PDFView
             binding.ContentPdf.fromBytes(bytes)
                     .pages(0) // Show only the first page
-                    .spacing(0)
+
                     .swipeHorizontal(false)
                     .enableSwipe(false)
                     .onError(t -> {
                         Log.d(TAG, "onError: " + t.getMessage());
-                    })
-                    .onPageError((page, t) -> {
-                        Log.d(TAG, "onPageError: " + t.getMessage());
                     })
                     .onLoad(nbPages -> {
                         Log.d(TAG, "LoadComplete: PDF loaded");

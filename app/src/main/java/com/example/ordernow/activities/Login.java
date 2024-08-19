@@ -1,18 +1,12 @@
 package com.example.ordernow.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
-import android.widget.Toast;
-
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ordernow.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -62,7 +56,7 @@ public class Login extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
                                     //TODO go to homepage
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    Intent toSignUp = new Intent(Login.this, SignUp.class);
+                                    Intent toSignUp = new Intent(Login.this, ProfileLayout.class);
                                     startActivity(toSignUp);
                                     finish();
                                 } else {

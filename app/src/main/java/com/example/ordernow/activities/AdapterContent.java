@@ -1,7 +1,5 @@
 package com.example.ordernow.activities;
 
-import static com.example.ordernow.activities.Constants.MAX_BYTES_PDF;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
@@ -9,15 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.ordernow.databinding.AddcontentrowBinding;
+
 import com.example.ordernow.R;
+import com.example.ordernow.databinding.AddcontentrowBinding;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -116,16 +114,12 @@ public class AdapterContent extends RecyclerView.Adapter<AdapterContent.MyViewHo
             // Set PDF bytes to PDFView
             holder.contentPdf.fromBytes(bytes)
                     .pages(0) // Show only the first page
-                    .spacing(0)
+
                     .swipeHorizontal(false)
                     .enableSwipe(false)
                     .onError(t -> {
                         holder.progressBar.setVisibility(View.INVISIBLE);
                         Log.d(TAG, "onError: " + t.getMessage());
-                    })
-                    .onPageError((page, t) -> {
-                        holder.progressBar.setVisibility(View.INVISIBLE);
-                        Log.d(TAG, "onPageError: " + t.getMessage());
                     })
                     .onLoad(nbPages -> {
                         holder.progressBar.setVisibility(View.INVISIBLE);

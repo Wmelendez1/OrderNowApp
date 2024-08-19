@@ -2,6 +2,9 @@ package com.example.ordernow.activities;
 
 import android.widget.Filter;
 
+import com.example.ordernow.Adapter.AdapterPdfAdmin;
+import com.example.ordernow.Models.ModelPdf;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.ordernow.activities;
+package com.example.ordernow.Adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -15,11 +15,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ordernow.Models.ModelPdf;
 import com.example.ordernow.R;
+import com.example.ordernow.activities.FilterPdfAdmin;
 import com.example.ordernow.databinding.ActivityProfileLayoutBinding;
-import com.example.ordernow.databinding.AddcontentBinding;
-import com.example.ordernow.databinding.AddcontentrowBinding;
-import com.example.ordernow.activities.ModelPdf;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -152,16 +151,12 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
             // Set PDF bytes to PDFView
             holder.pdfView.fromBytes(bytes)
                     .pages(0) // Show only the first page
-                    .spacing(0)
+
                     .swipeHorizontal(false)
                     .enableSwipe(false)
                     .onError(t -> {
                         holder.progressBar.setVisibility(View.INVISIBLE);
                         Log.d(TAG, "onError: " + t.getMessage());
-                    })
-                    .onPageError((page, t) -> {
-                        holder.progressBar.setVisibility(View.INVISIBLE);
-                        Log.d(TAG, "onPageError: " + t.getMessage());
                     })
                     .onLoad(nbPages -> {
                         holder.progressBar.setVisibility(View.INVISIBLE);

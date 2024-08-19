@@ -43,6 +43,12 @@
             android:name=".activities.SignUp"
             android:exported="false" />
         <activity
+            android:name=".activities.Login"
+            android:exported="false" />
+        <activity
+            android:name=".activities.FoodList"
+            android:exported="false" />
+        <activity
             android:name=".activities.WelcomeScreen"
             android:exported="true">
             <intent-filter>

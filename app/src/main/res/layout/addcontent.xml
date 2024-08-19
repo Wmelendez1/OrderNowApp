@@ -63,39 +63,50 @@
 
     </RelativeLayout>
 
-    <!--Title Input-->
+    <!-- PDFView to display the image being edited -->
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/ContentPdf"
+        android:layout_width="210dp"
+        android:layout_height="300dp"
+        android:layout_below="@id/toolbarRl"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/titleTil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginTop="225dp"
+        android:layout_marginTop="560dp"
         app:hintEnabled="false">
 
         <EditText
             android:id="@+id/titleEt"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:background="@drawable/shape_edittext01"
+            android:drawablePadding="10dp"
+            android:hint="Post Title"
             android:inputType="textPersonName|textCapWords"
             android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="@color/gray01"
-            android:textSize="16sp"
-            android:background="@drawable/shape_edittext01"
-            android:drawablePadding="10dp"
-            android:hint="Post Title" />
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <!--Description Input-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/descriptionTil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/titleTil"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="616dp"
         app:hintEnabled="false">
 
         <EditText
@@ -109,12 +120,12 @@
             android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="@color/gray01"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+
+
     <!--Submit Button-->
-
-
     <!--Submit Button-->
     <RelativeLayout
 
@@ -125,16 +136,15 @@
         <ImageButton
             android:id="@+id/submitBtn2"
             android:layout_width="500dp"
-            android:layout_height="100dp"
+            android:layout_height="400dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="360dp"
+            android:layout_marginTop="650dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="0dp"
             android:background="@null"
             android:padding="70dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/uploadbutton2" />
     </RelativeLayout>
-
 
 </RelativeLayout>
