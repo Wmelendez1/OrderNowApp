@@ -1,6 +1,7 @@
 package com.example.ordernow.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ordernow.Models.ModelPdf;
 import com.example.ordernow.R;
+import com.example.ordernow.activities.AddContent;
 import com.example.ordernow.activities.FilterPdfAdmin;
 import com.example.ordernow.databinding.ActivityProfileLayoutBinding;
 import com.github.barteksc.pdfviewer.PDFView;
@@ -30,6 +32,9 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
     private Context context;
     public ArrayList<ModelPdf> pdfArrayList, filterList;
 
+    private long profileTimestamp;
+
+
     private ActivityProfileLayoutBinding binding;
 
     public FilterPdfAdmin filter;
@@ -38,10 +43,11 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
     private static final long MAX_BYTES_PDF = 50000000; // 50 MB
 
 
-    public AdapterPdfAdmin(Context context, ArrayList<ModelPdf> pdfArrayList) {
+    public AdapterPdfAdmin(Context context, ArrayList<ModelPdf> pdfArrayList,  long profileTimestamp) {
         this.context = context;
         this.pdfArrayList = pdfArrayList;
         this.filterList = new ArrayList<>(pdfArrayList);
+
     }
 
     @Override
@@ -75,11 +81,15 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         String username = model.getUsername();
         String bio = model.getBio();
         String url = model.getUrl();
+         long Timestamp = model.getTimestamp();
+
         String ContentTitle = model.getContentTitle();
         String ContentDescription = model.getContentDescription();
         String ContentPdf = model.getContentPdf();
 
-
+        Intent intent = new Intent(context, AddContent.class);
+        intent.putExtra("ProfileTimestamp",  model.getTimestamp());  // Pass timestamp
+        context.startActivity(intent);
         // Set data to views
         holder.firstNameTv.setText(firstName);
         holder.lastNameTv.setText(lastName);
@@ -87,6 +97,7 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         holder.username.setText(username);
         holder.Bio.setText(bio);
         holder.pdfUrl = url;
+
 
 
 

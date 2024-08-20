@@ -25,7 +25,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 public class EditContentInfo extends AppCompatActivity {
     private ActivityEditContentInfoBinding binding;  // Ensure you create this layout file
     private FirebaseAuth firebaseAuth;
@@ -44,7 +43,7 @@ public class EditContentInfo extends AppCompatActivity {
 
 
 
- // Set this properly based on authenticated user
+    // Set this properly based on authenticated user
     private static final String CONTENT_PATH = "Content";
     private ModelContent modelContent;
 
@@ -77,7 +76,7 @@ public class EditContentInfo extends AppCompatActivity {
         }
 
 
-       contentUid = firebaseAuth.getUid();
+        contentUid = firebaseAuth.getUid();
 
         // Fetch and display current node content
 
@@ -127,7 +126,7 @@ public class EditContentInfo extends AppCompatActivity {
                 // Display the first item in the list (or change this logic based on your requirement)
                 if (!ContentArrayList.isEmpty()) {
                     modelContent = ContentArrayList.get(0);
-                   // Store the current content
+                    // Store the current content
                     displayContentForEdit( modelContent);
                 }
             }
@@ -270,15 +269,19 @@ public class EditContentInfo extends AppCompatActivity {
 
 
     private void pdfPickIntent() {
+
         Log.d(TAG, "pdfPickIntent: starting pdf pick intent");
         Intent intent = new Intent();
         intent.setType("application/pdf");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select PDF"), PDF_PICK_CODE);
+
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        Toast.makeText(EditContentInfo.this, "Loading Image", Toast.LENGTH_LONG).show();
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PDF_PICK_CODE && data != null && data.getData() != null) {
             Log.d(TAG, "onActivityResult: PDF Picked");
@@ -298,6 +301,7 @@ public class EditContentInfo extends AppCompatActivity {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         ds.getRef().removeValue();
                     }
+
                     // Upload PDF to Firebase Storage
                     pdfStorageReference.putFile(pdfUri)
                             .addOnSuccessListener(taskSnapshot -> {
@@ -306,8 +310,10 @@ public class EditContentInfo extends AppCompatActivity {
 
                                 Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                                 uriTask.addOnSuccessListener(uri -> {
+
                                     String uploadPdfUrl = uri.toString();
                                     loadPdfFromUrl(uploadPdfUrl);
+
                                 }).addOnFailureListener(e -> {
                                     progressDialog.dismiss();
                                     Log.d(TAG, "onFailure: Failed to get PDF URL due to " + e.getMessage());
@@ -374,8 +380,3 @@ public class EditContentInfo extends AppCompatActivity {
         });
     }
 }
-
-
-
-
-

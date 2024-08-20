@@ -1,6 +1,8 @@
 package com.example.ordernow.Models;
 
-public class ModelPdf {
+import java.io.Serializable;
+
+public class ModelPdf implements Serializable {
     // Variables
     private String uid;
     private String id;

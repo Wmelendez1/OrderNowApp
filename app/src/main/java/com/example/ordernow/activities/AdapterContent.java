@@ -87,7 +87,7 @@ public class AdapterContent extends RecyclerView.Adapter<AdapterContent.MyViewHo
         holder.editContentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onItemClicked(model); // Pass only the timestamp
+                listener.onItemClicked(model);
             }
         });
 

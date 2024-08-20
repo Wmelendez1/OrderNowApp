@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,7 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -89,6 +87,8 @@ public class EditProfileLayout extends AppCompatActivity {
         } else {
             uploadPdfToStorage(firstName, lastName, Age, username, bio);
         }
+
+        uploadPdfToStorage(firstName, lastName, Age, username, bio);
     }
 
 
