@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="business_categories">
+        <item>Chinese</item>
+        <item>Burger</item>
+        <item>Chicken</item>
+        <item>Pizza</item>
+        <item>Thai</item>
+        <item>Sushi</item>
+        <item>Italian</item>
+        <item>Mexican</item>
+        <item>Indian</item>
+        <item>Japanese</item>
+        <item>Mediterranean</item>
+        <item>Middle Eastern</item>
+        <item>Korean</item>
+        <item>Vietnamese</item>
+        <item>American</item>
+        <item>BBQ</item>
+        <item>Seafood</item>
+        <item>Vegetarian/Vegan</item>
+        <item>Sandwiches/Subs</item>
+        <item>Desserts</item>
+        <item>Breakfast/Brunch</item>
+        <item>Salads</item>
+        <item>Vegan</item>
+        <item>Fast Food</item>
+    </string-array>
+</resources>
