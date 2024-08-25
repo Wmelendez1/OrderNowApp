@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Card Image/Icon -->
+        <ImageView
+            android:id="@+id/cardIconIV"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/credit_card" />
+
+        <!-- Card Number -->
+        <TextView
+            android:id="@+id/cardNumberTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/cardIconIV"
+            android:layout_marginStart="16dp"
+            android:text="**** **** **** 1234"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Card Holder Name -->
+        <TextView
+            android:id="@+id/cardHolderNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardNumberTV"
+            android:layout_toEndOf="@id/cardIconIV"
+            android:layout_marginStart="16dp"
+            android:text="John Doe"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray" />
+
+        <!-- Expiry Date -->
+        <TextView
+            android:id="@+id/expiryDateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardHolderNameTV"
+            android:layout_toEndOf="@id/cardIconIV"
+            android:layout_marginStart="16dp"
+            android:text="12/24"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray" />
+
+        <!-- Default Card Checkbox -->
+        <CheckBox
+            android:id="@+id/defaultCardCB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Default"
+            android:checked="false" />
+
+        <!-- Delete Button -->
+        <ImageButton
+            android:id="@+id/deleteCardBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/cardNumberTV"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/delete"
+            android:contentDescription="Delete Card" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

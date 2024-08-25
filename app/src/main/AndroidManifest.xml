@@ -19,9 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderNow">
         <activity
-            android:name=".activities.Settings"
+            android:name=".activities.Payment"
             android:exported="false" />
-        <!-- Activities -->
+        <activity
+            android:name=".activities.Settings"
+            android:exported="false" /> <!-- Activities -->
         <activity
             android:name=".activities.ProfileLayout"
             android:exported="false" />
@@ -50,7 +52,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:grantUriPermissions="true"></provider>
+            android:grantUriPermissions="true" />
     </application>
 
 </manifest>
