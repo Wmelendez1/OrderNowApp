@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderNow">
         <activity
+            android:name=".activities.AddCardActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.Payment"
             android:exported="false" />
         <activity
