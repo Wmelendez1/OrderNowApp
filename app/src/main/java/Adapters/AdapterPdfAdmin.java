@@ -112,10 +112,10 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
             Log.d(TAG, "onFailure: " + e.getMessage());
         });
     }
-
-    private void loadPdfFromUrl(ModelPdf model, HolderPdfAdmin holder) {
+    public void loadPdfFromUrl(ModelPdf model, HolderPdfAdmin holder) {
         // Load PDF from URL and display in PDFView
         String pdfUrl = model.getUrl();
+        String id = model.getId();
         Log.d(TAG, "PDF URL: " + pdfUrl); // Log the URL
 
         if (pdfUrl == null || pdfUrl.isEmpty()) {
@@ -130,16 +130,12 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
             // Set PDF bytes to PDFView
             holder.pdfView.fromBytes(bytes)
                     .pages(0) // Show only the first page
-                    .spacing(0)
+
                     .swipeHorizontal(false)
                     .enableSwipe(false)
                     .onError(t -> {
                         holder.progressBar.setVisibility(View.INVISIBLE);
                         Log.d(TAG, "onError: " + t.getMessage());
-                    })
-                    .onPageError((page, t) -> {
-                        holder.progressBar.setVisibility(View.INVISIBLE);
-                        Log.d(TAG, "onPageError: " + t.getMessage());
                     })
                     .onLoad(nbPages -> {
                         holder.progressBar.setVisibility(View.INVISIBLE);

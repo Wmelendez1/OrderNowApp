@@ -8,19 +8,21 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.ordernow.Domain.BusinessDomain;
 import com.example.ordernow.R;
+
 
 import java.util.ArrayList;
 
 public class BusinessHmpgAdapter extends RecyclerView.Adapter<BusinessHmpgAdapter.ViewHolder> {
     ArrayList<BusinessDomain> businessDomains;
 
+
     //constructor to initialize the adapter
     public BusinessHmpgAdapter(ArrayList<BusinessDomain> businessDomains) {
         this.businessDomains = businessDomains;
+
     }
 
     @NonNull
@@ -37,6 +39,10 @@ public class BusinessHmpgAdapter extends RecyclerView.Adapter<BusinessHmpgAdapte
         //bind data to viewholder
         holder.businessName.setText(business.getBusinessName());
         holder.businessAddress.setText(business.getBusinessAddress());
+
+
+
+
 
         if (business.getBusinessPic() != null && !business.getBusinessPic().isEmpty()) {
             Glide.with(holder.itemView.getContext())
@@ -61,13 +67,14 @@ public class BusinessHmpgAdapter extends RecyclerView.Adapter<BusinessHmpgAdapte
         private TextView businessName;
         private TextView businessAddress;
         private TextView businessPhone;
+        private TextView businessOwnerFullName;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             businessPic = itemView.findViewById(R.id.businesspic);
             businessName = itemView.findViewById(R.id.businessName);
             businessAddress = itemView.findViewById(R.id.businessAddress);
             businessPhone = itemView.findViewById(R.id.businessPhone);
+
         }
     }
 }
-

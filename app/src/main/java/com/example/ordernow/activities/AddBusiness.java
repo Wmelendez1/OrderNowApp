@@ -1,17 +1,9 @@
 package com.example.ordernow.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
@@ -22,21 +14,25 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 import com.bumptech.glide.Glide;
 import com.example.ordernow.R;
-import com.example.ordernow.Domain.BusinessDomain;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,16 +52,32 @@ public class AddBusiness extends AppCompatActivity {
     private TextInputEditText businessNameEditText;
     private AutoCompleteTextView businessAddressEditText;
     private TextInputEditText businessPhoneEditText;
+
     private Button confirmBtn;
     private ImageButton addBusinessPic;
     private AutocompleteSessionToken sessionToken;
     private PlacesClient placesClient;
+
+    private String uid;
+    private String ownerFullName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_business);
+
+
+
+        // Retrieve first name, last name, and UID from intent
+        Intent intent = getIntent();
+        String firstName = intent.getStringExtra("FirstName");
+        String LastName = intent.getStringExtra("LastName") ;
+        ownerFullName = firstName + " " + LastName;
+        uid = intent.getStringExtra("uid");
+
+
+
 
         //places sdk and firebaseAPI key
         String firebaseApiKey = getString(R.string.firebaseApiKey);
@@ -80,6 +92,9 @@ public class AddBusiness extends AppCompatActivity {
         businessPhoneEditText = findViewById(R.id.businessPhone).findViewById(R.id.businesssPhoneEdit);
         confirmBtn = findViewById(R.id.confirmBtn);
         addBusinessPic = findViewById(R.id.addBusinessPic);
+
+
+
 
         //initialize catergories from string array
         categories = getResources().getStringArray(R.array.business_categories);
@@ -105,7 +120,7 @@ public class AddBusiness extends AppCompatActivity {
         addBusinessPic.setOnClickListener(v -> openPicSelect());
 
         //save data button
-        confirmBtn.setOnClickListener(v -> saveBusinessData());
+        confirmBtn.setOnClickListener(v -> saveBusinessData(uid, ownerFullName));
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_addBusiness), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -188,35 +203,44 @@ public class AddBusiness extends AppCompatActivity {
         }
     }
 
-    private void saveBusinessData() {
+    private void saveBusinessData(String uid, String ownerFullName) {
         String businessName = businessNameEditText.getText().toString();
         String businessAddress = businessAddressEditText.getText().toString();
         String businessPhone = businessPhoneEditText.getText().toString();
+
+
+
 
         //reference to firestore db
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
         //create map to business data to upload
         Map<String, Object> businessData = new HashMap<>();
+        businessData.put("uid", uid);
+        businessData.put("businessOwnersName", ownerFullName);
         businessData.put("businessName", businessName);
         businessData.put("businessAddress", businessAddress);
         businessData.put("businessPhone", businessPhone);
         businessData.put("businessCategories", getSelectedCategories());
         businessData.put("businessPic", selectedImageUrl);
 
-        //save data to db under businesses collection
-        firestore.collection("businesses").add(businessData)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(AddBusiness.this, "Business data saved successfully!", Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(AddBusiness.this, BusinessMngrHomePage.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(AddBusiness.this, "Failed to save business data: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                    }
+        //save data to db under businesses collection
+        firestore.collection("businesses").document(uid)
+                .set(businessData)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(AddBusiness.this, "Business data saved successfully!", Toast.LENGTH_SHORT).show();
+                    Intent businessintent = new Intent(AddBusiness.this, BusinessMngrHomePage.class);
+                    businessintent.putExtra("uid", uid);;
+                    startActivity(businessintent);
+                    finish();
+
+
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(AddBusiness.this, "Failed to save business data: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
+
     }
 
     private void showMultiSelectDialog() {
