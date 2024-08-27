@@ -20,5 +20,12 @@
     <string name="title_activity_navigation">Navigation</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="payment_overview_text">
+        Welcome to the Payment Settings section of our app. Here, you can get a quick snapshot of your current payment setup, including your default payment methods and billing information. This overview provides a consolidated view of all your payment-related settings, ensuring you have everything in one place for easy management.\n\n
+        What you can do here:\n\n
+        • Review Payment Methods: View and manage your active payment methods, including credit/debit cards and other payment options.\n
+        • Check Billing Information: Ensure that your billing details are accurate and up-to-date.\n\n
+        Stay on top of your payment settings to ensure a smooth and seamless experience with our app. For detailed changes or updates, navigate to the Billing and Payment Details sections.
+    </string>
     <string name="change_password">Change Password</string>
 </resources>
