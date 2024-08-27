@@ -42,7 +42,8 @@
         android:id="@+id/locationDisclaimerTV"
         android:layout_width="392dp"
         android:layout_height="154dp"
-        android:autoLink="none"
+        android:autoLink="web"
+        android:linksClickable="true"
         android:text="To ensure the optimal functionality and user experience of our app, it is essential that your device's location settings are turned on. By using this app, you acknowledge and agree that enabling location services is necessary for certain features and services to operate correctly. Your location data will be used in accordance with our Privacy Policy to provide personalized content and services. If you choose to disable location settings, some features of the app may not function as intended."
         android:textAlignment="center"
         android:textColor="@color/gray02"
@@ -52,7 +53,7 @@
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/privSecTB"
-        app:layout_constraintVertical_bias="0.382" />
+        app:layout_constraintVertical_bias="0.341" />
 
     <Switch
         android:id="@+id/locationSwitch"
