@@ -116,8 +116,8 @@ public class EditProfileLayout extends AppCompatActivity {
                 // Step 3: Upload the new profile PDF to storage
                 pdfStorageReference.putFile(pdfUri)
                         .addOnSuccessListener(taskSnapshot -> {
-                            Log.d(TAG, "onSuccess: PDF uploaded to storage...");
-                            Log.d(TAG, "onSuccess: getting pdf url...");
+                            Log.d(TAG, "onSuccess: uploaded to storage...");
+                            Log.d(TAG, "onSuccess: getting url...");
 
                             Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                             uriTask.addOnSuccessListener(uri -> {
@@ -147,7 +147,7 @@ public class EditProfileLayout extends AppCompatActivity {
         });
     }
     private void uploadPdfInfoToDB(String firstName, String lastName, String uploadPdfUrl, long timestamp, String Age, String username, String bio) {
-        Log.d(TAG, "uploadPdfInfoToDB: uploading PDF info to firebase db...");
+        Log.d(TAG, "uploadPdfInfoToDB: uploading Firebase db...");
         progressDialog.setMessage("Uploading Profile Info...");
         String uid = firebaseAuth.getUid();
 

@@ -81,7 +81,8 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         String username = model.getUsername();
         String bio = model.getBio();
         String url = model.getUrl();
-         long Timestamp = model.getTimestamp();
+        long Timestamp = model.getTimestamp();
+        String fullName = firstName+ ""+ lastName;
 
         String ContentTitle = model.getContentTitle();
         String ContentDescription = model.getContentDescription();
@@ -91,8 +92,8 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         intent.putExtra("ProfileTimestamp",  model.getTimestamp());  // Pass timestamp
         context.startActivity(intent);
         // Set data to views
-        holder.firstNameTv.setText(firstName);
-        holder.lastNameTv.setText(lastName);
+        holder.firstNameTv.setText(fullName);
+
         holder.AgeTv.setText(age);
         holder.username.setText(username);
         holder.Bio.setText(bio);
@@ -201,7 +202,7 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
 
             progressBar = itemView.findViewById(R.id.progressBar);
             firstNameTv = itemView.findViewById(R.id.firstNameTv);
-            lastNameTv = itemView.findViewById(R.id.lastNameTv);
+
             AgeTv = itemView.findViewById(R.id.AgeTv);
             username = itemView.findViewById(R.id.username); // Initialize usernameTv
             Bio = itemView.findViewById(R.id.Bio); // Initialize bioTv
