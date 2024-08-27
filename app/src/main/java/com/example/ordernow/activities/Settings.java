@@ -16,16 +16,25 @@ import com.example.ordernow.R;
 
 public class Settings extends AppCompatActivity {
 
-    Button Feedbackbtn;
+    Button feedbackbtn;
+    Button inviteBttn;
+    Button adBttn;
+    Button privSecBttn;
+    Button paymentBttn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_settings);
 
-        Feedbackbtn = findViewById(R.id.FeedbackSettBttn);
+        feedbackbtn = findViewById(R.id.FeedbackSettBttn);
+        inviteBttn = findViewById(R.id.InviteSettBttn);
+        adBttn = findViewById(R.id.AdSettBttn);
+        privSecBttn = findViewById(R.id.PrivSettBttn);
+        paymentBttn = findViewById(R.id.PaymentSettBttn);
 
-        Feedbackbtn.setOnClickListener(new View.OnClickListener() {
+        feedbackbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

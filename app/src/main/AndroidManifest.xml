@@ -30,7 +30,6 @@
         <activity
             android:name=".activities.Settings"
             android:exported="false" />
-            android:exported="false" />
         <activity
             android:name=".activities.EditContentInfo"
             android:exported="false" />

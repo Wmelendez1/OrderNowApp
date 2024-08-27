@@ -2,14 +2,18 @@ package com.example.ordernow.activities;
 
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
+import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
@@ -20,12 +24,16 @@ import com.example.ordernow.Domain.FoodNearYouDomain;
 import com.example.ordernow.R;
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.material.navigation.NavigationView;
 
 import java.sql.Array;
 import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
 
+
+    public DrawerLayout drawerLayout;
+    private Button nav;
     private View orderTrackerLayout;
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewCategories;
@@ -37,21 +45,37 @@ public class HomePage extends AppCompatActivity {
     static ArrayList<FoodNearYouDomain> foodnearyou;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.navigation_layout);
 
         //initialize members here
         orderTrackerLayout = findViewById(R.id.orderStatusTextView);
         enterAddress = findViewById(R.id.enteraddress);
         whitePin = findViewById(R.id.whitepin);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        ImageView navMenu = findViewById(R.id.navmenu);
+        if (navMenu != null) {
+            navMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    drawerLayout.openDrawer(GravityCompat.START);
+                }
+            });
+        } else {
+            Log.e("HomePage", "navMenu ImageView not Found!");
+        }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.homepage), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+//
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.homepage), (v, insets) -> {
+//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+//            return insets;
+//        });
 
         //check for ongoing order status
         boolean hasOngoingOrder = checkForOngoingOrder();
@@ -65,7 +89,9 @@ public class HomePage extends AppCompatActivity {
 
         recycleViewCategory();
         recyclerViewFoodNearYou();
+
     }
+
 
     //setup recycle view to display categories horizontally
     private void recycleViewCategory() {
@@ -132,4 +158,5 @@ public class HomePage extends AppCompatActivity {
     private void hideOrderTracker() {
         orderTrackerLayout.setVisibility(View.GONE);
     }
+
 }

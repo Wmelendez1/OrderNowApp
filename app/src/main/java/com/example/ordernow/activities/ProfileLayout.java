@@ -211,8 +211,7 @@ public class ProfileLayout extends AppCompatActivity implements SelectListener {
         binding.HomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                startActivity(new Intent(ProfileLayout.this, HomePage.class));
             }
         });
 
