@@ -68,7 +68,7 @@
 
 
 
-    <EditText
+    <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -194,23 +194,6 @@
         android:background="@null"
         android:layout_alignParentStart="true" />
 
-    <EditText
-      android:id="@+id/lastNameET"
-        android:layout_width="150dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="16dp"
-        android:clickable="true"
-        android:textColor="@color/black"
-        android:enabled="false"
-        android:hint="Lastname"
-        android:inputType="text"
-        android:background="@null"
-        android:textSize="20sp"
-        android:layout_below="@id/username"
-        android:layout_alignParentStart="true"
-        android:layout_toEndOf="@id/firstnameET"
-         />
 
     <ImageButton
         android:id="@+id/saveBtn"

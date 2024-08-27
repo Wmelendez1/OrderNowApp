@@ -161,7 +161,7 @@ public class EditContentInfo extends AppCompatActivity {
         } else if (TextUtils.isEmpty(description)) {
             Toast.makeText(this, "Enter Description", Toast.LENGTH_SHORT).show();
         } else if (pdfUri == null) {
-            Toast.makeText(this, "Pick PDF...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Pick Image...", Toast.LENGTH_SHORT).show();
         } else {
             uploadPdfToStorage(title,description,  modelContent);
         }

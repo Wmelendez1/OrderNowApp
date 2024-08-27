@@ -1,5 +1,6 @@
 
 
+
 package com.example.ordernow.activities;
 
 
@@ -231,6 +232,7 @@ public class ProfileLayout extends AppCompatActivity implements SelectListener {
                         bio = ds.child("Bio").getValue(String.class);
                         username = ds.child("username").getValue(String.class);
                         url = ds.child("url").getValue(String.class);
+                        String fullname = firstName + " " + lastName;
 
                         // Log the retrieved data to verify
                         Log.d(TAG, "First Name: " + firstName);
@@ -241,8 +243,7 @@ public class ProfileLayout extends AppCompatActivity implements SelectListener {
                         Log.d(TAG, "username: " + username);
 
                         // Update UI with retrieved profile information
-                        binding.firstnameET.setText(firstName);
-                        binding.lastNameET.setText(lastName);
+                        binding.firstnameET.setText(fullname);
                         binding.aboutmeET.setText(bio);
                         binding.username.setText(username);
 
@@ -421,6 +422,3 @@ public class ProfileLayout extends AppCompatActivity implements SelectListener {
 
 
 }
-
-
-

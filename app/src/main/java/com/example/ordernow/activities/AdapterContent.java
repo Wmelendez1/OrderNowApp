@@ -64,7 +64,7 @@ public class AdapterContent extends RecyclerView.Adapter<AdapterContent.MyViewHo
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       Contentbinding = AddcontentrowBinding.inflate(LayoutInflater.from(context), parent, false);
+        Contentbinding = AddcontentrowBinding.inflate(LayoutInflater.from(context), parent, false);
         return new MyViewHolder(Contentbinding);
     }
 
@@ -77,7 +77,7 @@ public class AdapterContent extends RecyclerView.Adapter<AdapterContent.MyViewHo
         String contentTitle = model.getContentTitle();
         String contentDescription = model.getContentDescription();
         String contentPdf = model.getContentPdf();
-       long timestamp = model.getTimestamp();
+        long timestamp = model.getTimestamp();
 
 
         // Set data to views
@@ -163,5 +163,3 @@ public class AdapterContent extends RecyclerView.Adapter<AdapterContent.MyViewHo
 
     }
 }
-
-
