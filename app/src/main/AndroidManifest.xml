@@ -19,6 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderNow">
         <activity
+            android:name=".activities.FeedBack"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Settings"
+            android:exported="false" />
+        <activity
             android:name=".activities.EditContentInfo"
             android:exported="false" />
         <activity
@@ -40,13 +46,13 @@
             android:name=".activities.AddProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SignUp"
-            android:exported="false" />
-        <activity
             android:name=".activities.Login"
             android:exported="false" />
         <activity
-            android:name=".activities.FoodList"
+            android:name=".activities.HomePage"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SignUp"
             android:exported="false" />
         <activity
             android:name=".activities.WelcomeScreen"
