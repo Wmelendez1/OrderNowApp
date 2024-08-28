@@ -13,26 +13,22 @@
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <!-- Include the main content layout -->
         <include layout="@layout/activity_home_page" />
-
     </FrameLayout>
 
-    <!-- NavigationView for the navigation drawer -->
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/white"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header"
-        app:itemIconPadding="20sp"
-        app:itemIconSize="30sp"
-        app:itemTextAppearance="@style/NavigationViewTextAppearance"
-        app:itemTextColor="@color/black"
-        app:menu="@menu/nav_drawer_menu" />
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/white"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/nav_header"
+            app:itemIconPadding="20sp"
+            app:itemIconSize="30sp"
+            app:itemTextAppearance="@style/NavigationViewTextAppearance"
+            app:itemTextColor="@color/black"
+            app:menu="@menu/nav_drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
 

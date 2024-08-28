@@ -1,13 +1,19 @@
 package com.example.ordernow.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
@@ -59,6 +65,16 @@ public class HomePage extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ImageView navMenu = findViewById(R.id.navmenu);
+
+        if (drawerLayout == null) {
+            Log.e("HomePage", "DrawerLayout not found!");
+        }
+
+        if (navigationView == null) {
+            Log.e("HomePage", "NavigationView not found!");
+        }
+
+
         if (navMenu != null) {
             navMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -70,12 +86,37 @@ public class HomePage extends AppCompatActivity {
             Log.e("HomePage", "navMenu ImageView not Found!");
         }
 
-//
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.homepage), (v, insets) -> {
-//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-//            return insets;
-//        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+
+                if (id == R.id.profilenav) {
+                    // Handle the profile action
+                    openProfile();
+                } else if (id == R.id.pastordersnav) {
+                    // Handle the past orders action
+                    openPastOrders();
+                } else if (id == R.id.alertsnav) {
+                    // Handle the alerts action
+                    openAlerts();
+                } else if (id == R.id.favoritesnav) {
+                    // Handle the favorites action
+                    openFavorites();
+                } else if (id == R.id.promonav) {
+                    // Handle the promotions action
+                    openPromotions();
+                } else if (id == R.id.settingsnav) {
+                    // Handle the settings action
+                    openSettings();
+                }
+
+                // Close the drawer after an item is clicked
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
+
 
         //check for ongoing order status
         boolean hasOngoingOrder = checkForOngoingOrder();
@@ -89,6 +130,37 @@ public class HomePage extends AppCompatActivity {
 
         recycleViewCategory();
         recyclerViewFoodNearYou();
+
+    }
+
+    private void openPromotions() {
+
+    }
+
+    private void openFavorites() {
+        Intent intent = new Intent(this, Favorites.class);
+        startActivity(intent);
+    }
+
+    private void openAlerts() {
+        Intent intent = new Intent(this, Alerts.class);
+        startActivity(intent);
+    }
+
+    private void openSettings() {
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+    }
+
+    private void openPastOrders() {
+        Intent intent = new Intent(this, PastOrders.class);
+        startActivity(intent);
+
+    }
+
+    private void openProfile() {
+        Intent intent = new Intent(this, ProfileLayout.class);
+        startActivity(intent);
 
     }
 

@@ -18,6 +18,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderNow">
+
+        <activity
+            android:name=".activities.Favorites"
+            android:exported="false"/>
+        <activity
+            android:name=".activities.Alerts"
+            android:exported="false"/>
+        <activity
+            android:name=".activities.PastOrders"
+            android:exported="false"/>
         <activity
             android:name=".activities.AddCardActivity"
             android:exported="false" />
@@ -44,7 +54,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.EditProfileLayout"
-            android:exported="false" /> <!-- Activities -->
+            android:exported="false" />
         <activity
             android:name=".activities.ProfileLayout"
             android:exported="false" />
@@ -54,14 +64,14 @@
         <activity
             android:name=".activities.Login"
             android:exported="false" />
-        <activity
-            android:name=".activities.HomePage"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".activities.HomePage"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".activities.SignUp"
             android:exported="false" />
         <activity
-            android:name=".activities.WelcomeScreen"
+            android:name=".activities.HomePage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

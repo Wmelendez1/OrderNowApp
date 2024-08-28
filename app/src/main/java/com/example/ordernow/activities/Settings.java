@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,7 @@ public class Settings extends AppCompatActivity {
     Button adBttn;
     Button privSecBttn;
     Button paymentBttn;
+    ImageView backBttn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class Settings extends AppCompatActivity {
         adBttn = findViewById(R.id.AdSettBttn);
         privSecBttn = findViewById(R.id.PrivSettBttn);
         paymentBttn = findViewById(R.id.PaymentSettBttn);
+        backBttn = findViewById(R.id.backBttnSett);
+
 
         feedbackbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +44,49 @@ public class Settings extends AppCompatActivity {
 
                 Intent toSignUp = new Intent(Settings.this, FeedBack.class);
                 startActivity(toSignUp);
+            }
+        });
+
+        paymentBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent toSignUp = new Intent(Settings.this, Payment.class);
+                startActivity(toSignUp);
+            }
+        });
+
+         privSecBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent toSignUp = new Intent(Settings.this, Settings_PS.class);
+                startActivity(toSignUp);
+            }
+        });
+
+        adBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent toSignUp = new Intent(Settings.this, Ad_Settings.class);
+                startActivity(toSignUp);
+            }
+        });
+
+        inviteBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent toSignUp = new Intent(Settings.this, InviteSetting.class);
+                startActivity(toSignUp);
+            }
+        });
+
+        backBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

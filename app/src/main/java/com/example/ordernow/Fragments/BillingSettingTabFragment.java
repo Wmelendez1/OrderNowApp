@@ -37,7 +37,7 @@ public class BillingSettingTabFragment extends Fragment {
          CITYeditText = view.findViewById(R.id.CITYeditText);
          MAeditText = view.findViewById(R.id.MAeditText);
         countrySpinner= view.findViewById(R.id.countrySpinner);
-         imgBttn = view.findViewById(R.id.imageButton);
+         imgBttn = view.findViewById(R.id.backBttnIF);
          saveButton = view.findViewById(R.id.saveBttn);
 
 

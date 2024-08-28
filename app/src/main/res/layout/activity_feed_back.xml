@@ -45,7 +45,7 @@
         tools:ignore="HardcodedText,TextSizeCheck" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/feedbackEMT"
         android:layout_width="345dp"
         android:layout_height="176dp"
         android:background="@drawable/edit_text_outline_feedback"
@@ -71,12 +71,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine"
+        app:layout_constraintTop_toBottomOf="@+id/feedbackEMT"
         app:layout_constraintVertical_bias="0.064"
         tools:ignore="HardcodedText,TextContrastCheck" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/backBttnFeedB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/FeedBackTB"

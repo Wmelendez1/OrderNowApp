@@ -10,8 +10,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/inviteTB"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
+        android:layout_width="449dp"
+        android:layout_height="65dp"
         android:background="@color/themecolor"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -22,11 +22,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:title="Invite Friends"
-        app:titleMarginStart="130dp"
+        app:titleMarginStart="155dp"
         app:titleTextColor="@color/white" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/backBttnIF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/transparent"
@@ -62,7 +62,7 @@
             app:layout_constraintVertical_bias="0.066" />
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/LinkEt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -84,7 +84,7 @@
             android:layout_marginTop="13dp"
             android:text="Copy our link and send it over to your friends for a free meal on us!"
             android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/editTextText"
+            app:layout_constraintBottom_toTopOf="@+id/LinkEt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inviteTVBold"
@@ -103,7 +103,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText"
+            app:layout_constraintTop_toBottomOf="@+id/LinkEt"
             app:layout_constraintVertical_bias="1.0"
             tools:ignore="HardcodedText,RtlHardcoded" />
 
