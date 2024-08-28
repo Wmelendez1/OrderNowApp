@@ -12,6 +12,7 @@
         android:id="@+id/inviteTB"
         android:layout_width="449dp"
         android:layout_height="65dp"
+        android:layout_marginTop="35dp"
         android:background="@color/themecolor"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -27,14 +28,15 @@
 
     <ImageButton
         android:id="@+id/backBttnIF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="39dp"
+        android:layout_height="49dp"
         android:background="@color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/inviteTB"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintHorizontal_bias="0.039"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.775"
         app:srcCompat="@drawable/back_arrow"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 

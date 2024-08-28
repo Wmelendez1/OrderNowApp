@@ -30,6 +30,7 @@ public class InviteSetting extends AppCompatActivity {
         setContentView(R.layout.activity_invite_setting);
 
         backBttn =  findViewById(R.id.backBttnIF);
+        copyBttn = findViewById(R.id.copyLinkBttn);
 
         backBttn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +42,7 @@ public class InviteSetting extends AppCompatActivity {
         copyBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // copy link text to clipboard
             }
         });
 

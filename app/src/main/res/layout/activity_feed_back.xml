@@ -11,6 +11,7 @@
         android:id="@+id/FeedBackTB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
         android:background="@color/themecolor"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -19,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Feed Back"
-        app:titleMarginStart="150dp"
+        app:titleMarginStart="170dp"
         app:titleTextColor="@color/white" />
 
     <RatingBar
@@ -37,6 +38,8 @@
         android:layout_width="133dp"
         android:layout_height="45dp"
         android:text="Tell us how we did!"
+        android:textAlignment="center"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/ratingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +68,7 @@
         android:layout_width="107dp"
         android:layout_height="56dp"
         android:layout_marginTop="40dp"
-        android:background="@color/themecolor"
+        android:backgroundTint="@color/themecolor"
         android:text="Submit"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -77,13 +80,14 @@
 
     <ImageView
         android:id="@+id/backBttnFeedB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="33dp"
+        android:layout_height="32dp"
         app:layout_constraintBottom_toBottomOf="@+id/FeedBackTB"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintHorizontal_bias="0.038"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/FeedBackTB"
+        app:layout_constraintVertical_bias="0.437"
         app:srcCompat="@drawable/back_arrow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

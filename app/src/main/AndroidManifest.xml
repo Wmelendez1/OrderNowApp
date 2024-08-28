@@ -20,6 +20,15 @@
         android:theme="@style/Theme.OrderNow">
 
         <activity
+            android:name=".activities.Settings_PS"
+            android:exported="false"/>
+        <activity
+            android:name=".activities.Ad_Settings"
+            android:exported="false"/>
+        <activity
+            android:name=".activities.InviteSetting"
+            android:exported="false"/>
+        <activity
             android:name=".activities.Favorites"
             android:exported="false"/>
         <activity
@@ -64,14 +73,14 @@
         <activity
             android:name=".activities.Login"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".activities.HomePage"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".activities.HomePage"
+            android:exported="false" />
         <activity
             android:name=".activities.SignUp"
             android:exported="false" />
         <activity
-            android:name=".activities.HomePage"
+            android:name=".activities.WelcomeScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

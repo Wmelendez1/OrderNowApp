@@ -1,6 +1,8 @@
 package com.example.ordernow.activities;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,8 @@ public class Payment extends AppCompatActivity {
     ViewPager2 viewPager2;
     ViewPagerAdapter viewPagerAdapter;
 
+    ImageButton backBttn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +30,17 @@ public class Payment extends AppCompatActivity {
         setContentView(R.layout.activity_payment);
         tabLayout = findViewById(R.id.paymentTabV);
         viewPager2 = findViewById(R.id.viewPager);
+        backBttn = findViewById(R.id.backBttnPaySett);
         viewPagerAdapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(viewPagerAdapter);
+
+        backBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

@@ -1,9 +1,12 @@
 package com.example.ordernow.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 
 import androidx.activity.EdgeToEdge;
@@ -16,7 +19,7 @@ import com.example.ordernow.R;
 
 public class FeedBack extends AppCompatActivity {
 
-    Button backBttn;
+    ImageView backBttn;
     Button submitBttn;
     RatingBar ratingBar;
     EditText feedback;
@@ -28,6 +31,24 @@ public class FeedBack extends AppCompatActivity {
 
         ratingBar = findViewById(R.id.ratingBar);
         feedback = findViewById(R.id.feedbackEMT);
+        submitBttn = findViewById(R.id.SubmitBttnFeedBack);
+        backBttn = findViewById(R.id.backBttnFeedB);  // You missed initializing this
+
+        // Check if views are properly initialized
+        if (ratingBar == null) {
+            Log.e("FeedBack", "Rating bar not found!");
+        }
+        if (feedback == null) {
+            Log.e("FeedBack", "EditText not found!");
+        }
+        if (submitBttn == null) {
+            Log.e("FeedBack", "Submit button not found!");
+        }
+        if (backBttn == null) {
+            Log.e("FeedBack", "Back button not found!");
+        }
+
+
 
         backBttn.setOnClickListener(new View.OnClickListener() {
             @Override

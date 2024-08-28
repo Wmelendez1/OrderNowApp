@@ -9,15 +9,15 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/privSecTB"
-        android:layout_width="410dp"
-        android:layout_height="62dp"
+        android:layout_width="446dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="35dp"
         android:layout_marginBottom="580dp"
         android:background="@color/themecolor"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -89,12 +89,14 @@
         android:id="@+id/changePassTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="52dp"
         android:layout_marginTop="24dp"
         android:autoLink="none"
         android:contextClickable="true"
         android:text="Change Password"
+        app:layout_constraintBottom_toTopOf="@+id/locationDisclaimerTV"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationSwitch" />
+        app:layout_constraintTop_toBottomOf="@+id/locationSwitch"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

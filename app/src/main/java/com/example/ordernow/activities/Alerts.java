@@ -31,6 +31,8 @@ package com.example.ordernow.activities;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -56,6 +58,8 @@ public class Alerts extends AppCompatActivity {
     private AlertAdapter alertsAdapter;
     private List<AlertItem> alertItemList;
 
+    ImageButton backBttn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +67,15 @@ public class Alerts extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.Alert_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        backBttn = findViewById(R.id.backBttnAlerts);
+        backBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         recyclerViewAlerts = findViewById(R.id.Alert_recyclerView);

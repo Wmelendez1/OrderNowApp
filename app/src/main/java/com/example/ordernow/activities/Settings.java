@@ -2,6 +2,7 @@ package com.example.ordernow.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,7 +38,9 @@ public class Settings extends AppCompatActivity {
         paymentBttn = findViewById(R.id.PaymentSettBttn);
         backBttn = findViewById(R.id.backBttnSett);
 
-
+        if (feedbackbtn == null) {
+            Log.e("Settings", "feedback button not found!");
+        }
         feedbackbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +50,9 @@ public class Settings extends AppCompatActivity {
             }
         });
 
+        if (paymentBttn == null) {
+            Log.e("Settings", "payment button not found!");
+        }
         paymentBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +62,9 @@ public class Settings extends AppCompatActivity {
             }
         });
 
+        if (privSecBttn == null) {
+            Log.e("Settings", "privacy and security button not found!");
+        }
          privSecBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +74,9 @@ public class Settings extends AppCompatActivity {
             }
         });
 
+        if (adBttn == null) {
+            Log.e("Settings", "ad settings button not found!");
+        }
         adBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +86,10 @@ public class Settings extends AppCompatActivity {
             }
         });
 
+
+        if (inviteBttn == null) {
+            Log.e("Settings", "invite friends button not found!");
+        }
         inviteBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +99,10 @@ public class Settings extends AppCompatActivity {
             }
         });
 
+
+        if (backBttn == null) {
+            Log.e("Settings", "feedback button not found!");
+        }
         backBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
