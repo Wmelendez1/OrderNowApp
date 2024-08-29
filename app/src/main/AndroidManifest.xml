@@ -18,15 +18,52 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderNow">
+
         <activity
-            android:name=".activities.FoodDetails"
+            android:name=".activities.Settings_PS"
+            android:exported="false"/>
+        <activity
+            android:name=".activities.Ad_Settings"
+            android:exported="false"/>
+        <activity
+            android:name=".activities.InviteSetting"
+            android:exported="false"/>
+        <activity
+            android:name=".activities.Favorites"
+            android:exported="false"/>
+        <activity
+            android:name=".activities.Alerts"
+            android:exported="false"/>
+        <activity
+            android:name=".activities.PastOrders"
+            android:exported="false"/>
+        <activity
+            android:name=".activities.AddCardActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.FoodList"
+            android:name=".activities.Payment"
             android:exported="false" />
         <activity
-            android:name=".activities.CartList"
-            android:exported="false" /> <!-- Activities -->
+            android:name=".activities.FeedBack"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Settings"
+            android:exported="false" />
+        <activity
+            android:name=".activities.EditContentInfo"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AdapterContent"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ModelContent"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AddContent"
+            android:exported="false" />
+        <activity
+            android:name=".activities.EditProfileLayout"
+            android:exported="false" />
         <activity
             android:name=".activities.ProfileLayout"
             android:exported="false" />

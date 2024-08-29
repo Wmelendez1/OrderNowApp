@@ -14,6 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="250dp" />
 
+    <ImageView
+        android:id="@+id/iconIv"
+        android:layout_width="1100dp"
+        android:layout_height="110dp"
+        android:layout_below="@id/backBtn"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="backbtn"
+        app:srcCompat= "@drawable/onlogo2"
+        tools:srcCompat= "@drawable/onlogo2"/>
+
+
     <ImageButton
         android:id="@+id/backBtn"
         android:layout_width="48dp"
@@ -32,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="225dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Add Profile Information"
         android:textColor="@color/white"
@@ -50,16 +61,17 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="@android:color/transparent"
-        android:contentDescription="attachBtn"
+        android:contentDescription="addContent"
         android:padding="5dp"
-        android:src="@drawable/ic_attach_white" />
+        android:src="@drawable/addcontent" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/titleTil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="225dp"
+        android:layout_marginTop="275dp"
         android:layout_marginEnd="30dp"
         app:hintEnabled="false">
 
@@ -120,14 +132,50 @@
         android:textColorHint="@color/black"
         android:textSize="16sp" />
 
+    <com.google.android.material.textfield.TextInputEditText
+
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/AgeTv"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/shape_edittext01"
+        android:drawablePadding="10sp"
+        android:gravity="center_vertical"
+        android:hint="Username"
+        android:padding="10sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="16sp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+
+        android:id="@+id/Bio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/username"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/shape_edittext01"
+        android:drawablePadding="10sp"
+        android:gravity="center_vertical"
+        android:hint="Bio"
+        android:padding="10sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="16sp" />
+
 
     <!--Submit button-->
     <Button
         android:id="@+id/submitBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/Bio"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="400dp"
         android:layout_marginEnd="30dp"
         android:text="Add Profile"
         android:textColor="@color/black" />

@@ -1,4 +1,4 @@
-package Adapters;
+package com.example.ordernow.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.ordernow.R;
-import Models.Order;
+import com.example.ordernow.Models.Order;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {

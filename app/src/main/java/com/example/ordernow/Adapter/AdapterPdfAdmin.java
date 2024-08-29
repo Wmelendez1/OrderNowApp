@@ -1,6 +1,7 @@
-package Adapters;
+package com.example.ordernow.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ordernow.Models.ModelPdf;
 import com.example.ordernow.R;
+import com.example.ordernow.activities.AddContent;
 import com.example.ordernow.activities.FilterPdfAdmin;
 import com.example.ordernow.databinding.ActivityProfileLayoutBinding;
 import com.github.barteksc.pdfviewer.PDFView;
@@ -24,22 +27,27 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-import Models.ModelPdf;
-
 public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.HolderPdfAdmin> implements Filterable {
 
     private Context context;
     public ArrayList<ModelPdf> pdfArrayList, filterList;
+
+    private long profileTimestamp;
+
+
     private ActivityProfileLayoutBinding binding;
+
     public FilterPdfAdmin filter;
 
     private static final String TAG = "PDF_ADAPTER_TAG";
     private static final long MAX_BYTES_PDF = 50000000; // 50 MB
 
-    public AdapterPdfAdmin(Context context, ArrayList<ModelPdf> pdfArrayList) {
+
+    public AdapterPdfAdmin(Context context, ArrayList<ModelPdf> pdfArrayList,  long profileTimestamp) {
         this.context = context;
         this.pdfArrayList = pdfArrayList;
         this.filterList = new ArrayList<>(pdfArrayList);
+
     }
 
     @Override
@@ -56,7 +64,12 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         View view = LayoutInflater.from(context).inflate(R.layout.activity_profile_layout, parent, false);
         binding = ActivityProfileLayoutBinding.inflate(LayoutInflater.from(context), parent, false);
         return new HolderPdfAdmin(binding.getRoot());
+
+
+
+
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull HolderPdfAdmin holder, int position) {
@@ -64,13 +77,32 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         ModelPdf model = pdfArrayList.get(position);
         String firstName = model.getFirstName();
         String lastName = model.getLastName();
-        long timestamp = model.getTimestamp();
-        String Age = model.getAge();
+        String age = model.getAge();
+        String username = model.getUsername();
+        String bio = model.getBio();
+        String url = model.getUrl();
+        long Timestamp = model.getTimestamp();
+        String fullName = firstName+ ""+ lastName;
 
+        String ContentTitle = model.getContentTitle();
+        String ContentDescription = model.getContentDescription();
+        String ContentPdf = model.getContentPdf();
+
+        Intent intent = new Intent(context, AddContent.class);
+        intent.putExtra("ProfileTimestamp",  model.getTimestamp());  // Pass timestamp
+        context.startActivity(intent);
         // Set data to views
-        holder.firstNameTv.setText(firstName);
-        holder.lastNameTv.setText(lastName);
-        holder.AgeTv.setText(Age);
+        holder.firstNameTv.setText(fullName);
+
+        holder.AgeTv.setText(age);
+        holder.username.setText(username);
+        holder.Bio.setText(bio);
+        holder.pdfUrl = url;
+
+
+
+
+
 
 
         // Load further details like category, pdf from URL, pdf size in separate functions
@@ -113,9 +145,10 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         });
     }
 
-    private void loadPdfFromUrl(ModelPdf model, HolderPdfAdmin holder) {
+    public void loadPdfFromUrl(ModelPdf model, HolderPdfAdmin holder) {
         // Load PDF from URL and display in PDFView
         String pdfUrl = model.getUrl();
+        String id = model.getId();
         Log.d(TAG, "PDF URL: " + pdfUrl); // Log the URL
 
         if (pdfUrl == null || pdfUrl.isEmpty()) {
@@ -130,16 +163,12 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
             // Set PDF bytes to PDFView
             holder.pdfView.fromBytes(bytes)
                     .pages(0) // Show only the first page
-                    .spacing(0)
+
                     .swipeHorizontal(false)
                     .enableSwipe(false)
                     .onError(t -> {
                         holder.progressBar.setVisibility(View.INVISIBLE);
                         Log.d(TAG, "onError: " + t.getMessage());
-                    })
-                    .onPageError((page, t) -> {
-                        holder.progressBar.setVisibility(View.INVISIBLE);
-                        Log.d(TAG, "onPageError: " + t.getMessage());
                     })
                     .onLoad(nbPages -> {
                         holder.progressBar.setVisibility(View.INVISIBLE);
@@ -157,21 +186,34 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         return pdfArrayList.size();
     }
 
-    static class HolderPdfAdmin extends RecyclerView.ViewHolder {
+    class HolderPdfAdmin extends RecyclerView.ViewHolder {
+
+        String pdfUrl;
+
         PDFView pdfView;
         ProgressBar progressBar;
-        EditText firstNameTv, lastNameTv, AgeTv; // Change TextView to EditText
+        EditText firstNameTv, lastNameTv, AgeTv, username, Bio; // Change TextView to EditText
         ImageButton moreBtn;
         TextView sizeTextView;
 
         public HolderPdfAdmin(@NonNull View itemView) {
             super(itemView);
-            pdfView = itemView.findViewById(R.id.pdfView);
+            pdfView = itemView.findViewById(R.id.Content);
+
             progressBar = itemView.findViewById(R.id.progressBar);
             firstNameTv = itemView.findViewById(R.id.firstNameTv);
-            lastNameTv = itemView.findViewById(R.id.lastNameTv);
+
             AgeTv = itemView.findViewById(R.id.AgeTv);
+            username = itemView.findViewById(R.id.username); // Initialize usernameTv
+            Bio = itemView.findViewById(R.id.Bio); // Initialize bioTv
+
+
+
+
 
         }
+
+
+
     }
 }

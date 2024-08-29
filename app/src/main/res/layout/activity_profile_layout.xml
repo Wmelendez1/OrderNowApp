@@ -1,114 +1,247 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cartview"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.ProfileLayout">
 
-    <!--Toolbar-->
-    <RelativeLayout
-        android:id="@+id/toolbarRl"
+    <!-- Toolbar -->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Content"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@drawable/shape_toolbar02">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/favorite_cuisines_label"
+        android:layout_marginTop="5dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/addcontentrow" />
 
-        <!--Back Button-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/themecolor"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/FavoriteFoodToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="405dp"
+        android:background="@drawable/shape_themebutton"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+
+
+
+
+    <TextView
+        android:id="@+id/profileTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="180dp"
+        android:text="Profile"
+        android:textAlignment="viewStart"
+        android:textColor="@color/white"
+        android:textColorLink="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="-50dp"/>
+
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/profilePicIV"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_below="@id/profileTv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+
+
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profilePicIV"
+        android:layout_marginStart="150dp"
+        android:ems="5"
+        android:hint="Username"
+        android:clickable="true"
+        android:background="@null"
+        android:inputType="text"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="0dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="8dp"
+        android:text="About me:"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@id/username"
+        android:layout_alignParentStart="true" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/aboutmeET"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:paddingTop="-100dp"
+            android:enabled="false"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textSize="19sp"
+            tools:layout_editor_absoluteX="28dp"
+            tools:layout_editor_absoluteY="250dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <TextView
+        android:id="@+id/favorite_cuisines_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="Posts"
+        android:textColor="@color/white"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        android:layout_below="@id/textInputLayout"
+        android:layout_centerHorizontal="true" />
+
+
+    <ImageButton
+        android:id="@+id/AddProfileContent"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/favorite_cuisines_label"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-35dp"
+        android:layout_marginEnd="10dp"
+        android:background="#00FFFFFF"
+        app:srcCompat="@drawable/addcontent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+        tools:srcCompat="@drawable/addcontent" />
+
+    <LinearLayout
+        android:id="@+id/favorite_cuisines_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:layout_below="@id/favorite_cuisines_label">
+
+
+
+    </LinearLayout>
+
+
+
+    <ImageButton
+        android:id="@+id/editProfileBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-9dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="335dp"
+        android:background="#00FFFFFF"
+        app:srcCompat="@android:drawable/ic_menu_edit"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+        tools:srcCompat="@android:drawable/ic_menu_edit" />
+
+
+
+    <EditText
+        android:id="@+id/firstnameET"
+        android:layout_width="154dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:enabled="false"
+        android:hint="Firstname"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_below="@id/username"
+        android:background="@null"
+        android:layout_alignParentStart="true" />
+
+
+    <ImageButton
+        android:id="@+id/saveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#00FFFFFF"
+        android:clickable="false"
+        android:visibility="invisible"
+        android:layout_below="@id/toolbar"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@android:drawable/ic_menu_save" />
+
+    <ImageButton
+        android:id="@+id/editProfilePicBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="132dp"
+        android:background="#00FFFFFF"
+        android:clickable="false"
+        android:visibility="invisible"
+        android:layout_below="@id/profilePicIV"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@android:drawable/ic_menu_camera"
+        tools:ignore="TouchTargetSizeCheck" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <ImageButton
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_back_white"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="26dp"
-            android:background="@android:color/transparent"/>
-
-        <!--Title-->
-        <TextView
-            android:id="@+id/titleTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="Your Profile"
-            android:layout_marginTop="18dp"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/white"/>
-        <!--Subtitle/Category of Book-->
-
+            android:id="@+id/HomeButton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="-18dp"
+            android:layout_marginEnd="-20dp"
+            android:background="@null"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/home_button"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            tools:ignore="TouchTargetSizeCheck"/>
 
     </RelativeLayout>
-
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="148dp"
-        android:layout_marginBottom="5dp"
-        android:layout_below="@id/toolbarRl"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="8dp"
-        app:contentPadding="5dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RelativeLayout
-                android:id="@+id/pdfRl"
-                android:layout_width="100dp"
-                android:layout_height="140dp"
-                android:layout_marginEnd="5dp"
-                android:background="@color/gray01">
-
-                <!-- PDF View -->
-
-                <!-- Progress Bar -->
-                <com.github.barteksc.pdfviewer.PDFView
-                    android:id="@+id/pdfView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone" />
-                </com.github.barteksc.pdfviewer.PDFView>
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/firstNameTv"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="First Name"
-                android:maxLines="1"
-                android:textColor="@color/black"
-                android:layout_toEndOf="@id/pdfRl"/>
-
-            <TextView
-                android:id="@+id/lastNameTv"
-                style="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/firstNameTv"
-                android:layout_toEndOf="@id/pdfRl"
-                android:layout_marginStart="5dp"
-                android:text="Last Name"
-                android:maxLines="4"
-                android:ellipsize="end"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-
-
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
 
 
 </RelativeLayout>

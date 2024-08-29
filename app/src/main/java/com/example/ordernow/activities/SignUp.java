@@ -1,14 +1,16 @@
 package com.example.ordernow.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.ordernow.R;
 import com.example.ordernow.databinding.ActivitySignUpBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,12 +27,25 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Button loginreg = findViewById(R.id.loginreg);
 
         // Set status bar color
         getWindow().setStatusBarColor(Color.parseColor("#36B5FF"));
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+
+
+        binding.loginreg.setOnClickListener(v -> startActivity(new Intent(this, Login.class)));
+
+        loginreg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //creating intent to start signup activitry
+                Intent intent = new Intent(SignUp.this, Login.class);
+                startActivity(intent); //starts activity
+            }
+        });
 
         // Set up click listener for the sign-up button using binding
         binding.signupButton.setOnClickListener(v -> {
@@ -65,5 +80,3 @@ public class SignUp extends AppCompatActivity {
         });
     }
 }
-
-

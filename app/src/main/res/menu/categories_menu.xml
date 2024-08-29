@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/cat_one"
+            android:title="Pizza"
+            app:actionViewClass="android.widget.CheckBox"/>
+        <item
+            android:id="@+id/cat_two"
+            android:title="Chinese"
+            app:actionViewClass="android.widget.CheckBox"/>
+        <item
+            android:id="@+id/cat_three"
+            android:title="Breakfast"
+            app:actionViewClass="android.widget.CheckBox"/>
+        <item
+            android:id="@+id/cat_four"
+            android:title="FastFood"
+            app:actionViewClass="android.widget.CheckBox"/>
+        <item
+            android:id="@+id/cat_five"
+            android:title="Burgers"
+            app:actionViewClass="android.widget.CheckBox"/>
+
+    </group>
+
+</menu>
