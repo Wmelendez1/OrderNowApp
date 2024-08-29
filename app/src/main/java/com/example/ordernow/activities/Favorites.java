@@ -1,6 +1,8 @@
 package com.example.ordernow.activities;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +22,7 @@ public class Favorites extends AppCompatActivity {
     private FavoritesAdapter favoritesAdapter;
     private List<FavoriteItem> favoriteItemList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,5 +38,13 @@ public class Favorites extends AppCompatActivity {
 
         favoritesAdapter = new FavoritesAdapter(favoriteItemList);
         recyclerViewFavorites.setAdapter(favoritesAdapter);
+
+        ImageButton backButton = findViewById(R.id.imageButtonBack);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               finish();
+            }
+        });
     }
 }

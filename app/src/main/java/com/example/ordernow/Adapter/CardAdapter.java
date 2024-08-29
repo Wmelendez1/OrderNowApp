@@ -40,6 +40,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         }
 
         // Set click listeners for delete and other actions if needed
+        // Handle card deletion
+        holder.deleteCardBtn.setOnClickListener(v -> {
+            cards.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, cards.size());
+        });
     }
 
     @Override
@@ -48,6 +54,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder {
+        public View deleteCardBtn;
         TextView cardNumber;
         TextView cardHolderName;
         TextView expiryDate;
@@ -58,7 +65,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             cardNumber = itemView.findViewById(R.id.cardNumberTV);
             cardHolderName = itemView.findViewById(R.id.cardHolderNameTV);
             expiryDate = itemView.findViewById(R.id.expiryDateTV);
-            defaultIndicator = itemView.findViewById(R.id.defaultCardCB); // Assume you have this in your card_item layout
+            defaultIndicator = itemView.findViewById(R.id.defaultCardCB);
+            deleteCardBtn = itemView.findViewById(R.id.deleteCardBtn);
         }
     }
 }
