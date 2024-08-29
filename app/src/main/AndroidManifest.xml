@@ -26,10 +26,10 @@
             android:exported="false" />
         <activity
             android:name=".activities.AddBusiness"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activities.BusinessMngrHomePage"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activities.FoodDetails"
             android:exported="false" />
@@ -52,8 +52,14 @@
             android:name=".activities.HomePage"
             android:exported="false" />
         <activity
+            android:name=".activities.BusinessLogIn"
+            android:exported="true" />
+        <activity
             android:name=".activities.SignUp"
             android:exported="false" />
+        <activity
+            android:name=".activities.BusinessSignUp"
+            android:exported="true" />
         <activity
             android:name=".activities.WelcomeScreen"
             android:exported="true">

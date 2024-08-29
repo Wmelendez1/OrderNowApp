@@ -10,14 +10,18 @@ public class BusinessDomain {
     private String businessAddress;
     private String contactNumber;
 
+
+
+
     public BusinessDomain() {
     }
 
-    public BusinessDomain(String businessPic, String businessName, String businessAddress, String contactNumber) {
+    public BusinessDomain(String businessPic, String businessName, String businessAddress, String contactNumber, String businessOwnersName) {
         this.businessPic = businessPic;
         this.businessName = businessName;
         this.businessAddress = businessAddress;
         this.contactNumber = contactNumber;
+
     }
 
     public String getBusinessPic() {
@@ -52,12 +56,14 @@ public class BusinessDomain {
         this.contactNumber = contactNumber;
     }
 
+
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("businessPic", businessPic);
         result.put("businessName", businessName);
         result.put("businessAddress", businessAddress);
         result.put("contactNumber", contactNumber);
+
         return result;
     }
 }
