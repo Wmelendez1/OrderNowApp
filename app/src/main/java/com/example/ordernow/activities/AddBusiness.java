@@ -33,6 +33,7 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -195,6 +196,9 @@ public class AddBusiness extends AppCompatActivity {
 
         //reference to firestore db
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
+        //document ref for business
+        DocumentReference businessRef = firestore.collection("businesses").document();
 
         //create map to business data to upload
         Map<String, Object> businessData = new HashMap<>();

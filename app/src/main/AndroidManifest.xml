@@ -19,6 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderNow">
         <activity
+            android:name=".activities.AddMenuItem"
+            android:exported="false" />
+        <activity
+            android:name=".activities.BusinessPage"
+            android:exported="false" />
+        <activity
             android:name=".activities.AddBusiness"
             android:exported="false" />
         <activity

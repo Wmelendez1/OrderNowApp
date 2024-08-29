@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/businessPageView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activities.BusinessPage">
+
+    <ImageView
+        android:id="@+id/businessPagetoolbar"
+        android:layout_width="420dp"
+        android:layout_height="150dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@id/businessPagerecyclerview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/businessPagebackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/themecolor"
+        app:layout_constraintBottom_toBottomOf="@id/businessName"
+        app:layout_constraintEnd_toStartOf="@id/businessName"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="@id/businessPagetoolbar"
+        app:layout_constraintTop_toTopOf="@id/businessName"
+        app:srcCompat="@drawable/back_arrow" />
+
+    <TextView
+        android:id="@+id/businessName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cooperhewitt_semibold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@id/businessPagetoolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/businessPagetoolbar"
+        app:layout_constraintTop_toTopOf="@id/businessPagetoolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/businessPagerecyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/addFoodItemButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/businessPagetoolbar" />
+
+    <TextView
+        android:id="@+id/addFoodItemButton"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_margin="17dp"
+        android:background="@drawable/bigplus"
+        android:fontFamily="@font/cooperhewitt_semibold"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/businessPagerecyclerview" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

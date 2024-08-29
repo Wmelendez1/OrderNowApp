@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_width="350dp"
+    android:layout_height="700dp"
+    android:layout_gravity="bottom"
+    android:layout_marginStart="25dp"
+    android:background="@color/white"
+    tools:context=".activities.AddMenuItem">
+
+    <ImageButton
+        android:id="@+id/addMenuItemPic"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:contentDescription="@string/add_menu_item_picture"
+        app:layout_constraintBottom_toTopOf="@id/addPhotoText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/addimage" />
+
+    <TextView
+        android:id="@+id/addPhotoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/cooperhewitt_medium"
+        android:text="Add a photo of menu item"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/addMenuItemPic"
+        app:layout_constraintEnd_toEndOf="@+id/addMenuItemPic"
+        app:layout_constraintStart_toStartOf="@+id/addMenuItemPic"
+        app:layout_constraintTop_toBottomOf="@+id/addMenuItemPic" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/foodname"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/addMenuItemPic"
+        app:layout_constraintStart_toStartOf="@+id/addMenuItemPic"
+        app:layout_constraintTop_toBottomOf="@id/addPhotoText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/foodnameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cooperhewitt_medium"
+            android:hint="Enter food name"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/price"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/foodname"
+        app:layout_constraintStart_toStartOf="@+id/foodname"
+        app:layout_constraintTop_toBottomOf="@+id/foodname">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/priceEdit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="@font/cooperhewitt_mediumitalic"
+            android:hint="Enter food price"
+            android:textColor="@color/black"
+            android:paddingStart="15dp"
+            android:textColorHint="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/description"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/price"
+        app:layout_constraintStart_toStartOf="@+id/price"
+        app:layout_constraintTop_toBottomOf="@+id/price">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/descriptionEdit"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter food description" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/addMenuItemBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/themecolor"
+        android:fontFamily="@font/cooperhewitt_medium"
+        android:text="Confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:layout_constraintVertical_bias="0.9" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
