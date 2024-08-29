@@ -63,6 +63,7 @@ dependencies {
     implementation 'com.github.kittinunf.fuel:fuel:2.3.1'
     implementation 'com.google.firebase:firebase-auth:23.0.0'
     implementation 'com.google.firebase:firebase-storage:21.0.0'
+    implementation 'com.android.volley:volley:1.2.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     implementation group: 'com.airbnb.android', name: 'lottie', version: '6.4.0'
     implementation 'com.google.android.libraries.places:places:3.4.0'
