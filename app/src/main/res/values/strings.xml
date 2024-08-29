@@ -5,6 +5,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="signup">Sign Up</string>
     <string name="login">Login</string>
+    <string name="owner_full_name_default">Owner Full Name</string>
 
     <string name="add_profile_info">Add Profile Information</string>
     <string name="first_name_hint">First Name</string>
@@ -28,4 +29,5 @@
         Stay on top of your payment settings to ensure a smooth and seamless experience with our app. For detailed changes or updates, navigate to the Billing and Payment Details sections.
     </string>
     <string name="change_password">Change Password</string>
+    <string name="add_menu_item_picture">Add menu item photo</string>
 </resources>

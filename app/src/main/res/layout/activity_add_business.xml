@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_addBusiness"
+    android:orientation="vertical"
+    android:layout_width="350dp"
+    android:layout_height="700dp"
+    android:layout_gravity="bottom"
+    android:layout_marginStart="25dp"
+    android:background="@color/white"
+    tools:context=".activities.AddBusiness">
+
+    <ImageButton
+        android:id="@+id/addBusinessPic"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/addPhotoText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/addimage" />
+
+    <TextView
+        android:id="@+id/addPhotoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/cooperhewitt_medium"
+        android:text="Add a photo of your business"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/addBusinessPic"
+        app:layout_constraintEnd_toEndOf="@+id/addBusinessPic"
+        app:layout_constraintStart_toStartOf="@+id/addBusinessPic"
+        app:layout_constraintTop_toBottomOf="@+id/addBusinessPic" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/businessName"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/addBusinessPic"
+        app:layout_constraintStart_toStartOf="@+id/addBusinessPic"
+        app:layout_constraintTop_toBottomOf="@id/addPhotoText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/businessNameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cooperhewitt_medium"
+            android:hint="Enter business name"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/businessName"
+        app:layout_constraintStart_toStartOf="@+id/businessName"
+        app:layout_constraintTop_toBottomOf="@+id/businessName">
+
+        <AutoCompleteTextView
+            android:id="@+id/businessAddressEdit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="@font/cooperhewitt_mediumitalic"
+            android:hint="Enter business address"
+            android:textColor="@color/black"
+            android:paddingStart="15dp"
+            android:textColorHint="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/businessPhone"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/businesssPhoneEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cooperhewitt_mediumitalic"
+            android:hint="Enter business contact number"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/categoryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/cooperhewitt_medium"
+        android:text="Choose Category"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/businessPhone"
+        app:layout_constraintStart_toStartOf="@id/businessPhone"
+        app:layout_constraintTop_toBottomOf="@id/businessPhone" />
+
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/categoryLabel"
+        app:layout_constraintStart_toStartOf="@id/categoryLabel"
+        app:layout_constraintTop_toBottomOf="@id/categoryLabel"
+        android:entries="@array/business_categories"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/confirmBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/themecolor"
+        android:fontFamily="@font/cooperhewitt_medium"
+        android:text="Confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/categorySpinner"
+        app:layout_constraintStart_toStartOf="@+id/categorySpinner"
+        app:layout_constraintTop_toBottomOf="@+id/categorySpinner" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,6 +29,21 @@
             android:name=".activities.InviteSetting"
             android:exported="false"/>
         <activity
+            android:name=".activities.AddMenuItem"
+            android:exported="false" />
+        <activity
+            android:name=".activities.BusinessPage"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AddBusiness"
+            android:exported="true" />
+        <activity
+            android:name=".activities.BusinessMngrHomePage"
+            android:exported="true" />
+        <activity
+            android:name=".activities.FoodDetails"
+            android:exported="false" />
+        <activity
             android:name=".activities.Favorites"
             android:exported="false"/>
         <activity
@@ -77,8 +92,14 @@
             android:name=".activities.HomePage"
             android:exported="false" />
         <activity
+            android:name=".activities.BusinessLogIn"
+            android:exported="true" />
+        <activity
             android:name=".activities.SignUp"
             android:exported="false" />
+        <activity
+            android:name=".activities.BusinessSignUp"
+            android:exported="true" />
         <activity
             android:name=".activities.WelcomeScreen"
             android:exported="true">

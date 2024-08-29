@@ -34,6 +34,18 @@ android {
     }
 
 
+    buildscript {
+        repositories {
+            google()
+            mavenCentral()
+            gradlePluginPortal()
+            maven { url "https://jitpack.io"  }
+            // other repositories if needed
+        }
+        dependencies {
+            classpath 'com.android.tools.build:gradle:4.2.2' // Update to the latest version
+        }
+    }
 
 }
 
@@ -42,6 +54,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     implementation 'com.github.barteksc:AndroidPdfViewer:2.3.0'
 
+    implementation 'com.github.barteksc:AndroidPdfViewer:2.3.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     implementation 'androidx.navigation:navigation-fragment:2.6.0'
