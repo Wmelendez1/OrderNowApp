@@ -26,6 +26,9 @@ public class Login extends AppCompatActivity {
     TextInputEditText emailText, passwordText;
     FirebaseAuth mAuth;
     int failCount;
+    private Toast toast;
+    private final int duriation= Toast.LENGTH_SHORT;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +65,14 @@ public class Login extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
                                     //TODO go to homepage
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    Intent toSignUp = new Intent(Login.this, SignUp.class);
+                                    Intent toSignUp = new Intent(Login.this, ProfileLayout.class);
                                     startActivity(toSignUp);
                                     finish();
                                 } else {
                                     Intent toSignUp = new Intent(Login.this, Login.class);
                                     startActivity(toSignUp);
                                     finish();
+
                                 }
                             }
                         });

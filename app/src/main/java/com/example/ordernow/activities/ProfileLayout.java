@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,9 +36,8 @@ public class ProfileLayout extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference profileRef;
     private String id;
-
     // Profile information
-    private String firstName, lastName, Age, email, username, bio;
+    private String firstName, lastName, email, username, bio; //Age,
     private Uri pdfUri;
 
     private static final String TAG = "PROFILE_TAG";
@@ -83,7 +83,7 @@ public class ProfileLayout extends AppCompatActivity {
                     if (ds.exists()) {
                         firstName = ds.child("firstName").getValue(String.class);
                         lastName = ds.child("lastName").getValue(String.class);
-                        Age = ds.child("age").getValue(String.class);
+                        Long Age = ds.child("age").getValue(Long.class);
                         email = ds.child("email").getValue(String.class);
                         bio = ds.child("Bio").getValue(String.class);
                         username = ds.child("username").getValue(String.class);

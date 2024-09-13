@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.0.2'  // Ensure compatibility with your Android Studio
+    }
+}
+
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
@@ -21,36 +32,22 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
-
-    buildscript {
-        repositories {
-            google()
-            mavenCentral()
-            gradlePluginPortal()
-            // other repositories if needed
-        }
-        dependencies {
-            classpath 'com.android.tools.build:gradle:4.2.2' // Update to the latest version
-        }
-    }
-
 }
 
 dependencies {
-
     implementation 'com.github.bumptech.glide:glide:4.14.2'
-    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     implementation 'androidx.navigation:navigation-fragment:2.6.0'
@@ -72,3 +69,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
+
+
+
+
