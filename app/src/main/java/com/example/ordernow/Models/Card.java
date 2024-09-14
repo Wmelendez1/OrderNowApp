@@ -1,4 +1,4 @@
-package Models;
+package com.example.ordernow.Models;
 
 import java.io.Serializable;
 
@@ -7,6 +7,9 @@ public class Card implements Serializable {
     private boolean isDefault;
     private String cardHolderName;
     private String expiryDate;
+
+    // No-argument constructor required for Firebase
+    public Card() {}
 
     // Constructor
     public Card(String cardNumber, boolean isDefault, String cardHolderName, String expiryDate) {

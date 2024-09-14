@@ -35,6 +35,12 @@ import com.example.ordernow.Interface.ChangeQuantityListener;
 import com.example.ordernow.R;
 
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.paymentsheet.PaymentSheet;
 import com.stripe.android.paymentsheet.PaymentSheetResult;
@@ -73,18 +79,17 @@ public class CartList extends AppCompatActivity {
     private FoodNearYouDomain foodNearYouDomain;
     private PaymentSheet paymentSheet;
     private double total;
-    private boolean apiFlag;
     String paymentIntentClientSecret;
     PaymentSheet.CustomerConfiguration customerConfig;
+    String paymentMethodId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_cart_list);
 
-        //initialize members here
+        // Initialize members
         recyclerView = findViewById(R.id.cartrecyclerview);
         subTotal = findViewById(R.id.subTotal);
         deliveryFee = findViewById(R.id.deliveryFee);
@@ -103,39 +108,61 @@ public class CartList extends AppCompatActivity {
 
         managementCart = new ManagementCart(this);
 
-        cartbackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CartList.this, HomePage.class);
-                startActivity(intent);
-            }
+        cartbackButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CartList.this, HomePage.class);
+            startActivity(intent);
         });
 
         initList();
-        CalculateCart();
-        makeRequest();
+        calculateCart();
+        retrievePaymentMethod(); // Retrieve the payment method stored in Firebase
 
-        checkoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                paymentSheet.presentWithPaymentIntent(paymentIntentClientSecret, new PaymentSheet.Configuration(
-                        "Order Now", customerConfig
-                ));
-            }
+        checkoutButton.setOnClickListener(v -> {
+            paymentSheet.presentWithPaymentIntent(paymentIntentClientSecret, new PaymentSheet.Configuration(
+                    "Order Now", customerConfig
+            ));
         });
 
         paymentSheet = new PaymentSheet(this, this::onPaymentSheetResult);
 
     }
-    private void onPaymentSheetResult(final PaymentSheetResult paymentSheetResult)
-    {
-        if (paymentSheetResult instanceof PaymentSheetResult.Canceled){
+
+    private void retrievePaymentMethod() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String uid = auth.getCurrentUser().getUid();
+
+        DatabaseReference userCardsRef = FirebaseDatabase.getInstance().getReference("Users")
+                .child(uid).child("Cards");
+
+        // Retrieve the default or first card (you can modify to select from a list if needed)
+        userCardsRef.orderByChild("isDefault").equalTo(true).limitToFirst(1)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            for (DataSnapshot cardSnapshot : snapshot.getChildren()) {
+                                paymentMethodId = cardSnapshot.child("paymentMethodId").getValue(String.class);
+                                makeRequest(paymentMethodId); // Pass the PaymentMethod ID to Stripe for PaymentIntent
+                            }
+                        } else {
+                            Toast.makeText(CartList.this, "No payment method available", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.e("FirebaseError", "Failed to retrieve payment method", error.toException());
+                    }
+                });
+    }
+
+    private void onPaymentSheetResult(final PaymentSheetResult paymentSheetResult) {
+        if (paymentSheetResult instanceof PaymentSheetResult.Canceled) {
             Toast.makeText(this, "Payment Canceled", Toast.LENGTH_SHORT).show();
-        } else if (paymentSheetResult instanceof  PaymentSheetResult.Failed) {
+        } else if (paymentSheetResult instanceof PaymentSheetResult.Failed) {
             Toast.makeText(this, "Payment Declined", Toast.LENGTH_SHORT).show();
         } else if (paymentSheetResult instanceof PaymentSheetResult.Completed) {
-            //TODO go to next page
-            Toast.makeText(this, "Completed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Payment Completed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -146,13 +173,12 @@ public class CartList extends AppCompatActivity {
         adapter = new CartListAdapter(managementCart.getCartList(), this, new ChangeQuantityListener() {
             @Override
             public void changed() {
-                CalculateCart();
+                calculateCart();
             }
         });
 
         recyclerView.setAdapter(adapter);
 
-        //cart will be visible ONLY IF theres something in the cart
         if (managementCart.getCartList().isEmpty()) {
             cartemptyText.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.GONE);
@@ -162,9 +188,8 @@ public class CartList extends AppCompatActivity {
         }
     }
 
-    //calculates the cart and sets data into the view
-    private void CalculateCart() {
-        double taxPercent = 0.06; //example til we feed with data. Florida food sales tax
+    private void calculateCart() {
+        double taxPercent = 0.06;
         double deliveryFeeAmount = 2.99;
 
         double subTotalAmount = (double) Math.round(managementCart.getSubtotal() * 100) / 100;
@@ -177,73 +202,62 @@ public class CartList extends AppCompatActivity {
         totalPrice.setText("$" + total);
     }
 
-    //POST request to server. Sends dollar amount gets publishable key.
-    private void makeRequest() {
+    private void makeRequest(String paymentMethodId) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String url = "https://illustrious-branch-couch.glitch.me/checkout";
+        String url = "https://important-easy-actor.glitch.me/";
         JSONObject postData = new JSONObject();
         try {
             postData.put("amount", String.valueOf(total));
+            postData.put("paymentMethodId", paymentMethodId);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         final String mRequestBody = postData.toString();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.i("LOG_VOLLEY", response);
-                try {
-                    final JSONObject result = new JSONObject(response);
-                    customerConfig = new PaymentSheet.CustomerConfiguration(
-                            result.getString("customer"),
-                            result.getString("ephemeralKey")
-                    );
-                    paymentIntentClientSecret = result.getString("paymentIntent");
-                    PaymentConfiguration.init(getApplicationContext(), result.getString("publishableKey"));
-                } catch (JSONException e) { Log.e("LOG_VOLLEY", response); }
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+            Log.i("LOG_VOLLEY", response);
+            try {
+                final JSONObject result = new JSONObject(response);
+                customerConfig = new PaymentSheet.CustomerConfiguration(
+                        result.getString("customer"),
+                        result.getString("ephemeralKey")
+                );
+                paymentIntentClientSecret = result.getString("paymentIntent");
+                PaymentConfiguration.init(getApplicationContext(), result.getString("publishableKey"));
+            } catch (JSONException e) {
+                Log.e("LOG_VOLLEY", response);
             }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e("LOG_VOLLEY", error.toString());
-                }
-            }) {
-                @Override
-                public String getBodyContentType() {
-                    return "application/json; charset=utf-8";
-                }
+        }, error -> Log.e("LOG_VOLLEY", error.toString())) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
 
-                @Override
-                public byte[] getBody() throws AuthFailureError {
-                    try {
-                        return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
-                    } catch (UnsupportedEncodingException uee) {
-                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", mRequestBody, "utf-8");
-                        return null;
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", mRequestBody, "utf-8");
+                    return null;
+                }
+            }
+
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String jsonString = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+                    if (jsonString == null || jsonString.length() == 0) {
+                        jsonString = "{'status':'success'}";
                     }
+                    return Response.success(jsonString, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    return Response.error(new ParseError(e));
                 }
+            }
+        };
 
-                @Override
-                protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                    try {
-                        String jsonString = new String(response.data,
-                                HttpHeaderParser.parseCharset(response.headers));
-                        //Allow null
-                        if (jsonString == null || jsonString.length() == 0) {
-                            jsonString = "{'status':'success'}";
-                        }
-
-                        return Response.success(jsonString,
-                                HttpHeaderParser.parseCacheHeaders(response));
-                    } catch (UnsupportedEncodingException e) {
-                        return Response.error(new ParseError(e));
-                    }
-                }
-            };
-
-            requestQueue.add(stringRequest);
-        }
-
+        requestQueue.add(stringRequest);
     }
+}
 

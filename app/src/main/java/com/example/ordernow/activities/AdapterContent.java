@@ -17,6 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ordernow.R;
 import com.example.ordernow.databinding.AddcontentrowBinding;
 import com.github.barteksc.pdfviewer.PDFView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -33,6 +38,11 @@ public class AdapterContent extends RecyclerView.Adapter<AdapterContent.MyViewHo
     private FilterPdfContent filter;
 
     private SelectListener listener;
+
+    public AddcontentrowBinding Contentbinding;
+
+    private static final String TAG = "PDF_ADAPTER_TAG";
+    private static final long MAX_BYTES_PDF = 1024 * 1024 * 10; // 10MB
 
     public AdapterContent(Context context, ArrayList<ModelContent> contentArrayList, SelectListener listener) {
         this.context = context;
@@ -54,12 +64,6 @@ public class AdapterContent extends RecyclerView.Adapter<AdapterContent.MyViewHo
         ContentArrayList = filteredList;
         notifyDataSetChanged();
     }
-    public AddcontentrowBinding Contentbinding;
-
-    private static final String TAG = "PDF_ADAPTER_TAG";
-
-
-    private static final long MAX_BYTES_PDF = 1024 * 1024 * 10; // 10MB
 
     @NonNull
     @Override
@@ -74,15 +78,9 @@ public class AdapterContent extends RecyclerView.Adapter<AdapterContent.MyViewHo
         ModelContent model = ContentArrayList.get(position);
 
 
-        String contentTitle = model.getContentTitle();
-        String contentDescription = model.getContentDescription();
-        String contentPdf = model.getContentPdf();
-        long timestamp = model.getTimestamp();
-
-
         // Set data to views
-        holder.Contentbinding.titleTv.setText(contentTitle);
-        holder.Contentbinding.descriptionTV.setText(contentDescription);
+        holder.Contentbinding.titleTv.setText(model.getContentTitle());
+        holder.Contentbinding.descriptionTV.setText(model.getContentDescription());
 
         holder.editContentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +88,6 @@ public class AdapterContent extends RecyclerView.Adapter<AdapterContent.MyViewHo
                 listener.onItemClicked(model);
             }
         });
-
-
 
         // Load PDF from URL
         loadPdfFromUrl(model, holder);
@@ -101,7 +97,6 @@ public class AdapterContent extends RecyclerView.Adapter<AdapterContent.MyViewHo
         String pdfUrl = model.getContentPdf();
 
         Log.d(TAG, "PDF URL: " + pdfUrl); // Log the URL
-
         if (pdfUrl == null || pdfUrl.isEmpty()) {
             Log.e(TAG, "PDF URL is null or empty");
             return;
@@ -144,22 +139,46 @@ public class AdapterContent extends RecyclerView.Adapter<AdapterContent.MyViewHo
         public ImageButton editContentBtn;
 
         ProgressBar progressBar;
-        String pdfUrl;
+        //String pdfUrl;
         PDFView contentPdf;
 
         public MyViewHolder(AddcontentrowBinding Contentbinding) {
             super(Contentbinding.getRoot());
             this.Contentbinding = Contentbinding;
             this.contentPdf = Contentbinding.ContentPdf;
-
-            contentPdf = itemView.findViewById(R.id.ContentPdf);
             this.editContentBtn = Contentbinding.editContentBtn;
-            progressBar = itemView.findViewById(R.id.progressBar);
-            contentTitle = itemView.findViewById(R.id.titleTv);
-            contentDescription = itemView.findViewById(R.id.descriptionTV);
+            progressBar = Contentbinding.progressBar;
+//            super(Contentbinding.getRoot());
+//            this.Contentbinding = Contentbinding;
+//            this.contentPdf = Contentbinding.ContentPdf;
+//
+//            contentPdf = itemView.findViewById(R.id.ContentPdf);
+//            this.editContentBtn = Contentbinding.editContentBtn;
+//            progressBar = itemView.findViewById(R.id.progressBar);
+//            contentTitle = itemView.findViewById(R.id.titleTv);
+//            contentDescription = itemView.findViewById(R.id.descriptionTV);
 
 
         }
+    }
+    // Fetch content from Firebase Realtime Database
+    public void fetchSharedContent() {
+        DatabaseReference contentRef = FirebaseDatabase.getInstance().getReference("SharedContent");
+        contentRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<ModelContent> contentList = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    ModelContent content = snapshot.getValue(ModelContent.class);
+                    contentList.add(content);
+                }
+                updateContentList(contentList); // Update adapter's content list
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "DatabaseError: " + databaseError.getMessage());
+            }
+        });
     }
 }

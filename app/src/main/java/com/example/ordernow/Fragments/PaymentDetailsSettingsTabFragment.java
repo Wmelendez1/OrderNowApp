@@ -12,15 +12,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import com.example.ordernow.Adapter.CardAdapter;
 import com.example.ordernow.R;
 import com.example.ordernow.activities.AddCardActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Models.Card;
+import com.example.ordernow.Models.Card;
+import com.example.ordernow.activities.Alerts;
 
 
 public class PaymentDetailsSettingsTabFragment extends Fragment {
@@ -29,22 +34,25 @@ public class PaymentDetailsSettingsTabFragment extends Fragment {
     private RecyclerView recyclerView;
     private CardAdapter cardAdapter;
     private List<Card> cards;
+    private DatabaseReference cardRef; // Firebase reference
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_payment_details_settings_tab, container, false);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        cardRef = database.getReference("Cards");
 
         recyclerView = view.findViewById(R.id.cardRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Sample card data
         cards = new ArrayList<>();
-        cards.add(new Card("**** 1234", true,"John Doe", "12/23" ));
-        cards.add(new Card("**** 5678", false, "Jane Doe", "11/24"));
-        // Add more cards as needed
-
         cardAdapter = new CardAdapter(cards);
         recyclerView.setAdapter(cardAdapter);
+
+        loadCardsFromFirebase();
 
         Button addNewCardBtn = view.findViewById(R.id.addNewCardBtn);
         addNewCardBtn.setOnClickListener(new View.OnClickListener() {
@@ -65,9 +73,37 @@ public class PaymentDetailsSettingsTabFragment extends Fragment {
         if (requestCode == ADD_CARD_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
             if (data != null && data.hasExtra("newCard")) {
                 Card newCard = (Card) data.getSerializableExtra("newCard");
+
+                addCardToFirebase(newCard);
+
                 cards.add(newCard);
                 cardAdapter.notifyDataSetChanged();
+
+                Alerts.addAlert("Payment Method Added", "A new payment method has been added.");
             }
         }
+    }
+
+    private void addCardToFirebase(Card card) {
+        cardRef.push().setValue(card);
+
+    }
+    private void loadCardsFromFirebase() {
+        cardRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                cards.clear(); // Clear the list before adding data
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Card card = snapshot.getValue(Card.class);
+                    cards.add(card); // Add card to the list
+                }
+                cardAdapter.notifyDataSetChanged(); // Notify adapter about the data change
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle database errors if necessary
+            }
+        });
     }
 }

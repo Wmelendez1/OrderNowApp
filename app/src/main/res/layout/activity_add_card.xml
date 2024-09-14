@@ -8,9 +8,6 @@
     tools:context=".activities.AddCardActivity">
 
     <!-- Title -->
-
-    <!-- Subtitle -->
-
     <TextView
         android:id="@+id/addCardTitle"
         android:layout_width="wrap_content"
@@ -24,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Subtitle -->
     <TextView
         android:id="@+id/addCardSubtitle"
         android:layout_width="wrap_content"
@@ -32,84 +30,19 @@
         android:text="Enter the card details"
         android:textColor="@android:color/darker_gray"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/cardHolderNameEditText"
+        app:layout_constraintBottom_toTopOf="@+id/cardInputWidget"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/addCardTitle" />
 
-    <!-- Cardholder Name Input -->
-    <EditText
-        android:id="@+id/cardHolderNameEditText"
+    <!-- Stripe CardInputWidget -->
+    <com.stripe.android.view.CardInputWidget
+        android:id="@+id/cardInputWidget"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="@drawable/shape_edittext01"
-        android:hint="Cardholder Name"
-        app:layout_constraintBottom_toTopOf="@+id/cardNumberContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/addCardSubtitle" />
-
-    <!-- Card Number Container -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cardNumberContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardHolderNameEditText">
-
-        <!-- Card Number Input -->
-        <EditText
-            android:id="@+id/cardNumberEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/shape_edittext01"
-            android:hint="Card Number"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/cardTypeImageView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Card Type Image (Visa, etc.) -->
-        <ImageView
-            android:id="@+id/cardTypeImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/credit_card"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="0dp" /> <!-- replace with your card type image -->
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- Expiry Date Input -->
-    <EditText
-        android:id="@+id/expiryDateEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/shape_edittext01"
-        android:hint="Expiration date"
-        app:layout_constraintBottom_toTopOf="@+id/saveCardButton"
-        app:layout_constraintEnd_toStartOf="@+id/cvvEditText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardNumberContainer" />
-
-    <!-- CVV Input -->
-    <EditText
-        android:id="@+id/cvvEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/shape_edittext01"
-        android:hint="CVV"
-        app:layout_constraintBottom_toTopOf="@+id/saveCardButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/expiryDateEditText"
-        app:layout_constraintTop_toBottomOf="@id/cardNumberContainer" />
 
     <!-- Save Button -->
     <Button
@@ -122,8 +55,8 @@
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cvvEditText" />
+        app:layout_constraintTop_toBottomOf="@id/cardInputWidget" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
